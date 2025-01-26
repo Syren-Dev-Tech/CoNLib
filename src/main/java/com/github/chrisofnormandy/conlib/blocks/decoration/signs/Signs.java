@@ -51,29 +51,13 @@ public class Signs {
             return create(name, Properties.copy(Blocks.OAK_SIGN), WoodType.OAK);
         }
 
-        public static final RegistryObject<WallSignBlock> create(String name,
-                ResourceKey<CreativeModeTab> creativeTab) {
-            return create(name, Properties.copy(Blocks.OAK_SIGN), WoodType.OAK, creativeTab);
-        }
-
         public static final RegistryObject<WallSignBlock> create(String name, Properties properties) {
             return create(name, properties, WoodType.OAK);
         }
 
         public static final RegistryObject<WallSignBlock> create(String name, Properties properties,
-                ResourceKey<CreativeModeTab> creativeTab) {
-            return create(name, properties, WoodType.OAK, creativeTab);
-        }
-
-        public static final RegistryObject<WallSignBlock> create(String name, Properties properties,
                 WoodType woodType) {
             return BlockRegistry.register(name, () -> new WallSignBlock(properties, woodType));
-        }
-
-        public static final RegistryObject<WallSignBlock> create(String name, Properties properties,
-                WoodType woodType,
-                ResourceKey<CreativeModeTab> creativeTab) {
-            return BlockRegistry.register(name, () -> new WallSignBlock(properties, woodType), creativeTab);
         }
     }
 
@@ -87,7 +71,7 @@ public class Signs {
     public static final Tuple<RegistryObject<WallSignBlock>, RegistryObject<StandingSignBlock>> create(String name,
             ResourceKey<CreativeModeTab> creativeTab) {
         var standing = StandingSigns.create(name, creativeTab);
-        var wall = WallSigns.create(name, creativeTab);
+        var wall = WallSigns.create(name);
 
         return new Tuple<>(wall, standing);
     }
@@ -104,7 +88,7 @@ public class Signs {
             Properties properties,
             ResourceKey<CreativeModeTab> creativeTab) {
         var standing = StandingSigns.create(name + "_sign", properties, creativeTab);
-        var wall = WallSigns.create(name + "_wall_sign", properties, creativeTab);
+        var wall = WallSigns.create(name + "_wall_sign", properties);
 
         return new Tuple<>(wall, standing);
     }

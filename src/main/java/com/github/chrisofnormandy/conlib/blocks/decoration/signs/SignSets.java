@@ -23,9 +23,9 @@ public class SignSets {
     public static final RegistryObject<?>[] create(String name, ResourceKey<CreativeModeTab> creativeTab) {
         return new RegistryObject<?>[] {
                 StandingSigns.create(name, creativeTab),
-                WallSigns.create("wall_" + name, creativeTab),
+                WallSigns.create("wall_" + name),
                 CeilingHangingSigns.create("hanging_" + name, creativeTab),
-                WallHangingSigns.create("wall_hanging_" + name, creativeTab)
+                WallHangingSigns.create("wall_hanging_" + name)
         };
     }
 
@@ -42,9 +42,9 @@ public class SignSets {
             ResourceKey<CreativeModeTab> creativeTab) {
         return new RegistryObject<?>[] {
                 StandingSigns.create(name, properties, creativeTab),
-                WallSigns.create("wall_" + name, properties, creativeTab),
+                WallSigns.create("wall_" + name, properties),
                 CeilingHangingSigns.create("hanging_" + name, properties, creativeTab),
-                WallHangingSigns.create("wall_hanging_" + name, properties, creativeTab)
+                WallHangingSigns.create("wall_hanging_" + name, properties)
         };
     }
 }

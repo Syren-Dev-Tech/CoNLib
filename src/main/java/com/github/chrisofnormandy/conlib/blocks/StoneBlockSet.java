@@ -23,13 +23,15 @@ public class StoneBlockSet {
         var stoneProperties = Properties.copy(Blocks.STONE);
         var stone = FullBlocks.create(name, stoneProperties, creativeTab);
 
-        var slab = Slabs.create(name + "_slab", stoneProperties, creativeTab);
-        var stairs = Stairs.create(name + "_stairs", stoneProperties, () -> stone.get(), creativeTab);
-        var wall = WallBlocks.create(name + "_wall", stoneProperties, creativeTab);
+        Slabs.create(name + "_slab", stoneProperties, creativeTab);
+        Stairs.create(name + "_stairs", stoneProperties, () -> stone.get(), creativeTab);
+        WallBlocks.create(name + "_wall", stoneProperties, creativeTab);
 
-        var pressurePlate = PressurePlates.create(name + "_pressure_plate", stoneProperties, Sensitivity.EVERYTHING,
+        PressurePlates.create(name + "_pressure_plate",
+                stoneProperties,
+                Sensitivity.EVERYTHING,
                 blockSetType,
                 creativeTab);
-        var button = Buttons.create(name + "_button", stoneProperties, creativeTab);
+        Buttons.create(name + "_button", stoneProperties, creativeTab);
     }
 }

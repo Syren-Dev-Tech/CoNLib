@@ -51,29 +51,13 @@ public class HangingSigns {
             return create(name, Properties.copy(Blocks.OAK_SIGN), WoodType.OAK);
         }
 
-        public static final RegistryObject<WallHangingSignBlock> create(String name,
-                ResourceKey<CreativeModeTab> creativeTab) {
-            return create(name, Properties.copy(Blocks.OAK_SIGN), WoodType.OAK, creativeTab);
-        }
-
         public static final RegistryObject<WallHangingSignBlock> create(String name, Properties properties) {
             return create(name, properties, WoodType.OAK);
         }
 
         public static final RegistryObject<WallHangingSignBlock> create(String name, Properties properties,
-                ResourceKey<CreativeModeTab> creativeTab) {
-            return create(name, properties, WoodType.OAK, creativeTab);
-        }
-
-        public static final RegistryObject<WallHangingSignBlock> create(String name, Properties properties,
                 WoodType woodType) {
             return BlockRegistry.register(name, () -> new WallHangingSignBlock(properties, woodType));
-        }
-
-        public static final RegistryObject<WallHangingSignBlock> create(String name, Properties properties,
-                WoodType woodType,
-                ResourceKey<CreativeModeTab> creativeTab) {
-            return BlockRegistry.register(name, () -> new WallHangingSignBlock(properties, woodType), creativeTab);
         }
     }
 
@@ -89,7 +73,7 @@ public class HangingSigns {
             String name,
             ResourceKey<CreativeModeTab> creativeTab) {
         var ceiling = CeilingHangingSigns.create(name, creativeTab);
-        var wall = WallHangingSigns.create(name, creativeTab);
+        var wall = WallHangingSigns.create(name);
 
         return new Tuple<>(wall, ceiling);
     }
@@ -107,7 +91,7 @@ public class HangingSigns {
             String name, Properties properties,
             ResourceKey<CreativeModeTab> creativeTab) {
         var ceiling = CeilingHangingSigns.create("hanging_" + name + "_sign", properties, creativeTab);
-        var wall = WallHangingSigns.create("hanging_" + name + "_wall_sign", properties, creativeTab);
+        var wall = WallHangingSigns.create("hanging_" + name + "_wall_sign", properties);
 
         return new Tuple<>(wall, ceiling);
     }

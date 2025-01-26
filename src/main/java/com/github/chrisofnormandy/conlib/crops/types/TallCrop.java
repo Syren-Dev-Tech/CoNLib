@@ -34,7 +34,7 @@ public class TallCrop extends DoublePlantBlock implements BonemealableBlock {
     public static final int MAX_AGE = 4;
 
     private static final int DOUBLE_PLANT_AGE_INTERSECTION = 3;
-    private static final int BONEMEAL_INCREASE = 1;
+    // private static final int BONEMEAL_INCREASE = 1;
 
     private static final VoxelShape FULL_UPPER_SHAPE = Block.box(3.0D, 0.0D, 3.0D, 13.0D, 15.0D, 13.0D);
     private static final VoxelShape FULL_LOWER_SHAPE = Block.box(3.0D, -1.0D, 3.0D, 13.0D, 16.0D, 13.0D);
@@ -126,7 +126,7 @@ public class TallCrop extends DoublePlantBlock implements BonemealableBlock {
         if (entity instanceof Ravager && level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING))
             level.destroyBlock(blockPos, true, entity);
 
-        super.entityInside(blockState, level, blockPos, entity);
+        // super.entityInside(blockState, level, blockPos, entity);
     }
 
     public boolean canBeReplaced(BlockState blockState, BlockPlaceContext context) {
@@ -198,10 +198,11 @@ public class TallCrop extends DoublePlantBlock implements BonemealableBlock {
         int i = Math.min(blockState.getValue(AGE) + growthAmount, MAX_AGE);
         if (this.canGrow(serverLevel, blockPos, blockState, i)) {
             serverLevel.setBlock(blockPos, blockState.setValue(AGE, Integer.valueOf(i)), 2);
-            if (i >= 3) {
+            if (i >= DOUBLE_PLANT_AGE_INTERSECTION) {
                 BlockPos blockpos = blockPos.above();
                 serverLevel.setBlock(blockpos, copyWaterloggedFrom(serverLevel, blockPos, this.defaultBlockState()
-                        .setValue(AGE, Integer.valueOf(i)).setValue(HALF, DoubleBlockHalf.UPPER)), 3);
+                        .setValue(AGE, Integer.valueOf(i)).setValue(HALF, DoubleBlockHalf.UPPER)),
+                        DOUBLE_PLANT_AGE_INTERSECTION);
             }
         }
     }
