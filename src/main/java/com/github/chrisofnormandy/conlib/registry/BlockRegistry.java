@@ -1,13 +1,9 @@
 package com.github.chrisofnormandy.conlib.registry;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.function.Supplier;
 
-import org.slf4j.Logger;
-
 import com.github.chrisofnormandy.conlib.CoNLib;
-import com.mojang.logging.LogUtils;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -20,49 +16,37 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.CreativeModeTab;
 
 public class BlockRegistry {
-    private static final Logger LOGGER = LogUtils.getLogger();
+    private final ModRegister registry;
+    private final DeferredRegister<Block> BLOCKS;
 
-    public static class BlockRegistryInit {
-        private static String MOD_ID = CoNLib.MOD_ID;
+    public final HashMap<String, RegistryObject<? extends Block>> blocks = new HashMap<>();
+    public final HashMap<String, RegistryObject<? extends Block>> transparentBlocks = new HashMap<>();
 
-        private static final Map<String, DeferredRegister<Block>> BLOCKS = new HashMap<>();
-
-        public static final void using(String modId) {
-            MOD_ID = modId;
-            LOGGER.info("BLOCKS USE " + MOD_ID);
-        }
-
-        public static final void init(String modId) {
-            BLOCKS.put(modId, DeferredRegister.create(ForgeRegistries.BLOCKS, modId));
-            using(modId);
-        }
-
-        private static final DeferredRegister<Block> get() {
-            LOGGER.info("REGISTER BLOCK UNDER " + MOD_ID);
-            return BLOCKS.get(MOD_ID);
-        }
-
-        public static final void finish(IEventBus bus, String modId) {
-            BLOCKS.get(modId).register(bus);
-            using(modId);
-        }
+    public final void finish(IEventBus bus) {
+        BLOCKS.register(bus);
     }
 
-    public static final <T extends Block> RegistryObject<T> register(String name, Supplier<T> block) {
-        return BlockRegistryInit.get().register(name, block);
+    public final <T extends Block> Supplier<T> register(String name, Supplier<T> block) {
+        var blockRegistry = this.BLOCKS.register(name, block);
+        this.blocks.put(name, blockRegistry);
+
+        CoNLib.LOGGER.info("Registered new block: " + registry.modId + ":" + name);
+
+        return blockRegistry;
     }
 
-    public static final <T extends Block> RegistryObject<T> register(String name,
-            Supplier<T> block,
+    public final <T extends Block> Supplier<T> register(String name, Supplier<T> block,
             ResourceKey<CreativeModeTab> creativeTab) {
-        var blockRegistry = BlockRegistryInit.get().register(name, block);
-        ModRegister.blocks.put(name, blockRegistry);
+        var blockRegistry = register(name, block);
 
-        LOGGER.info("Registered new block: " + BlockRegistryInit.MOD_ID + ":" + name);
-
-        ItemRegistry.register(name, () -> new BlockItem(blockRegistry.get(), new Item.Properties()),
+        this.registry.itemRegistry.register(name, () -> new BlockItem(blockRegistry.get(), new Item.Properties()),
                 creativeTab);
 
         return blockRegistry;
+    }
+
+    public BlockRegistry(ModRegister registry) {
+        this.registry = registry;
+        this.BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, registry.modId);
     }
 }

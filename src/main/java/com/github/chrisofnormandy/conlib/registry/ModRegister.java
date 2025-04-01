@@ -1,75 +1,91 @@
 package com.github.chrisofnormandy.conlib.registry;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.function.Supplier;
 
-import com.github.chrisofnormandy.conlib.collections.Tuple;
+import com.github.chrisofnormandy.conlib.CoNLib;
 import com.github.chrisofnormandy.conlib.mobs.types.CustomAnimal;
-import com.github.chrisofnormandy.conlib.registry.BlockRegistry.BlockRegistryInit;
-import com.github.chrisofnormandy.conlib.registry.CreativeTabRegistry.CreativeTabRegistryInit;
-import com.github.chrisofnormandy.conlib.registry.ItemRegistry.ItemRegistryInit;
-import com.github.chrisofnormandy.conlib.registry.MobRegistry.MobRegistryInit;
+import com.github.chrisofnormandy.conlib.mobs.types.CustomAnimalModel;
+import com.github.chrisofnormandy.conlib.mobs.types.CustomMobRenderer;
 
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.RegistryObject;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 public class ModRegister {
 
-    // CREATIVE TAB ASSIGNMENTS
-    public static final HashMap<ResourceKey<CreativeModeTab>, List<RegistryObject<? extends Item>>> creativeTabs = new HashMap<>();
+    public String modId;
 
-    public static <T extends Item> RegistryObject<T> useCreativeTab(ResourceKey<CreativeModeTab> tab,
-            RegistryObject<T> item) {
-        var items = creativeTabs.get(tab);
-        if (items == null) {
-            items = new ArrayList<>();
-            creativeTabs.put(tab, items);
-        }
+    public final HashMap<String, Object> events = new HashMap<>();
+    public BlockRegistry blockRegistry;
+    public ItemRegistry itemRegistry;
+    public CreativeTabRegistry creativeTabRegistry;
+    public MobRegistry mobRegistry;
 
-        items.add(item);
-
-        return item;
+    private void commonSetup(final FMLCommonSetupEvent event) {
+        CoNLib.LOGGER.info("CONLIB COMMON SETUP");
     }
 
-    public static final HashMap<RegistryObject<EntityType<CustomAnimal>>, Supplier<AttributeSupplier.Builder>> entityAttributes = new HashMap<>();
-    public static final HashMap<String, Tuple<String, RegistryObject<EntityType<CustomAnimal>>>> entityRendering = new HashMap<>();
+    private void addCreative(BuildCreativeModeTabContentsEvent event) {
+        CoNLib.LOGGER.info("ASSIGNING CREATIVE TABS");
 
-    public static void defineEntityAttributes(RegistryObject<EntityType<CustomAnimal>> entity,
-            Supplier<AttributeSupplier.Builder> builder) {
-        entityAttributes.put(entity, builder);
+        this.creativeTabRegistry.creativeTabs.forEach((key, value) -> {
+            if (event.getTabKey() == key) {
+                value.forEach((item) -> event.accept(item));
+            }
+        });
     }
 
-    public static final HashMap<String, Object> events = new HashMap<>();
-    public static final HashMap<String, RegistryObject<CreativeModeTab>> groups = new HashMap<>();
-    public static final HashMap<String, RegistryObject<? extends Block>> blocks = new HashMap<>();
-    public static final HashMap<String, RegistryObject<? extends Block>> transparentBlocks = new HashMap<>();
-    public static final HashMap<String, RegistryObject<? extends Item>> items = new HashMap<>();
-    public static final HashMap<String, RegistryObject<? extends Item>> tools = new HashMap<>();
-    public static final HashMap<String, RegistryObject<? extends Item>> weapons = new HashMap<>();
-    public static final HashMap<String, RegistryObject<? extends ArmorItem>> wearable = new HashMap<>();
-    public static final HashMap<String, RegistryObject<? extends Item>> foods = new HashMap<>();
-    public static final HashMap<String, RegistryObject<? extends EntityType<?>>> entities = new HashMap<>();
+    public ModRegister(String modId) {
+        this.modId = modId;
 
-    public static void initRegistries(String modId) {
-        BlockRegistryInit.init(modId);
-        ItemRegistryInit.init(modId);
-        CreativeTabRegistryInit.init(modId);
-        MobRegistryInit.init(modId);
+        createRegistries();
+
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        modEventBus.addListener(this::commonSetup);
+        MinecraftForge.EVENT_BUS.register(this);
+        modEventBus.addListener(this::addCreative);
+
+        finishRegistries(modEventBus);
     }
 
-    public static void finishRegistries(IEventBus bus, String modId) {
-        BlockRegistryInit.finish(bus, modId);
-        ItemRegistryInit.finish(bus, modId);
-        CreativeTabRegistryInit.finish(bus, modId);
-        MobRegistryInit.finish(bus, modId);
+    public void onClientSetup(FMLClientSetupEvent event) {
+        this.mobRegistry.entityRendering.forEach((key, value) -> {
+            EntityRenderers.register(value.y.get(),
+                    context -> new CustomMobRenderer(context, new CustomAnimalModel<CustomAnimal>(context.bakeLayer(
+                            new ModelLayerLocation(new ResourceLocation(value.x, key), "main"))),
+                            0.5F) {
+                        @Override
+                        public ResourceLocation getTextureLocation(CustomAnimal entity) {
+                            return new ResourceLocation(value.x, "textures/entity/" + key + ".png");
+                        }
+                    });
+        });
+    }
+
+    public void onEntityAttributeCreation(EntityAttributeCreationEvent event) {
+        this.mobRegistry.entityAttributes.forEach((key, value) -> {
+            event.put(key.get(), value.get().build());
+        });
+    }
+
+    private void createRegistries() {
+        this.blockRegistry = new BlockRegistry(this);
+        this.itemRegistry = new ItemRegistry(this);
+        this.creativeTabRegistry = new CreativeTabRegistry(this);
+        this.mobRegistry = new MobRegistry(this);
+    }
+
+    private void finishRegistries(IEventBus bus) {
+        this.blockRegistry.finish(bus);
+        this.itemRegistry.finish(bus);
+        this.creativeTabRegistry.finish(bus);
+        this.mobRegistry.finish(bus);
     }
 }

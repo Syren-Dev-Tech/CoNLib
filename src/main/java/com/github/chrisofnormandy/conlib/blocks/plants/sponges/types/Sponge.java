@@ -64,7 +64,7 @@ public class Sponge extends SpongeBlock {
             for (Direction direction : ALL_DIRECTIONS) {
                 blockPosConsumer.accept(relBlockPos.relative(direction));
             }
-        }, (checkBlockPos) -> {
+        }, checkBlockPos -> {
             if (checkBlockPos.equals(blockPos)) {
                 return true;
             } else {
@@ -92,9 +92,7 @@ public class Sponge extends SpongeBlock {
                         return false;
                     }
 
-                    BlockEntity blockentity = blockstate.hasBlockEntity()
-                            ? level.getBlockEntity(checkBlockPos)
-                            : null;
+                    BlockEntity blockentity = blockstate.hasBlockEntity() ? level.getBlockEntity(checkBlockPos) : null;
 
                     dropResources(blockstate, level, checkBlockPos, blockentity);
 

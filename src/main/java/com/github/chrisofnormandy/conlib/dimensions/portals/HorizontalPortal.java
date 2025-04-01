@@ -34,20 +34,13 @@ public class HorizontalPortal extends BaseEntityBlock {
         return new TheEndPortalBlockEntity(blockPos, blockState);
     }
 
-    public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos,
-            CollisionContext context) {
+    public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext context) {
         return SHAPE;
     }
 
     public void entityInside(BlockState blockState, Level level, BlockPos blockPos, Entity entity) {
-        if (level instanceof ServerLevel && entity.canChangeDimensions()
-                && Shapes.joinIsNotEmpty(
-                        Shapes.create(entity.getBoundingBox().move((double) (-blockPos.getX()),
-                                (double) (-blockPos.getY()), (double) (-blockPos.getZ()))),
-                        blockState.getShape(level, blockPos), BooleanOp.AND)) {
-            ResourceKey<Level> resourcekey = level.dimension() == this.dimension
-                    ? Level.OVERWORLD
-                    : this.dimension;
+        if (level instanceof ServerLevel && entity.canChangeDimensions() && Shapes.joinIsNotEmpty(Shapes.create(entity.getBoundingBox().move((double) (-blockPos.getX()), (double) (-blockPos.getY()), (double) (-blockPos.getZ()))), blockState.getShape(level, blockPos), BooleanOp.AND)) {
+            ResourceKey<Level> resourcekey = level.dimension() == this.dimension ? Level.OVERWORLD : this.dimension;
 
             ServerLevel serverlevel = ((ServerLevel) level).getServer().getLevel(resourcekey);
 

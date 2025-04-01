@@ -26,6 +26,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.IPlantable;
 
@@ -83,7 +84,9 @@ public class TallCrop extends DoublePlantBlock implements BonemealableBlock {
 
         return blockState.getValue(HALF) == DoubleBlockHalf.LOWER
                 ? COLLISION_SHAPE_CROP
-                : super.getCollisionShape(blockState, blockGetter, blockPos, context);
+                : this.hasCollision
+                        ? blockState.getShape(blockGetter, blockPos)
+                        : Shapes.empty();
     }
 
     public boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {

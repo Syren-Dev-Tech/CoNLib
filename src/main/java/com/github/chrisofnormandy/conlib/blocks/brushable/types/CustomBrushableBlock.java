@@ -27,8 +27,7 @@ public class CustomBrushableBlock extends BaseEntityBlock {
     private final SoundEvent brushSound;
     private final SoundEvent brushCompletedSound;
 
-    public CustomBrushableBlock(Block turnsInto, Properties properties, SoundEvent brushSound,
-            SoundEvent brushCompletedSound) {
+    public CustomBrushableBlock(Block turnsInto, Properties properties, SoundEvent brushSound, SoundEvent brushCompletedSound) {
         super(properties);
         this.turnsInto = turnsInto;
         this.brushSound = brushSound;
@@ -44,13 +43,11 @@ public class CustomBrushableBlock extends BaseEntityBlock {
         return RenderShape.MODEL;
     }
 
-    public void onPlace(BlockState unused1, Level level, BlockPos blockPos, BlockState unused2,
-            boolean unused3) {
+    public void onPlace(BlockState unused1, Level level, BlockPos blockPos, BlockState unused2, boolean unused3) {
         level.scheduleTick(blockPos, this, 2);
     }
 
-    public BlockState updateShape(BlockState blockState, Direction direction, BlockState nextBlockState,
-            LevelAccessor levelAccessor, BlockPos blockPos, BlockPos nextBlockPos) {
+    public BlockState updateShape(BlockState blockState, Direction direction, BlockState nextBlockState, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos nextBlockPos) {
         levelAccessor.scheduleTick(blockPos, this, 2);
 
         return blockState;

@@ -23,8 +23,7 @@ public class BuddingCrystal extends BuddingAmethystBlock {
         super(properties);
     }
 
-    public BuddingCrystal(Properties properties, Block smallCrystal, Block mediumCrystal, Block largeCrystal,
-            Block fullCrystal) {
+    public BuddingCrystal(Properties properties, Block smallCrystal, Block mediumCrystal, Block largeCrystal, Block fullCrystal) {
         super(properties);
 
         this.smallCrystal = smallCrystal;
@@ -34,8 +33,7 @@ public class BuddingCrystal extends BuddingAmethystBlock {
     }
 
     @Override
-    public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos,
-            RandomSource randomSource) {
+    public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
         if (randomSource.nextInt(5) == 0) {
             Direction direction = DIRECTIONS[randomSource.nextInt(DIRECTIONS.length)];
             BlockPos blockpos = blockPos.relative(direction);
@@ -44,21 +42,16 @@ public class BuddingCrystal extends BuddingAmethystBlock {
 
             if (canClusterGrowAtState(blockstate)) {
                 block = this.smallCrystal;
-            } else if (blockstate.is(this.smallCrystal)
-                    && blockstate.getValue(AmethystClusterBlock.FACING) == direction) {
+            } else if (blockstate.is(this.smallCrystal) && blockstate.getValue(AmethystClusterBlock.FACING) == direction) {
                 block = this.mediumCrystal;
-            } else if (blockstate.is(this.mediumCrystal)
-                    && blockstate.getValue(AmethystClusterBlock.FACING) == direction) {
+            } else if (blockstate.is(this.mediumCrystal) && blockstate.getValue(AmethystClusterBlock.FACING) == direction) {
                 block = this.largeCrystal;
-            } else if (blockstate.is(this.largeCrystal)
-                    && blockstate.getValue(AmethystClusterBlock.FACING) == direction) {
+            } else if (blockstate.is(this.largeCrystal) && blockstate.getValue(AmethystClusterBlock.FACING) == direction) {
                 block = this.fullCrystal;
             }
 
             if (block != null) {
-                BlockState blockstate1 = block.defaultBlockState().setValue(AmethystClusterBlock.FACING, direction)
-                        .setValue(AmethystClusterBlock.WATERLOGGED,
-                                Boolean.valueOf(blockstate.getFluidState().getType() == Fluids.WATER));
+                BlockState blockstate1 = block.defaultBlockState().setValue(AmethystClusterBlock.FACING, direction).setValue(AmethystClusterBlock.WATERLOGGED, Boolean.valueOf(blockstate.getFluidState().getType() == Fluids.WATER));
                 serverLevel.setBlockAndUpdate(blockpos, blockstate1);
             }
         }

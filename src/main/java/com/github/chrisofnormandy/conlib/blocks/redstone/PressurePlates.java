@@ -1,6 +1,8 @@
 package com.github.chrisofnormandy.conlib.blocks.redstone;
 
-import com.github.chrisofnormandy.conlib.registry.BlockRegistry;
+import java.util.function.Supplier;
+
+import com.github.chrisofnormandy.conlib.registry.ModRegister;
 
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
@@ -9,91 +11,74 @@ import net.minecraft.world.level.block.PressurePlateBlock;
 import net.minecraft.world.level.block.PressurePlateBlock.Sensitivity;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
-import net.minecraftforge.registries.RegistryObject;
 
 public class PressurePlates {
 
-    public static final RegistryObject<PressurePlateBlock> create(String name) {
-        return create(name, Properties.copy(Blocks.STONE_PRESSURE_PLATE), Sensitivity.EVERYTHING, BlockSetType.STONE);
+    public static final Supplier<PressurePlateBlock> create(ModRegister register, String name) {
+        return create(register, name, Properties.copy(Blocks.STONE_PRESSURE_PLATE), Sensitivity.EVERYTHING, BlockSetType.STONE);
     }
 
-    public static final RegistryObject<PressurePlateBlock> create(String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
-        return create(name, Properties.copy(Blocks.STONE_PRESSURE_PLATE), Sensitivity.EVERYTHING, BlockSetType.STONE,
-                creativeTab);
+    public static final Supplier<PressurePlateBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
+        return create(register, name, Properties.copy(Blocks.STONE_PRESSURE_PLATE), Sensitivity.EVERYTHING, BlockSetType.STONE, creativeTab);
     }
 
-    public static final RegistryObject<PressurePlateBlock> create(String name, Properties properties) {
-        return create(name, properties, Sensitivity.EVERYTHING, BlockSetType.STONE);
+    public static final Supplier<PressurePlateBlock> create(ModRegister register, String name, Properties properties) {
+        return create(register, name, properties, Sensitivity.EVERYTHING, BlockSetType.STONE);
     }
 
-    public static final RegistryObject<PressurePlateBlock> create(String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
-        return create(name, properties, Sensitivity.EVERYTHING, BlockSetType.STONE, creativeTab);
+    public static final Supplier<PressurePlateBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
+        return create(register, name, properties, Sensitivity.EVERYTHING, BlockSetType.STONE, creativeTab);
     }
 
-    public static final RegistryObject<PressurePlateBlock> create(String name, Sensitivity sensitivity) {
-        return create(name, Properties.copy(Blocks.STONE_PRESSURE_PLATE), sensitivity, BlockSetType.STONE);
+    public static final Supplier<PressurePlateBlock> create(ModRegister register, String name, Sensitivity sensitivity) {
+        return create(register, name, Properties.copy(Blocks.STONE_PRESSURE_PLATE), sensitivity, BlockSetType.STONE);
     }
 
-    public static final RegistryObject<PressurePlateBlock> create(String name, Sensitivity sensitivity,
-            ResourceKey<CreativeModeTab> creativeTab) {
-        return create(name, Properties.copy(Blocks.STONE_PRESSURE_PLATE), sensitivity, BlockSetType.STONE, creativeTab);
+    public static final Supplier<PressurePlateBlock> create(ModRegister register, String name, Sensitivity sensitivity, ResourceKey<CreativeModeTab> creativeTab) {
+        return create(register, name, Properties.copy(Blocks.STONE_PRESSURE_PLATE), sensitivity, BlockSetType.STONE, creativeTab);
     }
 
-    public static final RegistryObject<PressurePlateBlock> create(String name, Properties properties,
-            Sensitivity sensitivity) {
-        return create(name, properties, sensitivity, BlockSetType.STONE);
+    public static final Supplier<PressurePlateBlock> create(ModRegister register, String name, Properties properties, Sensitivity sensitivity) {
+        return create(register, name, properties, sensitivity, BlockSetType.STONE);
     }
 
-    public static final RegistryObject<PressurePlateBlock> create(String name, Properties properties,
-            Sensitivity sensitivity,
-            ResourceKey<CreativeModeTab> creativeTab) {
-        return create(name, properties, sensitivity, BlockSetType.STONE, creativeTab);
+    public static final Supplier<PressurePlateBlock> create(ModRegister register, String name, Properties properties, Sensitivity sensitivity, ResourceKey<CreativeModeTab> creativeTab) {
+        return create(register, name, properties, sensitivity, BlockSetType.STONE, creativeTab);
     }
 
-    public static final RegistryObject<PressurePlateBlock> create(String name, BlockSetType blockSetType) {
-        return create(name, Properties.copy(Blocks.STONE_PRESSURE_PLATE), Sensitivity.EVERYTHING, blockSetType);
+    public static final Supplier<PressurePlateBlock> create(ModRegister register, String name, BlockSetType blockSetType) {
+        return create(register, name, Properties.copy(Blocks.STONE_PRESSURE_PLATE), Sensitivity.EVERYTHING, blockSetType);
     }
 
-    public static final RegistryObject<PressurePlateBlock> create(String name, BlockSetType blockSetType,
-            ResourceKey<CreativeModeTab> creativeTab) {
-        return create(name, Properties.copy(Blocks.STONE_PRESSURE_PLATE), Sensitivity.EVERYTHING, blockSetType,
-                creativeTab);
+    public static final Supplier<PressurePlateBlock> create(ModRegister register, String name, BlockSetType blockSetType, ResourceKey<CreativeModeTab> creativeTab) {
+        return create(register, name, Properties.copy(Blocks.STONE_PRESSURE_PLATE), Sensitivity.EVERYTHING, blockSetType, creativeTab);
     }
 
-    public static final RegistryObject<PressurePlateBlock> create(String name, Properties properties,
-            BlockSetType blockSetType) {
-        return create(name, properties, Sensitivity.EVERYTHING, blockSetType);
+    public static final Supplier<PressurePlateBlock> create(ModRegister register, String name, Properties properties, BlockSetType blockSetType) {
+        return create(register, name, properties, Sensitivity.EVERYTHING, blockSetType);
     }
 
-    public static final RegistryObject<PressurePlateBlock> create(String name, Properties properties,
-            BlockSetType blockSetType,
-            ResourceKey<CreativeModeTab> creativeTab) {
-        return create(name, properties, Sensitivity.EVERYTHING, blockSetType, creativeTab);
+    public static final Supplier<PressurePlateBlock> create(ModRegister register, String name, Properties properties, BlockSetType blockSetType, ResourceKey<CreativeModeTab> creativeTab) {
+        return create(register, name, properties, Sensitivity.EVERYTHING, blockSetType, creativeTab);
     }
 
-    public static final RegistryObject<PressurePlateBlock> create(String name, Sensitivity sensitivity,
-            BlockSetType blockSetType) {
-        return create(name, Properties.copy(Blocks.STONE_PRESSURE_PLATE), sensitivity, blockSetType);
+    public static final Supplier<PressurePlateBlock> create(ModRegister register, String name, Sensitivity sensitivity, BlockSetType blockSetType) {
+        return create(register, name, Properties.copy(Blocks.STONE_PRESSURE_PLATE), sensitivity, blockSetType);
     }
 
-    public static final RegistryObject<PressurePlateBlock> create(String name, Sensitivity sensitivity,
-            BlockSetType blockSetType,
-            ResourceKey<CreativeModeTab> creativeTab) {
-        return create(name, Properties.copy(Blocks.STONE_PRESSURE_PLATE), sensitivity, blockSetType, creativeTab);
+    public static final Supplier<PressurePlateBlock> create(ModRegister register, String name, Sensitivity sensitivity, BlockSetType blockSetType, ResourceKey<CreativeModeTab> creativeTab) {
+        return create(register, name, Properties.copy(Blocks.STONE_PRESSURE_PLATE), sensitivity, blockSetType, creativeTab);
     }
 
-    public static final RegistryObject<PressurePlateBlock> create(String name, Properties properties,
-            Sensitivity sensitivity,
-            BlockSetType blockSetType) {
-        return BlockRegistry.register(name, () -> new PressurePlateBlock(sensitivity, properties, blockSetType));
+    public static final Supplier<PressurePlateBlock> create(ModRegister register, String name, Properties properties, Sensitivity sensitivity, BlockSetType blockSetType) {
+        return register.blockRegistry.register(name, () -> new PressurePlateBlock(sensitivity, properties, blockSetType));
     }
 
-    public static final RegistryObject<PressurePlateBlock> create(String name, Properties properties,
-            Sensitivity sensitivity,
-            BlockSetType blockSetType, ResourceKey<CreativeModeTab> creativeTab) {
-        return BlockRegistry.register(name, () -> new PressurePlateBlock(sensitivity, properties,
-                blockSetType), creativeTab);
+    public static final Supplier<PressurePlateBlock> create(ModRegister register, String name, Properties properties, Sensitivity sensitivity, BlockSetType blockSetType, ResourceKey<CreativeModeTab> creativeTab) {
+        return register.blockRegistry.register(name, () -> new PressurePlateBlock(sensitivity, properties, blockSetType), creativeTab);
+    }
+
+    private PressurePlates() {
+        // Prevent instantiation
     }
 }

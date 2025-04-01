@@ -3,7 +3,7 @@ package com.github.chrisofnormandy.conlib.blocks.brushable;
 import java.util.function.Supplier;
 
 import com.github.chrisofnormandy.conlib.blocks.brushable.types.CustomBrushableBlock;
-import com.github.chrisofnormandy.conlib.registry.BlockRegistry;
+import com.github.chrisofnormandy.conlib.registry.ModRegister;
 
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
@@ -12,48 +12,34 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-import net.minecraftforge.registries.RegistryObject;
 
 public class BrushableStones {
-    public static final RegistryObject<CustomBrushableBlock> create(String name, Supplier<Block> dustedBlock) {
-        return create(name, Properties.copy(Blocks.STONE), dustedBlock);
+
+    public static final Supplier<CustomBrushableBlock> create(ModRegister register, String name, Supplier<Block> dustedBlock) {
+        return create(register, name, Properties.copy(Blocks.STONE), dustedBlock);
     }
 
-    public static final RegistryObject<CustomBrushableBlock> create(String name, Supplier<Block> dustedBlock,
-            ResourceKey<CreativeModeTab> creativeTab) {
-        return create(name, Properties.copy(Blocks.STONE), dustedBlock, SoundEvents.BRUSH_SAND,
-                SoundEvents.BRUSH_SAND_COMPLETED, creativeTab);
+    public static final Supplier<CustomBrushableBlock> create(ModRegister register, String name, Supplier<Block> dustedBlock, ResourceKey<CreativeModeTab> creativeTab) {
+        return create(register, name, Properties.copy(Blocks.STONE), dustedBlock, SoundEvents.BRUSH_SAND, SoundEvents.BRUSH_SAND_COMPLETED, creativeTab);
     }
 
-    public static final RegistryObject<CustomBrushableBlock> create(String name, Properties properties,
-            Supplier<Block> dustedBlock) {
-        return create(name, properties, dustedBlock, SoundEvents.BRUSH_SAND, SoundEvents.BRUSH_SAND_COMPLETED);
+    public static final Supplier<CustomBrushableBlock> create(ModRegister register, String name, Properties properties, Supplier<Block> dustedBlock) {
+        return create(register, name, properties, dustedBlock, SoundEvents.BRUSH_SAND, SoundEvents.BRUSH_SAND_COMPLETED);
     }
 
-    public static final RegistryObject<CustomBrushableBlock> create(String name, Properties properties,
-            Supplier<Block> dustedBlock,
-            ResourceKey<CreativeModeTab> creativeTab) {
-        return create(name, properties, dustedBlock, SoundEvents.BRUSH_SAND, SoundEvents.BRUSH_SAND_COMPLETED,
-                creativeTab);
+    public static final Supplier<CustomBrushableBlock> create(ModRegister register, String name, Properties properties, Supplier<Block> dustedBlock, ResourceKey<CreativeModeTab> creativeTab) {
+        return create(register, name, properties, dustedBlock, SoundEvents.BRUSH_SAND, SoundEvents.BRUSH_SAND_COMPLETED, creativeTab);
     }
 
-    public static final RegistryObject<CustomBrushableBlock> create(String name,
-            Properties properties,
-            Supplier<Block> dustedBlock,
-            SoundEvent dustingSound,
-            SoundEvent dustingCompletedSound) {
-        return BlockRegistry.register(name,
-                () -> new CustomBrushableBlock(dustedBlock.get(), properties, dustingSound, dustingCompletedSound));
+    public static final Supplier<CustomBrushableBlock> create(ModRegister register, String name, Properties properties, Supplier<Block> dustedBlock, SoundEvent dustingSound, SoundEvent dustingCompletedSound) {
+        return register.blockRegistry.register(name, () -> new CustomBrushableBlock(dustedBlock.get(), properties, dustingSound, dustingCompletedSound));
     }
 
-    public static final RegistryObject<CustomBrushableBlock> create(String name,
-            Properties properties,
-            Supplier<Block> dustedBlock,
-            SoundEvent dustingSound,
-            SoundEvent dustingCompletedSound,
-            ResourceKey<CreativeModeTab> creativeTab) {
-        return BlockRegistry.register(name,
-                () -> new CustomBrushableBlock(dustedBlock.get(), properties, dustingSound, dustingCompletedSound),
-                creativeTab);
+    public static final Supplier<CustomBrushableBlock> create(ModRegister register, String name, Properties properties, Supplier<Block> dustedBlock, SoundEvent dustingSound, SoundEvent dustingCompletedSound, ResourceKey<CreativeModeTab> creativeTab) {
+        return register.blockRegistry.register(name, () -> new CustomBrushableBlock(dustedBlock.get(), properties, dustingSound, dustingCompletedSound), creativeTab);
+    }
+
+    private BrushableStones() {
+        // Prevent instantiation
     }
 }

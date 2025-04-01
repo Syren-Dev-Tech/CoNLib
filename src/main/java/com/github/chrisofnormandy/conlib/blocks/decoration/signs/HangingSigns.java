@@ -1,7 +1,9 @@
 package com.github.chrisofnormandy.conlib.blocks.decoration.signs;
 
+import java.util.function.Supplier;
+
 import com.github.chrisofnormandy.conlib.collections.Tuple;
-import com.github.chrisofnormandy.conlib.registry.BlockRegistry;
+import com.github.chrisofnormandy.conlib.registry.ModRegister;
 
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
@@ -10,89 +12,88 @@ import net.minecraft.world.level.block.CeilingHangingSignBlock;
 import net.minecraft.world.level.block.WallHangingSignBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.properties.WoodType;
-import net.minecraftforge.registries.RegistryObject;
 
 public class HangingSigns {
+
     public static class CeilingHangingSigns {
 
-        public static final RegistryObject<CeilingHangingSignBlock> create(String name) {
-            return create(name, Properties.copy(Blocks.OAK_SIGN), WoodType.OAK);
+        public static final Supplier<CeilingHangingSignBlock> create(ModRegister register, String name) {
+            return create(register, name, Properties.copy(Blocks.OAK_SIGN), WoodType.OAK);
         }
 
-        public static final RegistryObject<CeilingHangingSignBlock> create(String name,
-                ResourceKey<CreativeModeTab> creativeTab) {
-            return create(name, Properties.copy(Blocks.OAK_SIGN), WoodType.OAK, creativeTab);
+        public static final Supplier<CeilingHangingSignBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
+            return create(register, name, Properties.copy(Blocks.OAK_SIGN), WoodType.OAK, creativeTab);
         }
 
-        public static final RegistryObject<CeilingHangingSignBlock> create(String name, Properties properties) {
-            return create(name, properties, WoodType.OAK);
+        public static final Supplier<CeilingHangingSignBlock> create(ModRegister register, String name, Properties properties) {
+            return create(register, name, properties, WoodType.OAK);
         }
 
-        public static final RegistryObject<CeilingHangingSignBlock> create(String name, Properties properties,
-                ResourceKey<CreativeModeTab> creativeTab) {
-            return create(name, properties, WoodType.OAK, creativeTab);
+        public static final Supplier<CeilingHangingSignBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
+            return create(register, name, properties, WoodType.OAK, creativeTab);
         }
 
-        public static final RegistryObject<CeilingHangingSignBlock> create(String name, Properties properties,
-                WoodType woodType) {
-            return BlockRegistry.register(name, () -> new CeilingHangingSignBlock(properties, woodType));
+        public static final Supplier<CeilingHangingSignBlock> create(ModRegister register, String name, Properties properties, WoodType woodType) {
+            return register.blockRegistry.register(name, () -> new CeilingHangingSignBlock(properties, woodType));
         }
 
-        public static final RegistryObject<CeilingHangingSignBlock> create(String name, Properties properties,
-                WoodType woodType,
-                ResourceKey<CreativeModeTab> creativeTab) {
-            return BlockRegistry.register(name, () -> new CeilingHangingSignBlock(properties, woodType), creativeTab);
+        public static final Supplier<CeilingHangingSignBlock> create(ModRegister register, String name, Properties properties, WoodType woodType, ResourceKey<CreativeModeTab> creativeTab) {
+            return register.blockRegistry.register(name, () -> new CeilingHangingSignBlock(properties, woodType), creativeTab);
+        }
+
+        private CeilingHangingSigns() {
+            // Prevent instantiation
         }
     }
 
     public static class WallHangingSigns {
 
-        public static final RegistryObject<WallHangingSignBlock> create(String name) {
-            return create(name, Properties.copy(Blocks.OAK_SIGN), WoodType.OAK);
+        public static final Supplier<WallHangingSignBlock> create(ModRegister register, String name) {
+            return create(register, name, Properties.copy(Blocks.OAK_SIGN), WoodType.OAK);
         }
 
-        public static final RegistryObject<WallHangingSignBlock> create(String name, Properties properties) {
-            return create(name, properties, WoodType.OAK);
+        public static final Supplier<WallHangingSignBlock> create(ModRegister register, String name, Properties properties) {
+            return create(register, name, properties, WoodType.OAK);
         }
 
-        public static final RegistryObject<WallHangingSignBlock> create(String name, Properties properties,
-                WoodType woodType) {
-            return BlockRegistry.register(name, () -> new WallHangingSignBlock(properties, woodType));
+        public static final Supplier<WallHangingSignBlock> create(ModRegister register, String name, Properties properties, WoodType woodType) {
+            return register.blockRegistry.register(name, () -> new WallHangingSignBlock(properties, woodType));
+        }
+
+        private WallHangingSigns() {
+            // Prevent instantiation
         }
     }
 
-    public static final Tuple<RegistryObject<WallHangingSignBlock>, RegistryObject<CeilingHangingSignBlock>> create(
-            String name) {
-        var ceiling = CeilingHangingSigns.create(name);
-        var wall = WallHangingSigns.create(name);
+    public static final Tuple<Supplier<WallHangingSignBlock>, Supplier<CeilingHangingSignBlock>> create(ModRegister register, String name) {
+        var ceiling = CeilingHangingSigns.create(register, name);
+        var wall = WallHangingSigns.create(register, name);
 
         return new Tuple<>(wall, ceiling);
     }
 
-    public static final Tuple<RegistryObject<WallHangingSignBlock>, RegistryObject<CeilingHangingSignBlock>> create(
-            String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
-        var ceiling = CeilingHangingSigns.create(name, creativeTab);
-        var wall = WallHangingSigns.create(name);
+    public static final Tuple<Supplier<WallHangingSignBlock>, Supplier<CeilingHangingSignBlock>> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
+        var ceiling = CeilingHangingSigns.create(register, name, creativeTab);
+        var wall = WallHangingSigns.create(register, name);
 
         return new Tuple<>(wall, ceiling);
     }
 
-    public static final Tuple<RegistryObject<WallHangingSignBlock>, RegistryObject<CeilingHangingSignBlock>> create(
-            String name,
-            Properties properties) {
-        var ceiling = CeilingHangingSigns.create(name, properties);
-        var wall = WallHangingSigns.create(name, properties);
+    public static final Tuple<Supplier<WallHangingSignBlock>, Supplier<CeilingHangingSignBlock>> create(ModRegister register, String name, Properties properties) {
+        var ceiling = CeilingHangingSigns.create(register, name, properties);
+        var wall = WallHangingSigns.create(register, name, properties);
 
         return new Tuple<>(wall, ceiling);
     }
 
-    public static final Tuple<RegistryObject<WallHangingSignBlock>, RegistryObject<CeilingHangingSignBlock>> create(
-            String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
-        var ceiling = CeilingHangingSigns.create("hanging_" + name + "_sign", properties, creativeTab);
-        var wall = WallHangingSigns.create("hanging_" + name + "_wall_sign", properties);
+    public static final Tuple<Supplier<WallHangingSignBlock>, Supplier<CeilingHangingSignBlock>> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
+        var ceiling = CeilingHangingSigns.create(register, "hanging_" + name + "_sign", properties, creativeTab);
+        var wall = WallHangingSigns.create(register, "hanging_" + name + "_wall_sign", properties);
 
         return new Tuple<>(wall, ceiling);
+    }
+
+    private HangingSigns() {
+        // Prevent instantiation
     }
 }

@@ -3,68 +3,53 @@ package com.github.chrisofnormandy.conlib.registry;
 import net.minecraft.world.item.Item;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.function.Supplier;
 
-import org.slf4j.Logger;
-
 import com.github.chrisofnormandy.conlib.CoNLib;
-import com.mojang.logging.LogUtils;
 
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 
 public class ItemRegistry {
-    private static final Logger LOGGER = LogUtils.getLogger();
+    private final ModRegister registry;
+    private final DeferredRegister<Item> ITEMS;
 
-    public static class ItemRegistryInit {
-        private static String MOD_ID = CoNLib.MOD_ID;
+    public final HashMap<String, Supplier<? extends Item>> items = new HashMap<>();
+    public final HashMap<String, Supplier<? extends Item>> tools = new HashMap<>();
+    public final HashMap<String, Supplier<? extends Item>> weapons = new HashMap<>();
+    public final HashMap<String, Supplier<? extends ArmorItem>> wearable = new HashMap<>();
+    public final HashMap<String, Supplier<? extends Item>> foods = new HashMap<>();
 
-        private static final Map<String, DeferredRegister<Item>> ITEMS = new HashMap<>();
-
-        public static final void using(String modId) {
-            MOD_ID = modId;
-            LOGGER.info("ITEMS USE " + MOD_ID);
-        }
-
-        public static final void init(String modId) {
-            ITEMS.put(modId, DeferredRegister.create(ForgeRegistries.ITEMS, modId));
-            using(modId);
-        }
-
-        public static final DeferredRegister<Item> get() {
-            LOGGER.info("REGISTER ITEM UNDER " + MOD_ID);
-            return ITEMS.get(MOD_ID);
-        }
-
-        public static final void finish(IEventBus bus, String modId) {
-            ITEMS.get(modId).register(bus);
-            using(modId);
-        }
+    public final void finish(IEventBus bus) {
+        ITEMS.register(bus);
     }
 
-    public static final <T extends Item> RegistryObject<T> register(String name, Supplier<T> item) {
-        var registry = ItemRegistryInit.get().register(name, item);
-        ModRegister.items.put(name, registry);
+    public final <T extends Item> Supplier<T> register(String name, Supplier<T> item) {
+        var registry = ITEMS.register(name, item);
+        this.items.put(name, registry);
 
-        LOGGER.info("Registered new item (not in creative tab): " + name);
+        CoNLib.LOGGER.info("Registered new item (not in creative tab): " + name);
 
         return registry;
     }
 
-    public static final <T extends Item> RegistryObject<T> register(String name, Supplier<T> item,
-            ResourceKey<CreativeModeTab> creativeTab) {
-        var registry = ItemRegistryInit.get().register(name, item);
-        ModRegister.items.put(name, registry);
+    public final <T extends Item> Supplier<T> register(String name, Supplier<T> item, ResourceKey<CreativeModeTab> creativeTab) {
+        var itemRegistry = this.ITEMS.register(name, item);
+        this.items.put(name, itemRegistry);
 
-        ModRegister.useCreativeTab(creativeTab, registry);
+        this.registry.creativeTabRegistry.useCreativeTab(creativeTab, itemRegistry);
 
-        LOGGER.info("Registered new item: " + ItemRegistryInit.MOD_ID + ":" + name);
+        CoNLib.LOGGER.info("Registered new item: " + this.registry.modId + ":" + name);
 
-        return registry;
+        return itemRegistry;
+    }
+
+    public ItemRegistry(ModRegister registry) {
+        this.registry = registry;
+        this.ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, registry.modId);
     }
 }

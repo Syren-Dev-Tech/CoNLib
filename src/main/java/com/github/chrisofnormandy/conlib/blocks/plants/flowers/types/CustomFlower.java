@@ -82,10 +82,7 @@ public class CustomFlower extends FlowerBlock {
 
         for (int i = 0; i < 3; ++i) {
             if (randomSource.nextBoolean()) {
-                level.addParticle(ParticleTypes.SMOKE, d0 + randomSource.nextDouble() / 5.0D,
-                        (double) blockPos.getY() + (0.5D - randomSource.nextDouble()),
-                        d1 + randomSource.nextDouble() / 5.0D,
-                        0.0D, 0.0D, 0.0D);
+                level.addParticle(ParticleTypes.SMOKE, d0 + randomSource.nextDouble() / 5.0D, (double) blockPos.getY() + (0.5D - randomSource.nextDouble()), d1 + randomSource.nextDouble() / 5.0D, 0.0D, 0.0D, 0.0D);
             }
         }
     }
@@ -97,8 +94,7 @@ public class CustomFlower extends FlowerBlock {
             if (entity instanceof LivingEntity) {
                 LivingEntity livingentity = (LivingEntity) entity;
 
-                boolean applyEffect = this.effect != MobEffects.WITHER
-                        || !livingentity.isInvulnerableTo(level.damageSources().wither());
+                boolean applyEffect = this.effect != MobEffects.WITHER || !livingentity.isInvulnerableTo(level.damageSources().wither());
 
                 if (applyEffect)
                     livingentity.addEffect(new MobEffectInstance(effect, 40));

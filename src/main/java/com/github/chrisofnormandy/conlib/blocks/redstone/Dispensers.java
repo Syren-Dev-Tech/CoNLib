@@ -1,31 +1,34 @@
 package com.github.chrisofnormandy.conlib.blocks.redstone;
 
-import com.github.chrisofnormandy.conlib.registry.BlockRegistry;
+import java.util.function.Supplier;
+
+import com.github.chrisofnormandy.conlib.registry.ModRegister;
 
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-import net.minecraftforge.registries.RegistryObject;
 
 public class Dispensers {
 
-    public static final RegistryObject<DispenserBlock> create(String name) {
-        return create(name, Properties.copy(Blocks.DISPENSER));
+    public static final Supplier<DispenserBlock> create(ModRegister register, String name) {
+        return create(register, name, Properties.copy(Blocks.DISPENSER));
     }
 
-    public static final RegistryObject<DispenserBlock> create(String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(name, Properties.copy(Blocks.DISPENSER), creativeTab);
+    public static final Supplier<DispenserBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
+        return create(register, name, Properties.copy(Blocks.DISPENSER), creativeTab);
     }
 
-    public static final RegistryObject<DispenserBlock> create(String name, Properties properties) {
-        return BlockRegistry.register(name, () -> new DispenserBlock(properties));
+    public static final Supplier<DispenserBlock> create(ModRegister register, String name, Properties properties) {
+        return register.blockRegistry.register(name, () -> new DispenserBlock(properties));
     }
 
-    public static final RegistryObject<DispenserBlock> create(String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
-        return BlockRegistry.register(name, () -> new DispenserBlock(properties), creativeTab);
+    public static final Supplier<DispenserBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
+        return register.blockRegistry.register(name, () -> new DispenserBlock(properties), creativeTab);
     }
 
+    private Dispensers() {
+        // Prevent instantiation
+    }
 }

@@ -1,11 +1,12 @@
 package com.github.chrisofnormandy.conlib.registry;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
-
-import com.github.chrisofnormandy.conlib.CoNLib;
+import java.util.List;
+import java.util.function.Supplier;
 
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
@@ -14,38 +15,42 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
 public class CreativeTabRegistry {
+    // private final ModRegister registry;
+    private final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS;
 
-    public static class CreativeTabRegistryInit {
-        private static String MOD_ID = CoNLib.MOD_ID;
+    public final HashMap<String, RegistryObject<CreativeModeTab>> groups = new HashMap<>();
+    public final HashMap<ResourceKey<CreativeModeTab>, List<RegistryObject<? extends Item>>> creativeTabs = new HashMap<>();
 
-        private static final Map<String, DeferredRegister<CreativeModeTab>> CREATIVE_MODE_TABS = new HashMap<>();
-
-        public static final void using(String modId) {
-            MOD_ID = modId;
-        }
-
-        public static final void init(String modId) {
-            CREATIVE_MODE_TABS.put(modId, DeferredRegister.create(Registries.CREATIVE_MODE_TAB, modId));
-            using(modId);
-        }
-
-        public static final DeferredRegister<CreativeModeTab> get() {
-            return CREATIVE_MODE_TABS.get(MOD_ID);
-        }
-
-        public static final void finish(IEventBus bus, String modId) {
-            CREATIVE_MODE_TABS.get(modId).register(bus);
-            using(modId);
-        }
-    }
-
-    public static final void register(String name, RegistryObject<Item> icon) {
-        CreativeTabRegistryInit.get().register(name, () -> CreativeModeTab.builder()
+    public final Supplier<CreativeModeTab> register(String name, RegistryObject<Item> icon) {
+        var tagRegistry = this.CREATIVE_MODE_TABS.register(name, () -> CreativeModeTab.builder()
                 .withTabsBefore(CreativeModeTabs.COMBAT)
                 .icon(() -> icon.get().getDefaultInstance())
-                .displayItems((parameters, output) -> {
-                    output.accept(icon.get()); // Add the example item to the tab. For your own tabs, this
-                                               // method is preferred over the event
-                }).build());
+                .displayItems((parameters, output) -> output.accept(icon.get())).build());
+
+        this.groups.put(name, tagRegistry);
+
+        return tagRegistry;
+    }
+
+    public <T extends Item> Supplier<T> useCreativeTab(ResourceKey<CreativeModeTab> tab,
+            RegistryObject<T> item) {
+        var items = creativeTabs.get(tab);
+        if (items == null) {
+            items = new ArrayList<>();
+            creativeTabs.put(tab, items);
+        }
+
+        items.add(item);
+
+        return item;
+    }
+
+    public final void finish(IEventBus bus) {
+        this.CREATIVE_MODE_TABS.register(bus);
+    }
+
+    public CreativeTabRegistry(ModRegister registry) {
+        // this.registry = registry;
+        this.CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, registry.modId);
     }
 }

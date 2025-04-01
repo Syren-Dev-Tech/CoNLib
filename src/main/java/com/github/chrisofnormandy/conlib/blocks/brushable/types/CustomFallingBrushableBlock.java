@@ -16,16 +16,14 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 
 public class CustomFallingBrushableBlock extends CustomBrushableBlock implements Fallable {
-    public CustomFallingBrushableBlock(Block turnsInto, Properties properties, SoundEvent brushSound,
-            SoundEvent brushCompletedStone) {
+    public CustomFallingBrushableBlock(Block turnsInto, Properties properties, SoundEvent brushSound, SoundEvent brushCompletedStone) {
         super(turnsInto, properties, brushSound, brushCompletedStone);
     }
 
     public void tick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
         super.tick(blockState, serverLevel, blockPos, randomSource);
 
-        if (FallingBlock.isFree(serverLevel.getBlockState(blockPos.below()))
-                && blockPos.getY() >= serverLevel.getMinBuildHeight()) {
+        if (FallingBlock.isFree(serverLevel.getBlockState(blockPos.below())) && blockPos.getY() >= serverLevel.getMinBuildHeight()) {
             FallingBlockEntity fallingblockentity = FallingBlockEntity.fall(serverLevel, blockPos, blockState);
             fallingblockentity.disableDrop();
         }
@@ -45,8 +43,7 @@ public class CustomFallingBrushableBlock extends CustomBrushableBlock implements
                 double d0 = (double) blockPos.getX() + randomSource.nextDouble();
                 double d1 = (double) blockPos.getY() - 0.05D;
                 double d2 = (double) blockPos.getZ() + randomSource.nextDouble();
-                level.addParticle(new BlockParticleOption(ParticleTypes.FALLING_DUST, blockState),
-                        d0, d1, d2, 0.0D, 0.0D, 0.0D);
+                level.addParticle(new BlockParticleOption(ParticleTypes.FALLING_DUST, blockState), d0, d1, d2, 0.0D, 0.0D, 0.0D);
             }
         }
 

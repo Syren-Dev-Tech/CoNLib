@@ -36,26 +36,19 @@ public class HorizontalPortalFrame extends Block {
 
     public HorizontalPortalFrame(Properties properties) {
         super(properties);
-        this.registerDefaultState(
-                this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(HAS_ACTIVATED,
-                        Boolean.valueOf(false)));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(HAS_ACTIVATED, Boolean.valueOf(false)));
     }
 
     public boolean useShapeForLightOcclusion(BlockState blockState) {
         return true;
     }
 
-    public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos,
-            CollisionContext context) {
-        return blockState.getValue(HAS_ACTIVATED)
-                ? FULL_SHAPE
-                : BASE_SHAPE;
+    public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext context) {
+        return blockState.getValue(HAS_ACTIVATED) ? FULL_SHAPE : BASE_SHAPE;
     }
 
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return this.defaultBlockState()
-                .setValue(FACING, context.getHorizontalDirection().getOpposite())
-                .setValue(HAS_ACTIVATED, Boolean.valueOf(false));
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite()).setValue(HAS_ACTIVATED, Boolean.valueOf(false));
     }
 
     public boolean hasAnalogOutputSignal(BlockState blockState) {
@@ -63,9 +56,7 @@ public class HorizontalPortalFrame extends Block {
     }
 
     public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos blockPos) {
-        return blockState.getValue(HAS_ACTIVATED)
-                ? 15
-                : 0;
+        return blockState.getValue(HAS_ACTIVATED) ? 15 : 0;
     }
 
     public BlockState rotate(BlockState blockState, Rotation rotation) {
@@ -77,8 +68,7 @@ public class HorizontalPortalFrame extends Block {
     }
 
     // Custom implementation, might not work...
-    public BlockState mirror(BlockState blockState, Mirror mirror, LevelAccessor levelAccessor, BlockPos blockPos,
-            Rotation rotation) {
+    public BlockState mirror(BlockState blockState, Mirror mirror, LevelAccessor levelAccessor, BlockPos blockPos, Rotation rotation) {
         return blockState.rotate(levelAccessor, blockPos, mirror.getRotation(blockState.getValue(FACING)));
     }
 
@@ -88,32 +78,13 @@ public class HorizontalPortalFrame extends Block {
 
     public BlockPattern getOrCreatePortalShape() {
         if (portalShape == null) {
-            portalShape = BlockPatternBuilder.start().aisle("?vvv?", ">???<", ">???<", ">???<", "?^^^?")
-                    .where('?', BlockInWorld.hasState(BlockStatePredicate.ANY))
-                    .where('^',
-                            BlockInWorld.hasState(BlockStatePredicate.forBlock(this)
-                                    .where(HAS_ACTIVATED, Predicates.equalTo(true))
-                                    .where(FACING, Predicates.equalTo(Direction.SOUTH))))
-                    .where('>',
-                            BlockInWorld.hasState(BlockStatePredicate.forBlock(this)
-                                    .where(HAS_ACTIVATED, Predicates.equalTo(true))
-                                    .where(FACING, Predicates.equalTo(Direction.WEST))))
-                    .where('v',
-                            BlockInWorld.hasState(BlockStatePredicate.forBlock(this)
-                                    .where(HAS_ACTIVATED, Predicates.equalTo(true))
-                                    .where(FACING, Predicates.equalTo(Direction.NORTH))))
-                    .where('<',
-                            BlockInWorld.hasState(BlockStatePredicate.forBlock(this)
-                                    .where(HAS_ACTIVATED, Predicates.equalTo(true))
-                                    .where(FACING, Predicates.equalTo(Direction.EAST))))
-                    .build();
+            portalShape = BlockPatternBuilder.start().aisle("?vvv?", ">???<", ">???<", ">???<", "?^^^?").where('?', BlockInWorld.hasState(BlockStatePredicate.ANY)).where('^', BlockInWorld.hasState(BlockStatePredicate.forBlock(this).where(HAS_ACTIVATED, Predicates.equalTo(true)).where(FACING, Predicates.equalTo(Direction.SOUTH)))).where('>', BlockInWorld.hasState(BlockStatePredicate.forBlock(this).where(HAS_ACTIVATED, Predicates.equalTo(true)).where(FACING, Predicates.equalTo(Direction.WEST)))).where('v', BlockInWorld.hasState(BlockStatePredicate.forBlock(this).where(HAS_ACTIVATED, Predicates.equalTo(true)).where(FACING, Predicates.equalTo(Direction.NORTH)))).where('<', BlockInWorld.hasState(BlockStatePredicate.forBlock(this).where(HAS_ACTIVATED, Predicates.equalTo(true)).where(FACING, Predicates.equalTo(Direction.EAST)))).build();
         }
 
         return portalShape;
     }
 
-    public boolean isPathfindable(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos,
-            PathComputationType pathComputationType) {
+    public boolean isPathfindable(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, PathComputationType pathComputationType) {
         return false;
     }
 }

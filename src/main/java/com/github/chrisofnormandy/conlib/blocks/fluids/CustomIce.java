@@ -37,8 +37,7 @@ public class CustomIce extends HalfTransparentBlock {
         return this.liquid.defaultBlockState();
     }
 
-    public void playerDestroy(Level level, Player player, BlockPos blockPos, BlockState blockState,
-            @Nullable BlockEntity blockEntity, ItemStack itemStack) {
+    public void playerDestroy(Level level, Player player, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity, ItemStack itemStack) {
         super.playerDestroy(level, player, blockPos, blockState, blockEntity, itemStack);
         if (EnchantmentHelper.getTagEnchantmentLevel(Enchantments.SILK_TOUCH, itemStack) == 0) {
             if (level.dimensionType().ultraWarm()) {

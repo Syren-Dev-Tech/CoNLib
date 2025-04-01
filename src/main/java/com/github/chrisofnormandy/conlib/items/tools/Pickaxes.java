@@ -1,6 +1,7 @@
 package com.github.chrisofnormandy.conlib.items.tools;
 
-import com.github.chrisofnormandy.conlib.registry.ItemRegistry;
+import java.util.function.Supplier;
+
 import com.github.chrisofnormandy.conlib.registry.ModRegister;
 
 import net.minecraft.resources.ResourceKey;
@@ -10,70 +11,51 @@ import net.minecraft.world.item.Item.Properties;
 import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
-import net.minecraftforge.registries.RegistryObject;
 
 public class Pickaxes {
 
-    public static final RegistryObject<PickaxeItem> create(String name) {
-        return create(name, new Item.Properties(), Tiers.IRON, 2, -2.8F);
+    public static final Supplier<PickaxeItem> create(ModRegister register, String name) {
+        return create(register, name, new Item.Properties(), Tiers.IRON, 2, -2.8F);
     }
 
-    public static final RegistryObject<PickaxeItem> create(String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(name, new Item.Properties(), Tiers.IRON, 2, -2.8F, creativeTab);
+    public static final Supplier<PickaxeItem> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
+        return create(register, name, new Item.Properties(), Tiers.IRON, 2, -2.8F, creativeTab);
     }
 
-    public static final RegistryObject<PickaxeItem> create(String name, Properties properties) {
-        return create(name, properties, Tiers.IRON, 2, -2.8F);
+    public static final Supplier<PickaxeItem> create(ModRegister register, String name, Properties properties) {
+        return create(register, name, properties, Tiers.IRON, 2, -2.8F);
     }
 
-    public static final RegistryObject<PickaxeItem> create(String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
-        return create(name, properties, Tiers.IRON, 2, -2.8F, creativeTab);
+    public static final Supplier<PickaxeItem> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
+        return create(register, name, properties, Tiers.IRON, 2, -2.8F, creativeTab);
     }
 
-    public static final RegistryObject<PickaxeItem> create(String name, Properties properties, Tier tier) {
-        return create(name, new Properties(), tier, 2, -2.8F);
+    public static final Supplier<PickaxeItem> create(ModRegister register, String name, Properties properties, Tier tier) {
+        return create(register, name, new Properties(), tier, 2, -2.8F);
     }
 
-    public static final RegistryObject<PickaxeItem> create(String name, Properties properties, Tier tier,
-            ResourceKey<CreativeModeTab> creativeTab) {
-        return create(name, new Properties(), tier, 2, -2.8F, creativeTab);
+    public static final Supplier<PickaxeItem> create(ModRegister register, String name, Properties properties, Tier tier, ResourceKey<CreativeModeTab> creativeTab) {
+        return create(register, name, new Properties(), tier, 2, -2.8F, creativeTab);
     }
 
-    public static final RegistryObject<PickaxeItem> create(String name,
-            Tier tier,
-            Integer attackDamage,
-            Float attackSpeed) {
-        return create(name, new Item.Properties(), tier, attackDamage, attackSpeed);
+    public static final Supplier<PickaxeItem> create(ModRegister register, String name, Tier tier, Integer attackDamage, Float attackSpeed) {
+        return create(register, name, new Item.Properties(), tier, attackDamage, attackSpeed);
     }
 
-    public static final RegistryObject<PickaxeItem> create(String name,
-            Tier tier,
-            Integer attackDamage,
-            Float attackSpeed,
-            ResourceKey<CreativeModeTab> creativeTab) {
-        return create(name, new Item.Properties(), tier, attackDamage, attackSpeed, creativeTab);
+    public static final Supplier<PickaxeItem> create(ModRegister register, String name, Tier tier, Integer attackDamage, Float attackSpeed, ResourceKey<CreativeModeTab> creativeTab) {
+        return create(register, name, new Item.Properties(), tier, attackDamage, attackSpeed, creativeTab);
     }
 
-    public static final RegistryObject<PickaxeItem> create(String name,
-            Properties properties,
-            Tier tier,
-            Integer attackDamage,
-            Float attackSpeed) {
-        var pickaxe = ItemRegistry.register(name, () -> new PickaxeItem(tier, attackDamage, attackSpeed, properties));
-        ModRegister.tools.put(name, pickaxe);
+    public static final Supplier<PickaxeItem> create(ModRegister register, String name, Properties properties, Tier tier, Integer attackDamage, Float attackSpeed) {
+        var pickaxe = register.itemRegistry.register(name, () -> new PickaxeItem(tier, attackDamage, attackSpeed, properties));
+        register.itemRegistry.tools.put(name, pickaxe);
 
         return pickaxe;
     }
 
-    public static final RegistryObject<PickaxeItem> create(String name,
-            Properties properties,
-            Tier tier,
-            Integer attackDamage,
-            Float attackSpeed,
-            ResourceKey<CreativeModeTab> creativeTab) {
-        var pickaxe = ItemRegistry.register(name, () -> new PickaxeItem(tier, attackDamage, attackSpeed, properties));
-        ModRegister.tools.put(name, pickaxe);
+    public static final Supplier<PickaxeItem> create(ModRegister register, String name, Properties properties, Tier tier, Integer attackDamage, Float attackSpeed, ResourceKey<CreativeModeTab> creativeTab) {
+        var pickaxe = register.itemRegistry.register(name, () -> new PickaxeItem(tier, attackDamage, attackSpeed, properties));
+        register.itemRegistry.tools.put(name, pickaxe);
 
         return pickaxe;
     }

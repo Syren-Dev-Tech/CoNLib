@@ -1,30 +1,34 @@
 package com.github.chrisofnormandy.conlib.blocks.decoration.storage;
 
-import com.github.chrisofnormandy.conlib.registry.BlockRegistry;
+import java.util.function.Supplier;
+
+import com.github.chrisofnormandy.conlib.registry.ModRegister;
 
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.BarrelBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-import net.minecraftforge.registries.RegistryObject;
 
 public class Barrels {
 
-    public static final RegistryObject<BarrelBlock> create(String name) {
-        return create(name, Properties.copy(Blocks.BARREL));
+    public static final Supplier<BarrelBlock> create(ModRegister register, String name) {
+        return create(register, name, Properties.copy(Blocks.BARREL));
     }
 
-    public static final RegistryObject<BarrelBlock> create(String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(name, Properties.copy(Blocks.BARREL), creativeTab);
+    public static final Supplier<BarrelBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
+        return create(register, name, Properties.copy(Blocks.BARREL), creativeTab);
     }
 
-    public static final RegistryObject<BarrelBlock> create(String name, Properties properties) {
-        return BlockRegistry.register(name, () -> new BarrelBlock(properties));
+    public static final Supplier<BarrelBlock> create(ModRegister register, String name, Properties properties) {
+        return register.blockRegistry.register(name, () -> new BarrelBlock(properties));
     }
 
-    public static final RegistryObject<BarrelBlock> create(String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
-        return BlockRegistry.register(name, () -> new BarrelBlock(properties), creativeTab);
+    public static final Supplier<BarrelBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
+        return register.blockRegistry.register(name, () -> new BarrelBlock(properties), creativeTab);
+    }
+
+    private Barrels() {
+        // Prevent instantiation
     }
 }
