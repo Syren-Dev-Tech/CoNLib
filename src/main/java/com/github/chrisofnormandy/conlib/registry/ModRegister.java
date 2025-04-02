@@ -36,9 +36,8 @@ public class ModRegister {
         CoNLib.LOGGER.info("ASSIGNING CREATIVE TABS");
 
         this.creativeTabRegistry.creativeTabs.forEach((key, value) -> {
-            if (event.getTabKey() == key) {
-                value.forEach((item) -> event.accept(item));
-            }
+            if (event.getTabKey() == key)
+                value.forEach(event::accept);
         });
     }
 
@@ -57,22 +56,17 @@ public class ModRegister {
 
     public void onClientSetup(FMLClientSetupEvent event) {
         this.mobRegistry.entityRendering.forEach((key, value) -> {
-            EntityRenderers.register(value.y.get(),
-                    context -> new CustomMobRenderer(context, new CustomAnimalModel<CustomAnimal>(context.bakeLayer(
-                            new ModelLayerLocation(new ResourceLocation(value.x, key), "main"))),
-                            0.5F) {
-                        @Override
-                        public ResourceLocation getTextureLocation(CustomAnimal entity) {
-                            return new ResourceLocation(value.x, "textures/entity/" + key + ".png");
-                        }
-                    });
+            EntityRenderers.register(value.y.get(), context -> new CustomMobRenderer(context, new CustomAnimalModel<>(context.bakeLayer(new ModelLayerLocation(new ResourceLocation(value.x, key), "main"))), 0.5F) {
+                @Override
+                public ResourceLocation getTextureLocation(CustomAnimal entity) {
+                    return new ResourceLocation(value.x, "textures/entity/" + key + ".png");
+                }
+            });
         });
     }
 
     public void onEntityAttributeCreation(EntityAttributeCreationEvent event) {
-        this.mobRegistry.entityAttributes.forEach((key, value) -> {
-            event.put(key.get(), value.get().build());
-        });
+        this.mobRegistry.entityAttributes.forEach((key, value) -> event.put(key.get(), value.get().build()));
     }
 
     private void createRegistries() {
