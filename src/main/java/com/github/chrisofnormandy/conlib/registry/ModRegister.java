@@ -3,9 +3,9 @@ package com.github.chrisofnormandy.conlib.registry;
 import java.util.HashMap;
 
 import com.github.chrisofnormandy.conlib.CoNLib;
-import com.github.chrisofnormandy.conlib.mobs.types.CustomAnimal;
-import com.github.chrisofnormandy.conlib.mobs.types.CustomAnimalModel;
-import com.github.chrisofnormandy.conlib.mobs.types.CustomMobRenderer;
+import com.github.chrisofnormandy.conlib.mobs.types.CustomCreature;
+import com.github.chrisofnormandy.conlib.mobs.types.CustomCreatureModel;
+import com.github.chrisofnormandy.conlib.mobs.types.CustomCreatureRenderer;
 
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -54,22 +54,21 @@ public class ModRegister {
         finishRegistries(modEventBus);
     }
 
-    public void onClientSetup(FMLClientSetupEvent event) {
-        this.mobRegistry.entityRendering.forEach((key, value) -> {
-            EntityRenderers.register(value.y.get(), context -> new CustomMobRenderer(context, new CustomAnimalModel<>(context.bakeLayer(new ModelLayerLocation(new ResourceLocation(value.x, key), "main"))), 0.5F) {
-                @Override
-                public ResourceLocation getTextureLocation(CustomAnimal entity) {
-                    return new ResourceLocation(value.x, "textures/entity/" + key + ".png");
-                }
-            });
-        });
+    public void onEntityAttributeCreation(EntityAttributeCreationEvent event) {
+        CoNLib.LOGGER.info("REGISTERING ENTITY ATTRIBUTES");
+
+        this.mobRegistry.registerEntityAttributes(event);
     }
 
-    public void onEntityAttributeCreation(EntityAttributeCreationEvent event) {
-        this.mobRegistry.entityAttributes.forEach((key, value) -> event.put(key.get(), value.get().build()));
+    public void onClientSetup(FMLClientSetupEvent event) {
+        CoNLib.LOGGER.info("CONLIB CLIENT SETUP");
+
+        this.mobRegistry.registerEntityModels(event);
     }
 
     private void createRegistries() {
+        CoNLib.LOGGER.info("CREATING REGISTRIES");
+
         this.blockRegistry = new BlockRegistry(this);
         this.itemRegistry = new ItemRegistry(this);
         this.creativeTabRegistry = new CreativeTabRegistry(this);
@@ -77,6 +76,8 @@ public class ModRegister {
     }
 
     private void finishRegistries(IEventBus bus) {
+        CoNLib.LOGGER.info("FINISHING REGISTRIES");
+
         this.blockRegistry.finish(bus);
         this.itemRegistry.finish(bus);
         this.creativeTabRegistry.finish(bus);

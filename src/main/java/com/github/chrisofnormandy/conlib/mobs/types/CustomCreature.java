@@ -18,6 +18,7 @@ import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobType;
+import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
@@ -26,15 +27,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class CustomAnimal extends Mob {
+public class CustomCreature extends PathfinderMob {
 
-    private UUID persistentAngerTarget;
-    private static final EntityDataAccessor<Integer> DATA_REMAINING_ANGER_TIME;
-    private static final UniformInt PERSISTENT_ANGER_TIME;
+    private EntityType<CustomCreature> child;
 
-    private static EntityType<CustomAnimal> child;
-
-    public CustomAnimal(EntityType<? extends CustomAnimal> entityType, Level level) {
+    public CustomCreature(EntityType<? extends CustomCreature> entityType, Level level) {
         super(entityType, level);
     }
 
@@ -42,10 +39,6 @@ public class CustomAnimal extends Mob {
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(2, new RandomLookAroundGoal(this));
-    }
-
-    public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 20.0).add(Attributes.MOVEMENT_SPEED, 0.25);
     }
 
     @Override
@@ -82,9 +75,12 @@ public class CustomAnimal extends Mob {
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
+
         if (obj == null || getClass() != obj.getClass())
             return false;
-        CustomAnimal that = (CustomAnimal) obj;
+
+        CustomCreature that = (CustomCreature) obj;
+
         return this.getUUID().equals(that.getUUID());
     }
 
@@ -93,33 +89,8 @@ public class CustomAnimal extends Mob {
         return this.getUUID().hashCode();
     }
 
-    public UUID getPersistentAngerTarget() {
-        return this.persistentAngerTarget;
-    }
-
-    public int getRemainingPersistentAngerTime() {
-        return this.entityData.get(DATA_REMAINING_ANGER_TIME);
-    }
-
-    public void setPersistentAngerTarget(@Nullable UUID uuid) {
-        this.persistentAngerTarget = uuid;
-    }
-
-    public void setRemainingPersistentAngerTime(int angerTime) {
-        this.entityData.set(DATA_REMAINING_ANGER_TIME, angerTime);
-    }
-
-    public void startPersistentAngerTimer() {
-        this.setRemainingPersistentAngerTime(PERSISTENT_ANGER_TIME.sample(this.random));
-    }
-
     @Nullable
-    public CustomAnimal getBreedOffspring(ServerLevel serverLevel, AgeableMob mob) {
+    public CustomCreature getBreedOffspring(ServerLevel serverLevel, AgeableMob mob) {
         return child.create(serverLevel);
-    }
-
-    static {
-        DATA_REMAINING_ANGER_TIME = SynchedEntityData.defineId(CustomAnimal.class, EntityDataSerializers.INT);
-        PERSISTENT_ANGER_TIME = TimeUtil.rangeOfSeconds(20, 39);
     }
 }

@@ -35,12 +35,10 @@ public class BlockRegistry {
         return blockRegistry;
     }
 
-    public final <T extends Block> Supplier<T> register(String name, Supplier<T> block,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public final <T extends Block> Supplier<T> register(String name, Supplier<T> block, ResourceKey<CreativeModeTab> creativeTab) {
         var blockRegistry = register(name, block);
 
-        this.registry.itemRegistry.register(name, () -> new BlockItem(blockRegistry.get(), new Item.Properties()),
-                creativeTab);
+        this.registry.itemRegistry.register(name, () -> new BlockItem(blockRegistry.get(), new Item.Properties()), creativeTab);
 
         return blockRegistry;
     }
