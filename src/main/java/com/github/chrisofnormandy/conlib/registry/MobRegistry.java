@@ -5,7 +5,7 @@ import java.util.function.Supplier;
 
 import com.github.chrisofnormandy.conlib.CoNLib;
 import com.github.chrisofnormandy.conlib.collections.Tuple;
-import com.github.chrisofnormandy.conlib.mobs.types.CustomCreature;
+import com.github.chrisofnormandy.conlib.mobs.creatures.CustomCreature;
 
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntityType.EntityFactory;
@@ -26,13 +26,13 @@ public class MobRegistry {
     private final DeferredRegister<EntityType<?>> ENTITY_TYPES;
 
     public final HashMap<RegistryObject<EntityType<CustomCreature>>, Supplier<AttributeSupplier.Builder>> entityAttributes = new HashMap<>();
-    public final HashMap<String, RegistryObject<? extends EntityType<CustomCreature>>> entities = new HashMap<>();
+    public final HashMap<String, RegistryObject<? extends EntityType<? extends CustomCreature>>> entities = new HashMap<>();
 
     public final void finish(IEventBus bus) {
         CoNLib.LOGGER.info("Finishing entity registration");
 
         ENTITY_TYPES.register(bus);
-        this.modelRegistry.finish(bus, entities);
+        this.modelRegistry.finish(bus);
     }
 
     public AttributeSupplier.Builder createAttributes() {
@@ -77,7 +77,7 @@ public class MobRegistry {
                 CoNLib.LOGGER.info("Registering model for entity: " + name);
 
                 var entity = entityRegistryObject.get();
-                this.modelRegistry.register(name, () -> entity);
+                this.modelRegistry.registerRenderer(name, () -> entity);
             } else {
                 CoNLib.LOGGER.error("Failed to register model for entity: " + name);
             }

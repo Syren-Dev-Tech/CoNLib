@@ -1,6 +1,6 @@
 package com.github.chrisofnormandy.conlib.mobs;
 
-import com.github.chrisofnormandy.conlib.mobs.types.CustomCreature;
+import com.github.chrisofnormandy.conlib.mobs.creatures.CustomCreature;
 import com.github.chrisofnormandy.conlib.registry.ModRegister;
 
 public class Creatures {

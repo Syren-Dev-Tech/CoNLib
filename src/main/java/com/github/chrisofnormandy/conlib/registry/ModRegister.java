@@ -3,13 +3,7 @@ package com.github.chrisofnormandy.conlib.registry;
 import java.util.HashMap;
 
 import com.github.chrisofnormandy.conlib.CoNLib;
-import com.github.chrisofnormandy.conlib.mobs.types.CustomCreature;
-import com.github.chrisofnormandy.conlib.mobs.types.CustomCreatureModel;
-import com.github.chrisofnormandy.conlib.mobs.types.CustomCreatureRenderer;
 
-import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
