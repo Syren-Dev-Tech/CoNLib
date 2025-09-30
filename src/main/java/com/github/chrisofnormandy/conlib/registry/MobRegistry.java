@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.function.Supplier;
 
 import com.github.chrisofnormandy.conlib.CoNLib;
-import com.github.chrisofnormandy.conlib.collections.Tuple;
+import com.github.chrisofnormandy.conlib.mobs.creatures.CreatureRegistrar;
 import com.github.chrisofnormandy.conlib.mobs.creatures.CustomCreature;
 
 import net.minecraft.world.entity.EntityType;
@@ -18,21 +18,17 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 
 public class MobRegistry {
     private final ModRegister registry;
-    private final ModelRegistry modelRegistry;
     private final DeferredRegister<EntityType<?>> ENTITY_TYPES;
 
-    public final HashMap<RegistryObject<EntityType<CustomCreature>>, Supplier<AttributeSupplier.Builder>> entityAttributes = new HashMap<>();
-    public final HashMap<String, RegistryObject<? extends EntityType<? extends CustomCreature>>> entities = new HashMap<>();
+    public final HashMap<String, CreatureRegistrar<?, ?>> entities = new HashMap<>();
 
     public final void finish(IEventBus bus) {
         CoNLib.LOGGER.info("Finishing entity registration");
 
         ENTITY_TYPES.register(bus);
-        this.modelRegistry.finish(bus);
     }
 
     public AttributeSupplier.Builder createAttributes() {
@@ -46,8 +42,8 @@ public class MobRegistry {
 
         var entityTypeRegistry = this.ENTITY_TYPES.register(name, () -> EntityType.Builder.of(factory, MobCategory.CREATURE).sized(0.6F, 1.8F).build(name));
 
-        this.entities.put(name, entityTypeRegistry);
-        this.entityAttributes.put(entityTypeRegistry, () -> createAttributes());
+        var registrar = new CreatureRegistrar<CustomCreature, EntityType<CustomCreature>>(registry, name, entityTypeRegistry, () -> createAttributes());
+        this.entities.put(name, registrar);
 
         return entityTypeRegistry;
     }
@@ -55,17 +51,10 @@ public class MobRegistry {
     public void registerEntityAttributes(EntityAttributeCreationEvent event) {
         CoNLib.LOGGER.info("Registering entity attributes");
 
-        entityAttributes.forEach((entityRegistryObject, attributesSupplier) -> {
-            if (entityRegistryObject.isPresent()) {
-                CoNLib.LOGGER.info("Registering attributes for entity: " + entityRegistryObject);
+        entities.forEach((name, registrar) -> {
+            CoNLib.LOGGER.info("Registering attributes for: " + name);
 
-                var attributes = attributesSupplier.get().build();
-                var entity = entityRegistryObject.get();
-
-                event.put(entity, attributes);
-            } else {
-                CoNLib.LOGGER.error("Failed to register attributes for entity: " + entityRegistryObject);
-            }
+            registrar.registerAttributes(event);
         });
     }
 
@@ -73,20 +62,14 @@ public class MobRegistry {
         CoNLib.LOGGER.info("Registering entity models");
 
         entities.forEach((name, entityRegistryObject) -> {
-            if (entityRegistryObject.isPresent()) {
-                CoNLib.LOGGER.info("Registering model for entity: " + name);
+            CoNLib.LOGGER.info("Registering entity model for: " + name);
 
-                var entity = entityRegistryObject.get();
-                this.modelRegistry.registerRenderer(name, () -> entity);
-            } else {
-                CoNLib.LOGGER.error("Failed to register model for entity: " + name);
-            }
+            entityRegistryObject.register(event);
         });
     }
 
     public MobRegistry(ModRegister registry) {
         this.registry = registry;
         this.ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, registry.modId);
-        this.modelRegistry = new ModelRegistry(registry);
     }
 }
