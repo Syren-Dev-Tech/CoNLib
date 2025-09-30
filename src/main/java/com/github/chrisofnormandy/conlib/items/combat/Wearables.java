@@ -2,7 +2,6 @@ package com.github.chrisofnormandy.conlib.items.combat;
 
 import java.util.function.Supplier;
 
-import com.github.chrisofnormandy.conlib.registry.ItemRegistry;
 import com.github.chrisofnormandy.conlib.registry.ModRegister;
 
 import net.minecraft.resources.ResourceKey;

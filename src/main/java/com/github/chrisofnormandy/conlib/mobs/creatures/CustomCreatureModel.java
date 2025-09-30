@@ -10,15 +10,19 @@ public class CustomCreatureModel<T extends CustomCreature> extends GeoModel<T> {
     private final ModRegister registry;
     private final String name;
 
-    private final ResourceLocation model;
-    private final ResourceLocation texture;
-    private final ResourceLocation animations;
+    private ResourceLocation model;
+    private ResourceLocation texture;
+    private ResourceLocation animations;
 
     public CustomCreatureModel(ModRegister registry, String name) {
         super();
         this.registry = registry;
         this.name = name;
 
+        defineResourceLocations();
+    }
+
+    protected void defineResourceLocations() {
         this.model = new ResourceLocation(registry.modId, "geo/" + name + ".geo.json");
         this.texture = new ResourceLocation(registry.modId, "textures/entity/" + name + ".png");
         this.animations = new ResourceLocation(registry.modId, "animations/" + name + ".animation.json");

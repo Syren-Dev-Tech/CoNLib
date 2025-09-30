@@ -4,7 +4,6 @@ import java.util.function.Supplier;
 
 import com.github.chrisofnormandy.conlib.items.ModItem;
 import com.github.chrisofnormandy.conlib.ores.types.Ore;
-import com.github.chrisofnormandy.conlib.registry.BlockRegistry;
 import com.github.chrisofnormandy.conlib.registry.ModRegister;
 import com.github.chrisofnormandy.conlib.registry.features.OreFeature;
 

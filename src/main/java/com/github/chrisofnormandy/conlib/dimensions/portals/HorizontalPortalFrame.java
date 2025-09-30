@@ -64,7 +64,7 @@ public class HorizontalPortalFrame extends Block {
     }
 
     public BlockState mirror(BlockState blockState, Mirror mirror) {
-        return blockState.rotate(mirror.getRotation(blockState.getValue(FACING)));
+        return this.rotate(blockState, mirror.getRotation(blockState.getValue(FACING)));
     }
 
     // Custom implementation, might not work...

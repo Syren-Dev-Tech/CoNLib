@@ -9,7 +9,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 import org.slf4j.Logger;
 
-import com.github.chrisofnormandy.conlib.mobs.Creatures;
 import com.github.chrisofnormandy.conlib.registry.ModRegister;
 import com.mojang.logging.LogUtils;
 
@@ -22,8 +21,6 @@ public class CoNLib {
 
     public CoNLib() {
         LOGGER.info("Time to do a little modding...");
-
-        Creatures.create(MOD_REGISTER, "test_dummy");
     }
 
     @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
