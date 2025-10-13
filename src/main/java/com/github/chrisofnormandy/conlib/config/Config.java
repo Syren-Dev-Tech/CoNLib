@@ -2,398 +2,81 @@ package com.github.chrisofnormandy.conlib.config;
 
 import java.io.File;
 import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.List;
 
-import com.github.chrisofnormandy.conlib.collections.Quartet;
-import com.github.chrisofnormandy.conlib.collections.Tuple;
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
+import com.github.chrisofnormandy.conlib.CoNLib;
 
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig.Type;
-import net.minecraftforge.fml.loading.FMLPaths;
-
-@Mod.EventBusSubscriber
 public class Config {
-    private ConfigGroup config = new ConfigGroup();
-    private String name;
-    private String path = "";
 
-    /**
-     * 
-     * @param name
-     */
+    private static final String TOML_EXTENSION = ".toml";
+    private static final String CONFIG_DIR = "config";
+
+    private final ConfigGroup root;
+    private final File file;
+    private final CommentedFileConfig fileConfig;
+
+    private String name;
+    private String path;
+
     public Config(String name) {
         this.name = name;
-    }
-
-    /**
-     * 
-     * @param path
-     * @param name
-     */
-    public Config(String path, String name) {
-        this.path = path;
-        this.name = name;
-    }
-
-    /**
-     * 
-     * @param config
-     * @param path
-     */
-    private void loadConfig(ForgeConfigSpec config, Path path) {
-        CommentedFileConfig file = CommentedFileConfig.builder(path).sync().autosave().writingMode(WritingMode.REPLACE)
+        this.root = new ConfigGroup(this);
+        this.file = Path.of(CONFIG_DIR, this.name + TOML_EXTENSION).toFile();
+        this.path = "";
+        this.fileConfig = CommentedFileConfig.builder(this.file).sync().autosave().writingMode(WritingMode.REPLACE)
                 .build();
-
-        file.load();
-
-        config.setConfig(file);
     }
 
-    /**
-     * 
-     * @param type
-     */
-    private void createConfig(Type type) {
-        String fileName = this.name + ".toml";
+    public Config(String path, String name) {
+        this.name = name;
+        this.root = new ConfigGroup(this);
+        this.path = path;
+        this.file = Path.of(CONFIG_DIR, this.path, this.name + TOML_EXTENSION).toFile();
+        this.fileConfig = CommentedFileConfig.builder(this.file).sync().autosave().writingMode(WritingMode.REPLACE)
+                .build();
+    }
 
-        if (this.path != "") {
-            Path path = FMLPaths.CONFIGDIR.get().resolve(this.path);
-            final File dir = path.toFile();
+    public ConfigGroup getRoot() {
+        return this.root;
+    }
 
-            if (!dir.exists())
-                dir.mkdirs();
-
-            fileName = this.path + "/" + fileName;
+    public void load() {
+        if (!this.file.exists()) {
+            this.write();
         }
 
-        ModLoadingContext.get().registerConfig(type, config.CONFIG, fileName);
-        this.loadConfig(config.CONFIG, FMLPaths.CONFIGDIR.get().resolve(fileName));
+        this.fileConfig.load();
     }
 
-    /**
-     * 
-     * @param BUILDER
-     * @param group
-     */
-    private void BuildVars(ForgeConfigSpec.Builder BUILDER, ConfigGroup group) {
-
-        if (!group.flags_unbuilt.isEmpty()) {
-
-            BUILDER.push("Flags");
-            for (HashMap.Entry<String, Tuple<String, Boolean>> entry : group.flags_unbuilt.entrySet()) {
-                String key = entry.getKey();
-                Tuple<String, Boolean> value = entry.getValue();
-
-                group.flags.put(key, BUILDER.comment(value.x).define(key, value.y));
+    private void write() {
+        // If this file doesn't exist, create it and the parent directories
+        if (!this.file.exists()) {
+            this.file.getParentFile().mkdirs();
+            try {
+                boolean created = this.file.createNewFile();
+                if (!created) {
+                    CoNLib.LOGGER.error("Failed to create new config file: {}", this.file.getAbsolutePath());
+                }
+            } catch (Exception e) {
+                CoNLib.LOGGER.error("Exception creating new config file: {}", this.file.getAbsolutePath(), e);
             }
-
-            BUILDER.pop();
         }
 
-        if (!group.strings_unbuilt.isEmpty()) {
-
-            BUILDER.push("Strings");
-            for (HashMap.Entry<String, Tuple<String, String>> entry : group.strings_unbuilt.entrySet()) {
-                String key = entry.getKey();
-                Tuple<String, String> value = entry.getValue();
-
-                group.strings.put(key, BUILDER.comment(value.x).define(key, value.y));
-            }
-
-            BUILDER.pop();
-        }
-
-        if (!group.integers_unbuilt.isEmpty()) {
-
-            BUILDER.push("Integers");
-            for (HashMap.Entry<String, Tuple<String, Integer>> entry : group.integers_unbuilt.entrySet()) {
-                String key = entry.getKey();
-                Tuple<String, Integer> value = entry.getValue();
-
-                group.integers.put(key, BUILDER.comment(value.x).define(key, value.y));
-            }
-
-            BUILDER.pop();
-        }
-
-        if (!group.arrayLists_int_unbuilt.isEmpty()) {
-
-            BUILDER.push("Int Ranges");
-            for (HashMap.Entry<String, Quartet<String, Integer, Integer, Integer>> entry : group.ranges_unbuilt
-                    .entrySet()) {
-                String key = entry.getKey();
-                Quartet<String, Integer, Integer, Integer> value = entry.getValue();
-
-                group.ranges.put(key, BUILDER.comment(value.w).defineInRange(key, value.x, value.y, value.z));
-            }
-
-            BUILDER.pop();
-        }
-
-        if (!group.doubles_unbuilt.isEmpty()) {
-
-            BUILDER.push("Doubles");
-            for (HashMap.Entry<String, Tuple<String, Double>> entry : group.doubles_unbuilt.entrySet()) {
-                String key = entry.getKey();
-                Tuple<String, Double> value = entry.getValue();
-
-                group.doubles.put(key, BUILDER.comment(value.x).define(key, value.y));
-            }
-
-            BUILDER.pop();
-        }
+        this.root.write();
+        this.fileConfig.save();
     }
 
-    /**
-     * 
-     * @param BUILDER
-     * @param group
-     */
-    private void BuildLists(ForgeConfigSpec.Builder BUILDER, ConfigGroup group) {
-
-        if (!group.arrayLists_int_unbuilt.isEmpty()) {
-
-            BUILDER.push("Int Lists");
-            for (HashMap.Entry<String, Tuple<String, List<Integer>>> entry : group.arrayLists_int_unbuilt.entrySet()) {
-                String key = entry.getKey();
-                Tuple<String, List<Integer>> value = entry.getValue();
-
-                group.arrayLists_int.put(key, BUILDER.comment(value.x).define(key, value.y));
-            }
-
-            BUILDER.pop();
-        }
-
-        if (!group.arrayLists_string_unbuilt.isEmpty()) {
-
-            BUILDER.push("String Lists");
-            for (HashMap.Entry<String, Tuple<String, List<String>>> entry : group.arrayLists_string_unbuilt
-                    .entrySet()) {
-                String key = entry.getKey();
-                Tuple<String, List<String>> value = entry.getValue();
-
-                group.arrayLists_string.put(key, BUILDER.comment(value.x).define(key, value.y));
-            }
-
-            BUILDER.pop();
-        }
+    public void close() {
+        this.fileConfig.close();
     }
 
-    /**
-     * 
-     * @param BUILDER
-     * @param group
-     */
-    private void BuildAll(ForgeConfigSpec.Builder BUILDER, ConfigGroup group) {
-        BuildVars(BUILDER, group);
-        BuildLists(BUILDER, group);
-
-        group.subgroups.forEach((String name, ConfigGroup group_) -> {
-            BUILDER.push(name);
-            this.BuildAll(BUILDER, group_);
-            BUILDER.pop();
-        });
+    public CommentedFileConfig getFileConfig() {
+        return this.fileConfig;
     }
 
-    /**
-     * 
-     * @return
-     */
-    public Config Build() {
-        ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
-
-        this.BuildVars(BUILDER, this.config);
-        this.BuildLists(BUILDER, this.config);
-
-        this.config.subgroups.forEach((String name, ConfigGroup group) -> {
-            BUILDER.push(name);
-            this.BuildAll(BUILDER, group);
-            BUILDER.pop();
-        });
-
-        this.config.CONFIG = BUILDER.build();
-
-        this.createConfig(Type.COMMON);
-
-        return this;
-    }
-
-    /**
-     * 
-     * @param type
-     */
-    public void Build(Type type) {
-        ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
-
-        this.BuildVars(BUILDER, this.config);
-        this.BuildLists(BUILDER, this.config);
-
-        this.config.subgroups.forEach((String name, ConfigGroup group) -> {
-            BUILDER.push(name);
-            this.BuildAll(BUILDER, group);
-            BUILDER.pop();
-        });
-
-        this.config.CONFIG = BUILDER.build();
-
-        this.createConfig(type);
-    }
-
-    /**
-     * 
-     * @param key
-     * @param min
-     * @param max
-     * @param defaultValue
-     * @param comment
-     */
-    public void addRange(String key, Integer min, Integer max, Integer defaultValue, String comment) {
-        this.config.addRange(key, min, max, defaultValue, comment);
-    }
-
-    /**
-     * 
-     * @param key
-     * @param value
-     * @param comment
-     */
-    public void addString(String key, String value, String comment) {
-        this.config.addString(key, value, comment);
-    }
-
-    /**
-     * 
-     * @param key
-     * @param value
-     * @param comment
-     */
-    public void addInteger(String key, Integer value, String comment) {
-        this.config.addInteger(key, value, comment);
-    }
-
-    /**
-     * 
-     * @param key
-     * @param value
-     * @param comment
-     */
-    public void addDouble(String key, Double value, String comment) {
-        this.config.addDouble(key, value, comment);
-    }
-
-    /**
-     * 
-     * @param key
-     * @param value
-     * @param comment
-     */
-    public void addFlag(String key, Boolean value, String comment) {
-        this.config.addFlag(key, value, comment);
-    }
-
-    /**
-     * 
-     * @param key
-     * @param value
-     * @param comment
-     */
-    public void addIntList(String key, List<Integer> value, String comment) {
-        this.config.addIntList(key, value, comment);
-    }
-
-    /**
-     * 
-     * @param key
-     * @param value
-     * @param comment
-     */
-    public void addStringList(String key, List<String> value, String comment) {
-        this.config.addStringList(key, value, comment);
-    }
-
-    /**
-     * 
-     * @param key
-     * @return
-     */
-    public Integer getRangeValue(String key) {
-        return this.config.getRangeValue(key);
-    }
-
-    /**
-     * 
-     * @param key
-     * @return
-     */
-    public String getStringValue(String key) {
-        return this.config.getStringValue(key);
-    }
-
-    /**
-     * 
-     * @param key
-     * @return
-     */
-    public Integer getIntegerValue(String key) {
-        return this.config.getIntegerValue(key);
-    }
-
-    /**
-     * 
-     * @param key
-     * @return
-     */
-    public Double getDoubleValue(String key) {
-        return this.config.getDoubleValue(key);
-    }
-
-    /**
-     * 
-     * @param key
-     * @return
-     */
-    public Boolean getFlagValue(String key) {
-        return this.config.getFlagValue(key);
-    }
-
-    /**
-     * 
-     * @param key
-     * @return
-     */
-    public List<Integer> getIntListValue(String key) {
-        return this.config.getIntListValue(key);
-    }
-
-    /**
-     * 
-     * @param key
-     * @return
-     */
-    public List<String> getStringListValue(String key) {
-        return this.config.getStringListValue(key);
-    }
-
-    /**
-     * 
-     * @param name
-     * @param group
-     */
-    public void addSubgroup(String name, ConfigGroup group) {
-        this.config.addSubgroup(name, group);
-    }
-
-    /**
-     * 
-     * @param name
-     * @return
-     */
-    public ConfigGroup getSubgroup(String name) {
-        return this.config.getSubgroup(name);
+    public <T> T get(String key) {
+        // Retrieve the value by key path in the config
+        return this.fileConfig.get(key);
     }
 }

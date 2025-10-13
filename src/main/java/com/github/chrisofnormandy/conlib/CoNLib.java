@@ -6,6 +6,7 @@ import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import org.slf4j.Logger;
 
@@ -19,12 +20,18 @@ public class CoNLib {
 
     public static final ModRegister MOD_REGISTER = new ModRegister(MOD_ID);
 
-    public CoNLib() {
+    public CoNLib() { // NOSONAR - Constructor must be public
         LOGGER.info("Time to do a little modding...");
+
+        // Init ModRegister events using FML context
+        MOD_REGISTER.initEvents(FMLJavaModLoadingContext.get());
     }
 
     @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents {
+        private ClientModEvents() {
+        }
+
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             LOGGER.info("HELLO FROM CLIENT SETUP");
@@ -36,6 +43,10 @@ public class CoNLib {
 
     @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
     public static class CommonModEvents {
+        // Private constructor to prevent instantiation
+        private CommonModEvents() {
+        }
+
         @SubscribeEvent
         public static void onEntityAttributeCreation(EntityAttributeCreationEvent event) {
             LOGGER.info("HELLO FROM ENTITY ATTRIBUTE CREATION");
