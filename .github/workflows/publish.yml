@@ -31,3 +31,8 @@ jobs:
         with:
           name: build-artifacts
           path: build/libs/*.jar
+      - name: Upload Maven artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: maven-artifacts
+          path: mcmodsrepo/*
