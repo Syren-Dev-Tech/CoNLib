@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.github.syren_dev_tech.scylla.CoNLib;
+import com.github.syren_dev_tech.scylla.Scylla;
 import com.github.syren_dev_tech.scylla.registry.features.FeatureRegistry.OreFeatureRegistry;
 
 import net.minecraft.core.Holder;
@@ -63,7 +63,7 @@ public class PlacedFeatureRegistry {
     }
 
     private static ResourceKey<PlacedFeature> registerKey(String name) {
-        return ResourceKey.create(Registries.PLACED_FEATURE, new ResourceLocation(CoNLib.MOD_ID, name));
+        return ResourceKey.create(Registries.PLACED_FEATURE, new ResourceLocation(Scylla.MOD_ID, name));
     }
 
     private static void register(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key,

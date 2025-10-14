@@ -3,7 +3,7 @@ package com.github.syren_dev_tech.scylla.registry;
 import java.util.HashMap;
 import java.util.function.Supplier;
 
-import com.github.syren_dev_tech.scylla.CoNLib;
+import com.github.syren_dev_tech.scylla.Scylla;
 import com.github.syren_dev_tech.scylla.mobs.creatures.CreatureRegistrar;
 import com.github.syren_dev_tech.scylla.mobs.creatures.CustomCreature;
 
@@ -26,19 +26,19 @@ public class MobRegistry {
     public final HashMap<String, CreatureRegistrar<?, ?>> entities = new HashMap<>();
 
     public final void finish(IEventBus bus) {
-        CoNLib.LOGGER.info("Finishing entity registration");
+        Scylla.LOGGER.info("Finishing entity registration");
 
         ENTITY_TYPES.register(bus);
     }
 
     public AttributeSupplier.Builder createAttributes() {
-        CoNLib.LOGGER.info("Creating entity attributes");
+        Scylla.LOGGER.info("Creating entity attributes");
 
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 20.0).add(Attributes.MOVEMENT_SPEED, 0.25);
     }
 
     public final Supplier<EntityType<CustomCreature>> register(String name, EntityFactory<CustomCreature> factory) {
-        CoNLib.LOGGER.info("Registering entity: " + name);
+        Scylla.LOGGER.info("Registering entity: " + name);
 
         var entityTypeRegistry = this.ENTITY_TYPES.register(name,
                 () -> EntityType.Builder.of(factory, MobCategory.CREATURE).sized(0.6F, 1.8F).build(name));
@@ -51,20 +51,20 @@ public class MobRegistry {
     }
 
     public void registerEntityAttributes(EntityAttributeCreationEvent event) {
-        CoNLib.LOGGER.info("Registering entity attributes");
+        Scylla.LOGGER.info("Registering entity attributes");
 
         entities.forEach((name, registrar) -> {
-            CoNLib.LOGGER.info("Registering attributes for: " + name);
+            Scylla.LOGGER.info("Registering attributes for: " + name);
 
             registrar.registerAttributes(event);
         });
     }
 
     public void registerEntityModels(FMLClientSetupEvent event) {
-        CoNLib.LOGGER.info("Registering entity models");
+        Scylla.LOGGER.info("Registering entity models");
 
         entities.forEach((name, entityRegistryObject) -> {
-            CoNLib.LOGGER.info("Registering entity model for: " + name);
+            Scylla.LOGGER.info("Registering entity model for: " + name);
 
             entityRegistryObject.register(event);
         });

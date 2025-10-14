@@ -5,7 +5,7 @@ import net.minecraft.world.item.Item;
 import java.util.HashMap;
 import java.util.function.Supplier;
 
-import com.github.syren_dev_tech.scylla.CoNLib;
+import com.github.syren_dev_tech.scylla.Scylla;
 
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.ArmorItem;
@@ -32,7 +32,7 @@ public class ItemRegistry {
         var registry = ITEMS.register(name, item);
         this.items.put(name, registry);
 
-        CoNLib.LOGGER.info("Registered new item (not in creative tab): " + name);
+        Scylla.LOGGER.info("Registered new item (not in creative tab): " + name);
 
         return registry;
     }
@@ -44,7 +44,7 @@ public class ItemRegistry {
 
         this.registry.creativeTabRegistry.useCreativeTab(creativeTab, itemRegistry);
 
-        CoNLib.LOGGER.info("Registered new item: " + this.registry.modId + ":" + name);
+        Scylla.LOGGER.info("Registered new item: " + this.registry.modId + ":" + name);
 
         return itemRegistry;
     }

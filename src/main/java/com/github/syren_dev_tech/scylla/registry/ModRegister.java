@@ -3,7 +3,7 @@ package com.github.syren_dev_tech.scylla.registry;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.github.syren_dev_tech.scylla.CoNLib;
+import com.github.syren_dev_tech.scylla.Scylla;
 import com.github.syren_dev_tech.scylla.config.Config;
 
 import net.minecraftforge.common.MinecraftForge;
@@ -26,11 +26,11 @@ public class ModRegister {
     public final Map<String, Config> configs = new HashMap<>();
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        CoNLib.LOGGER.info("CONLIB COMMON SETUP");
+        Scylla.LOGGER.info("CONLIB COMMON SETUP");
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        CoNLib.LOGGER.info("ASSIGNING CREATIVE TABS");
+        Scylla.LOGGER.info("ASSIGNING CREATIVE TABS");
 
         this.creativeTabRegistry.creativeTabs.forEach((key, value) -> {
             if (event.getTabKey() == key)
@@ -57,19 +57,19 @@ public class ModRegister {
     }
 
     public void onEntityAttributeCreation(EntityAttributeCreationEvent event) {
-        CoNLib.LOGGER.info("REGISTERING ENTITY ATTRIBUTES");
+        Scylla.LOGGER.info("REGISTERING ENTITY ATTRIBUTES");
 
         this.mobRegistry.registerEntityAttributes(event);
     }
 
     public void onClientSetup(FMLClientSetupEvent event) {
-        CoNLib.LOGGER.info("CONLIB CLIENT SETUP");
+        Scylla.LOGGER.info("CONLIB CLIENT SETUP");
 
         this.mobRegistry.registerEntityModels(event);
     }
 
     private void finishRegistries(IEventBus bus) {
-        CoNLib.LOGGER.info("FINISHING REGISTRIES");
+        Scylla.LOGGER.info("FINISHING REGISTRIES");
 
         this.blockRegistry.finish(bus);
         this.itemRegistry.finish(bus);

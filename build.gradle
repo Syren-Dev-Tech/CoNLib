@@ -1,7 +1,7 @@
 buildscript {
-        repositories {
-                maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
-        }
+    repositories {
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+    }
 }
 
 plugins {
@@ -126,7 +126,7 @@ repositories {
                 includeGroupByRegex("software\\.bernie.*")
                 includeGroup("com.eliotlash.mclib")
         }
-}
+    }
 }
 
 dependencies {

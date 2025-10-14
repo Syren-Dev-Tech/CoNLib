@@ -3,7 +3,7 @@ package com.github.syren_dev_tech.scylla.registry;
 import java.util.HashMap;
 import java.util.function.Supplier;
 
-import com.github.syren_dev_tech.scylla.CoNLib;
+import com.github.syren_dev_tech.scylla.Scylla;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -30,7 +30,7 @@ public class BlockRegistry {
         var blockRegistry = this.BLOCKS.register(name, block);
         this.blocks.put(name, blockRegistry);
 
-        CoNLib.LOGGER.info("Registered new block: " + registry.modId + ":" + name);
+        Scylla.LOGGER.info("Registered new block: " + registry.modId + ":" + name);
 
         return blockRegistry;
     }

@@ -13,14 +13,14 @@ import org.slf4j.Logger;
 import com.github.syren_dev_tech.scylla.registry.ModRegister;
 import com.mojang.logging.LogUtils;
 
-@Mod(CoNLib.MOD_ID)
-public class CoNLib {
+@Mod(Scylla.MOD_ID)
+public class Scylla {
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final String MOD_ID = "scylla";
 
     public static final ModRegister MOD_REGISTER = new ModRegister(MOD_ID);
 
-    public CoNLib() { // NOSONAR - Constructor must be public
+    public Scylla() { // NOSONAR - Constructor must be public
         LOGGER.info("Time to do a little modding...");
 
         // Init ModRegister events using FML context

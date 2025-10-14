@@ -1,6 +1,6 @@
 package com.github.syren_dev_tech.scylla.common;
 
-import com.github.syren_dev_tech.scylla.CoNLib;
+import com.github.syren_dev_tech.scylla.Scylla;
 import com.github.syren_dev_tech.scylla.collections.PrimitiveTriplet.PrimDoubleTriplet;
 
 public class Transform3D {
@@ -9,9 +9,9 @@ public class Transform3D {
     // pivot point (radians).
     public static PrimDoubleTriplet transformCoordinate(PrimDoubleTriplet point, PrimDoubleTriplet pivot,
             PrimDoubleTriplet rotation) {
-        CoNLib.LOGGER.debug(" :: Point: " + point.x + ", " + point.y + ", " + point.z);
-        CoNLib.LOGGER.debug(" :: Pivot: " + pivot.x + ", " + pivot.y + ", " + pivot.z);
-        CoNLib.LOGGER.debug(" :: Rotation: " + rotation.x + ", " + rotation.y + ", " + rotation.z);
+        Scylla.LOGGER.debug(" :: Point: " + point.x + ", " + point.y + ", " + point.z);
+        Scylla.LOGGER.debug(" :: Pivot: " + pivot.x + ", " + pivot.y + ", " + pivot.z);
+        Scylla.LOGGER.debug(" :: Rotation: " + rotation.x + ", " + rotation.y + ", " + rotation.z);
 
         double translatedX = point.x - pivot.x;
         double translatedY = point.y - pivot.y;

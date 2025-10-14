@@ -1,7 +1,7 @@
 package com.github.syren_dev_tech.scylla.config;
 
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
-import com.github.syren_dev_tech.scylla.CoNLib;
+import com.github.syren_dev_tech.scylla.Scylla;
 
 public class ConfigField<T> {
 
@@ -31,7 +31,7 @@ public class ConfigField<T> {
     }
 
     public void write() {
-        CoNLib.LOGGER.debug("Writing config field: {} = {}", this.getFullKey(), this.defaultValue);
+        Scylla.LOGGER.debug("Writing config field: {} = {}", this.getFullKey(), this.defaultValue);
 
         CommentedFileConfig config = this.group.config.getFileConfig();
         String fullKey = this.getFullKey();

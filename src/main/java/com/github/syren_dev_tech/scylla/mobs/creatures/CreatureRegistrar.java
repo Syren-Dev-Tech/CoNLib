@@ -2,7 +2,7 @@ package com.github.syren_dev_tech.scylla.mobs.creatures;
 
 import java.util.function.Supplier;
 
-import com.github.syren_dev_tech.scylla.CoNLib;
+import com.github.syren_dev_tech.scylla.Scylla;
 import com.github.syren_dev_tech.scylla.registry.ModRegister;
 
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -29,10 +29,10 @@ public class CreatureRegistrar<T extends CustomCreature, E extends EntityType<T>
     }
 
     public void registerAttributes(EntityAttributeCreationEvent event) {
-        CoNLib.LOGGER.info("Registering attributes for entity: " + name);
+        Scylla.LOGGER.info("Registering attributes for entity: " + name);
 
         if (!entityType.isPresent()) {
-            CoNLib.LOGGER.error("Failed to register attributes for entity: " + name);
+            Scylla.LOGGER.error("Failed to register attributes for entity: " + name);
             return;
         }
 
@@ -43,10 +43,10 @@ public class CreatureRegistrar<T extends CustomCreature, E extends EntityType<T>
     }
 
     public void register(FMLClientSetupEvent event) {
-        CoNLib.LOGGER.info("Registering entity model for entity: " + name);
+        Scylla.LOGGER.info("Registering entity model for entity: " + name);
 
         if (!entityType.isPresent()) {
-            CoNLib.LOGGER.error("Failed to register entity model for entity: " + name);
+            Scylla.LOGGER.error("Failed to register entity model for entity: " + name);
             return;
         }
 

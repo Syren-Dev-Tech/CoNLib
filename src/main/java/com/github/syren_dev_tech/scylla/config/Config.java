@@ -5,7 +5,7 @@ import java.nio.file.Path;
 
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
-import com.github.syren_dev_tech.scylla.CoNLib;
+import com.github.syren_dev_tech.scylla.Scylla;
 
 public class Config {
 
@@ -56,10 +56,10 @@ public class Config {
             try {
                 boolean created = this.file.createNewFile();
                 if (!created) {
-                    CoNLib.LOGGER.error("Failed to create new config file: {}", this.file.getAbsolutePath());
+                    Scylla.LOGGER.error("Failed to create new config file: {}", this.file.getAbsolutePath());
                 }
             } catch (Exception e) {
-                CoNLib.LOGGER.error("Exception creating new config file: {}", this.file.getAbsolutePath(), e);
+                Scylla.LOGGER.error("Exception creating new config file: {}", this.file.getAbsolutePath(), e);
             }
         }
 

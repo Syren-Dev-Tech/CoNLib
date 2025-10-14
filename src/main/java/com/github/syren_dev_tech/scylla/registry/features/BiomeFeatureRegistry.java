@@ -3,7 +3,7 @@ package com.github.syren_dev_tech.scylla.registry.features;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.github.syren_dev_tech.scylla.CoNLib;
+import com.github.syren_dev_tech.scylla.Scylla;
 import com.github.syren_dev_tech.scylla.collections.Tuple;
 import com.github.syren_dev_tech.scylla.registry.features.PlacedFeatureRegistry.PlacedOreFeatureRegistry;
 
@@ -48,6 +48,6 @@ public class BiomeFeatureRegistry {
     }
 
     private static ResourceKey<BiomeModifier> registerKey(String name) {
-        return ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, new ResourceLocation(CoNLib.MOD_ID, name));
+        return ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, new ResourceLocation(Scylla.MOD_ID, name));
     }
 }
