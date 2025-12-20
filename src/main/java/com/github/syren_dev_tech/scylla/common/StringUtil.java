@@ -3,11 +3,9 @@ package com.github.syren_dev_tech.scylla.common;
 import org.apache.commons.lang3.StringUtils;
 
 public class StringUtil {
-    /**
-     *
-     * @param str
-     * @return
-     */
+    private StringUtil() {
+    }
+
     public static final String wordCaps(String str) {
         String[] arr = str.split(" ");
 
@@ -17,12 +15,7 @@ public class StringUtil {
         return String.join(" ", arr);
     }
 
-    /**
-     *
-     * @param str
-     * @return
-     */
-    public static final String wordCaps_repl(String str) {
+    public static final String wordCapsRepl(String str) {
         return wordCaps(str.replace("_", " "));
     }
 }

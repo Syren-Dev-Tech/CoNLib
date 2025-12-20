@@ -16,8 +16,7 @@ public class Anvils {
         return create(register, name, Properties.copy(Blocks.ANVIL));
     }
 
-    public static final Supplier<AnvilBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<AnvilBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.ANVIL), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Anvils {
         return register.blockRegistry.register(name, () -> new AnvilBlock(properties));
     }
 
-    public static final Supplier<AnvilBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<AnvilBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new AnvilBlock(properties), creativeTab);
     }
 

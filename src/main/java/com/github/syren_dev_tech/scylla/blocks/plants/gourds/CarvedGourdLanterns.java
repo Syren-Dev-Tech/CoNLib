@@ -18,8 +18,7 @@ public class CarvedGourdLanterns {
         return create(register, name, Properties.copy(Blocks.JACK_O_LANTERN), 15);
     }
 
-    public static final Supplier<CarvedGourd> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CarvedGourd> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.JACK_O_LANTERN), 15, creativeTab);
     }
 
@@ -27,21 +26,16 @@ public class CarvedGourdLanterns {
         return create(register, name, properties, 15);
     }
 
-    public static final Supplier<CarvedGourd> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CarvedGourd> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, properties, 15, creativeTab);
     }
 
-    public static final Supplier<CarvedGourd> create(ModRegister register, String name, Properties properties,
-            int lightLevel) {
-        return register.blockRegistry.register(name,
-                () -> new CarvedGourd(properties.lightLevel(blockState -> lightLevel)));
+    public static final Supplier<CarvedGourd> create(ModRegister register, String name, Properties properties, int lightLevel) {
+        return register.blockRegistry.register(name, () -> new CarvedGourd(properties.lightLevel(blockState -> lightLevel)));
     }
 
-    public static final Supplier<CarvedGourd> create(ModRegister register, String name, Properties properties,
-            int lightLevel, ResourceKey<CreativeModeTab> creativeTab) {
-        return register.blockRegistry.register(name,
-                () -> new CarvedGourd(properties.lightLevel(blockState -> lightLevel)), creativeTab);
+    public static final Supplier<CarvedGourd> create(ModRegister register, String name, Properties properties, int lightLevel, ResourceKey<CreativeModeTab> creativeTab) {
+        return register.blockRegistry.register(name, () -> new CarvedGourd(properties.lightLevel(blockState -> lightLevel)), creativeTab);
     }
 
     private CarvedGourdLanterns() {

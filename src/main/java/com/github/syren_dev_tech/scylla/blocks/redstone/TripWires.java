@@ -18,18 +18,15 @@ public class TripWires {
             return create(register, name, Properties.copy(Blocks.TRIPWIRE_HOOK));
         }
 
-        public static final Supplier<TripWireHookBlock> create(ModRegister register, String name,
-                ResourceKey<CreativeModeTab> creativeTab) {
+        public static final Supplier<TripWireHookBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
             return create(register, name, Properties.copy(Blocks.TRIPWIRE_HOOK), creativeTab);
         }
 
-        public static final Supplier<TripWireHookBlock> create(ModRegister register, String name,
-                Properties properties) {
+        public static final Supplier<TripWireHookBlock> create(ModRegister register, String name, Properties properties) {
             return register.blockRegistry.register(name, () -> new TripWireHookBlock(properties));
         }
 
-        public static final Supplier<TripWireHookBlock> create(ModRegister register, String name, Properties properties,
-                ResourceKey<CreativeModeTab> creativeTab) {
+        public static final Supplier<TripWireHookBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
             return register.blockRegistry.register(name, () -> new TripWireHookBlock(properties), creativeTab);
         }
 
@@ -42,18 +39,15 @@ public class TripWires {
         return create(register, name, hookBlock, Properties.copy(Blocks.TRIPWIRE));
     }
 
-    public static final Supplier<TripWireBlock> create(ModRegister register, String name, TripWireHookBlock hookBlock,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<TripWireBlock> create(ModRegister register, String name, TripWireHookBlock hookBlock, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, hookBlock, Properties.copy(Blocks.TRIPWIRE), creativeTab);
     }
 
-    public static final Supplier<TripWireBlock> create(ModRegister register, String name, TripWireHookBlock hookBlock,
-            Properties properties) {
+    public static final Supplier<TripWireBlock> create(ModRegister register, String name, TripWireHookBlock hookBlock, Properties properties) {
         return register.blockRegistry.register(name, () -> new TripWireBlock(hookBlock, properties));
     }
 
-    public static final Supplier<TripWireBlock> create(ModRegister register, String name, TripWireHookBlock hookBlock,
-            Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<TripWireBlock> create(ModRegister register, String name, TripWireHookBlock hookBlock, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new TripWireBlock(hookBlock, properties), creativeTab);
     }
 

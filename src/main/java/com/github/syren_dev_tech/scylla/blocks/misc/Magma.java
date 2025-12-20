@@ -16,8 +16,7 @@ public class Magma {
         return create(register, name, Properties.copy(Blocks.MAGMA_BLOCK));
     }
 
-    public static final Supplier<MagmaBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<MagmaBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.MAGMA_BLOCK), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Magma {
         return register.blockRegistry.register(name, () -> new MagmaBlock(properties));
     }
 
-    public static final Supplier<MagmaBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<MagmaBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new MagmaBlock(properties), creativeTab);
     }
 

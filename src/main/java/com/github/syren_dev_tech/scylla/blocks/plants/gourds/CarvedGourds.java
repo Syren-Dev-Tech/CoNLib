@@ -16,8 +16,7 @@ public class CarvedGourds {
         return create(register, name, Properties.copy(Blocks.CARVED_PUMPKIN));
     }
 
-    public static final Supplier<CarvedGourd> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CarvedGourd> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.CARVED_PUMPKIN), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class CarvedGourds {
         return register.blockRegistry.register(name, () -> new CarvedGourd(properties));
     }
 
-    public static final Supplier<CarvedGourd> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CarvedGourd> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new CarvedGourd(properties), creativeTab);
     }
 

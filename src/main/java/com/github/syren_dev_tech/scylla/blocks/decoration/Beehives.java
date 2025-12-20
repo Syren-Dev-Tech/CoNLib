@@ -16,8 +16,7 @@ public class Beehives {
         return create(register, name, Properties.copy(Blocks.BEEHIVE));
     }
 
-    public static final Supplier<BeehiveBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<BeehiveBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.BEEHIVE), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Beehives {
         return register.blockRegistry.register(name, () -> new BeehiveBlock(properties));
     }
 
-    public static final Supplier<BeehiveBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<BeehiveBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new BeehiveBlock(properties), creativeTab);
     }
 

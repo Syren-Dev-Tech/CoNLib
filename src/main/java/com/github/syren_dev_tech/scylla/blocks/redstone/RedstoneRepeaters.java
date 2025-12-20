@@ -16,8 +16,7 @@ public class RedstoneRepeaters {
         return create(register, name, Properties.copy(Blocks.REPEATER));
     }
 
-    public static final Supplier<RepeaterBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<RepeaterBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.REPEATER), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class RedstoneRepeaters {
         return register.blockRegistry.register(name, () -> new RepeaterBlock(properties));
     }
 
-    public static final Supplier<RepeaterBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<RepeaterBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new RepeaterBlock(properties), creativeTab);
     }
 

@@ -18,8 +18,7 @@ public class Beacons {
         return create(register, name, Properties.copy(Blocks.BEACON));
     }
 
-    public static final Supplier<BeaconBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<BeaconBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.BEACON), creativeTab);
     }
 
@@ -27,8 +26,7 @@ public class Beacons {
         return register.blockRegistry.register(name, () -> new BeaconBlock(properties));
     }
 
-    public static final Supplier<BeaconBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<BeaconBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new BeaconBlock(properties), creativeTab);
     }
 

@@ -28,8 +28,7 @@ public class StoneBlockSet {
         Stairs.create(register, name + "_stairs", stoneProperties, stone::get, creativeTab);
         WallBlocks.create(register, name + "_wall", stoneProperties, creativeTab);
 
-        PressurePlates.create(register, name + "_pressure_plate", stoneProperties, Sensitivity.EVERYTHING, blockSetType,
-                creativeTab);
+        PressurePlates.create(register, name + "_pressure_plate", stoneProperties, Sensitivity.EVERYTHING, blockSetType, creativeTab);
         Buttons.create(register, name + "_button", stoneProperties, creativeTab);
     }
 

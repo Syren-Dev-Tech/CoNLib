@@ -16,8 +16,7 @@ public class Cakes {
         return create(register, name, Properties.copy(Blocks.CAKE));
     }
 
-    public static final Supplier<CakeBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CakeBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.CAKE), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Cakes {
         return register.blockRegistry.register(name, () -> new CakeBlock(properties));
     }
 
-    public static final Supplier<CakeBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CakeBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new CakeBlock(properties), creativeTab);
     }
 

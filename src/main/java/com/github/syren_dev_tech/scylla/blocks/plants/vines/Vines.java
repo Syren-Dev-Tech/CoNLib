@@ -16,8 +16,7 @@ public class Vines {
         return create(register, name, Properties.copy(Blocks.VINE));
     }
 
-    public static final Supplier<VineBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<VineBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.VINE), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Vines {
         return register.blockRegistry.register(name, () -> new VineBlock(properties));
     }
 
-    public static final Supplier<VineBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<VineBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new VineBlock(properties), creativeTab);
     }
 

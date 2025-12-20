@@ -20,13 +20,13 @@ public class WaterEgg<T extends Animal> extends FrogspawnBlock {
     }
 
     private double getRandomPositionOffset(RandomSource randSource) {
-        double d0 = (this.eggData.hitboxWidth / 2.0F);
+        double d0 = (this.eggData.getHitboxWidth() / 2.0F);
 
         return Mth.clamp(randSource.nextDouble(), d0, 1.0D - d0);
     }
 
     private void spawnCreatures(ServerLevel serverLevel, BlockPos blockPos, RandomSource randSource) {
-        int i = randSource.nextInt(this.eggData.minSpawn, this.eggData.maxSpawn);
+        int i = randSource.nextInt(this.eggData.getMinSpawn(), this.eggData.getMaxSpawn());
 
         for (int j = 1; j <= i; ++j) {
             this.eggData.spawn(serverLevel, (T newCreature) -> {
@@ -42,12 +42,12 @@ public class WaterEgg<T extends Animal> extends FrogspawnBlock {
     }
 
     @Override
-    public void tick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randSource) {
+    public void tick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randSource) { // NOSONAR - Ignore deprecation warning
         if (!this.canSurvive(blockState, serverLevel, blockPos)) {
             serverLevel.destroyBlock(blockPos, false);
         } else {
             serverLevel.destroyBlock(blockPos, false);
-            serverLevel.playSound((Player) null, blockPos, eggData.hatchSound, SoundSource.BLOCKS, 1.0F, 1.0F);
+            serverLevel.playSound((Player) null, blockPos, eggData.getHatchSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
             this.spawnCreatures(serverLevel, blockPos, randSource);
         }
     }

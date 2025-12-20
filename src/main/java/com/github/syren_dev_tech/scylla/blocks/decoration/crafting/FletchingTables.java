@@ -16,8 +16,7 @@ public class FletchingTables {
         return create(register, name, Properties.copy(Blocks.FLETCHING_TABLE));
     }
 
-    public static final Supplier<FletchingTableBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<FletchingTableBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.FLETCHING_TABLE), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class FletchingTables {
         return register.blockRegistry.register(name, () -> new FletchingTableBlock(properties));
     }
 
-    public static final Supplier<FletchingTableBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<FletchingTableBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new FletchingTableBlock(properties), creativeTab);
     }
 

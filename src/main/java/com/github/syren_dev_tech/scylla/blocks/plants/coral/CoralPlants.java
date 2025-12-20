@@ -17,8 +17,7 @@ public class CoralPlants {
         return create(register, name, Properties.copy(Blocks.FIRE_CORAL), Blocks.DEAD_FIRE_CORAL);
     }
 
-    public static final Supplier<CoralPlantBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CoralPlantBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.FIRE_CORAL), Blocks.DEAD_FIRE_CORAL, creativeTab);
     }
 
@@ -26,8 +25,7 @@ public class CoralPlants {
         return create(register, name, properties, Blocks.DEAD_FIRE_CORAL);
     }
 
-    public static final Supplier<CoralPlantBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CoralPlantBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, properties, Blocks.DEAD_FIRE_CORAL, creativeTab);
     }
 
@@ -35,18 +33,15 @@ public class CoralPlants {
         return create(register, name, Properties.copy(Blocks.FIRE_CORAL), deadBlock);
     }
 
-    public static final Supplier<CoralPlantBlock> create(ModRegister register, String name, Block deadBlock,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CoralPlantBlock> create(ModRegister register, String name, Block deadBlock, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.FIRE_CORAL), deadBlock, creativeTab);
     }
 
-    public static final Supplier<CoralPlantBlock> create(ModRegister register, String name, Properties properties,
-            Block deadBlock) {
+    public static final Supplier<CoralPlantBlock> create(ModRegister register, String name, Properties properties, Block deadBlock) {
         return register.blockRegistry.register(name, () -> new CoralPlantBlock(deadBlock, properties));
     }
 
-    public static final Supplier<CoralPlantBlock> create(ModRegister register, String name, Properties properties,
-            Block deadBlock, ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CoralPlantBlock> create(ModRegister register, String name, Properties properties, Block deadBlock, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new CoralPlantBlock(deadBlock, properties), creativeTab);
     }
 

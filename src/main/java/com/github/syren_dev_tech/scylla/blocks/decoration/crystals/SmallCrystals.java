@@ -16,18 +16,15 @@ public class SmallCrystals {
         return create(register, name, Properties.copy(Blocks.AMETHYST_CLUSTER));
     }
 
-    public static final Supplier<AmethystClusterBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<AmethystClusterBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.AMETHYST_CLUSTER), creativeTab);
     }
 
-    public static final Supplier<AmethystClusterBlock> create(ModRegister register, String name,
-            Properties properties) {
+    public static final Supplier<AmethystClusterBlock> create(ModRegister register, String name, Properties properties) {
         return register.blockRegistry.register(name, () -> new AmethystClusterBlock(3, 4, properties));
     }
 
-    public static final Supplier<AmethystClusterBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<AmethystClusterBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new AmethystClusterBlock(3, 4, properties), creativeTab);
     }
 

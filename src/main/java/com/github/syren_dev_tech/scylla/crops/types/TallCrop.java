@@ -35,23 +35,14 @@ public class TallCrop extends DoublePlantBlock implements BonemealableBlock {
     public static final int MAX_AGE = 4;
 
     private static final int DOUBLE_PLANT_AGE_INTERSECTION = 3;
-    // private static final int BONEMEAL_INCREASE = 1;
+    // private static final int BONEMEAL_INCREASE = 1; // NOSONAR
 
     private static final VoxelShape FULL_UPPER_SHAPE = Block.box(3.0D, 0.0D, 3.0D, 13.0D, 15.0D, 13.0D);
     private static final VoxelShape FULL_LOWER_SHAPE = Block.box(3.0D, -1.0D, 3.0D, 13.0D, 16.0D, 13.0D);
     private static final VoxelShape COLLISION_SHAPE_BULB = Block.box(5.0D, -1.0D, 5.0D, 11.0D, 3.0D, 11.0D);
     private static final VoxelShape COLLISION_SHAPE_CROP = Block.box(3.0D, -1.0D, 3.0D, 13.0D, 5.0D, 13.0D);
-    private static final VoxelShape[] UPPER_SHAPE_BY_AGE = new VoxelShape[] {
-            Block.box(3.0D, 0.0D, 3.0D, 13.0D, 11.0D, 13.0D),
-            FULL_UPPER_SHAPE
-    };
-    private static final VoxelShape[] LOWER_SHAPE_BY_AGE = new VoxelShape[] {
-            COLLISION_SHAPE_BULB,
-            Block.box(3.0D, -1.0D, 3.0D, 13.0D, 14.0D, 13.0D),
-            FULL_LOWER_SHAPE,
-            FULL_LOWER_SHAPE,
-            FULL_LOWER_SHAPE
-    };
+    private static final VoxelShape[] UPPER_SHAPE_BY_AGE = new VoxelShape[] { Block.box(3.0D, 0.0D, 3.0D, 13.0D, 11.0D, 13.0D), FULL_UPPER_SHAPE };
+    private static final VoxelShape[] LOWER_SHAPE_BY_AGE = new VoxelShape[] { COLLISION_SHAPE_BULB, Block.box(3.0D, -1.0D, 3.0D, 13.0D, 14.0D, 13.0D), FULL_LOWER_SHAPE, FULL_LOWER_SHAPE, FULL_LOWER_SHAPE };
 
     public TallCrop(Properties properties) {
         super(properties);
@@ -61,35 +52,35 @@ public class TallCrop extends DoublePlantBlock implements BonemealableBlock {
         return blockState.getValue(AGE) >= MAX_AGE;
     }
 
+    @Override
     public boolean isRandomlyTicking(BlockState blockState) {
         return blockState.getValue(HALF) == DoubleBlockHalf.LOWER && !this.isMaxAge(blockState);
     }
 
-    @Nullable
+    @Nullable @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         return this.defaultBlockState();
     }
 
-    public BlockState updateShape(BlockState blockState, Direction direction, BlockState sourceBlockState,
-            LevelAccessor levelAccessor, BlockPos blockPos, BlockPos sourceBlockPos) {
-        return !blockState.canSurvive(levelAccessor, blockPos)
-                ? Blocks.AIR.defaultBlockState()
-                : blockState;
+    @Override
+    public BlockState updateShape(BlockState blockState, Direction direction, BlockState sourceBlockState, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos sourceBlockPos) { // NOSONAR - Ignore deprecation warning
+        return !blockState.canSurvive(levelAccessor, blockPos) ? Blocks.AIR.defaultBlockState() : blockState;
     }
 
-    public VoxelShape getCollisionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos,
-            CollisionContext context) {
+    @Override
+    public VoxelShape getCollisionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext context) { // NOSONAR - Ignore deprecation warning
         if (blockState.getValue(AGE) == 0)
             return COLLISION_SHAPE_BULB;
 
-        return blockState.getValue(HALF) == DoubleBlockHalf.LOWER
-                ? COLLISION_SHAPE_CROP
-                : this.hasCollision
-                        ? blockState.getShape(blockGetter, blockPos)
-                        : Shapes.empty();
+        if (blockState.getValue(HALF) == DoubleBlockHalf.LOWER) {
+            return COLLISION_SHAPE_CROP;
+        }
+
+        return this.hasCollision ? blockState.getShape(blockGetter, blockPos) : Shapes.empty();
     }
 
-    public boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) {
+    @Override
+    public boolean canSurvive(BlockState blockState, LevelReader levelReader, BlockPos blockPos) { // NOSONAR - Ignore deprecation warning
         if (!isLower(blockState)) {
             return super.canSurvive(blockState, levelReader, blockPos);
         }
@@ -103,44 +94,44 @@ public class TallCrop extends DoublePlantBlock implements BonemealableBlock {
         if (blockState.getBlock() == this)
             isSoil = levelReader.getBlockState(below).canSustainPlant(levelReader, below, Direction.UP, this);
 
-        return isSoil
-                && sufficientLight(levelReader, blockPos)
-                && (blockState.getValue(AGE) < MAX_AGE - 1 || isUpper(levelReader.getBlockState(blockPos.above())));
+        return isSoil && sufficientLight(levelReader, blockPos) && (blockState.getValue(AGE) < MAX_AGE - 1 || isUpper(levelReader.getBlockState(blockPos.above())));
     }
 
+    @Override
     protected boolean mayPlaceOn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
         return blockState.is(Blocks.FARMLAND);
     }
 
+    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(AGE);
         super.createBlockStateDefinition(builder);
     }
 
-    public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos,
-            CollisionContext context) {
-        return blockState.getValue(HALF) == DoubleBlockHalf.UPPER
-                ? UPPER_SHAPE_BY_AGE[Math.min(Math.abs(MAX_AGE - (blockState.getValue(AGE) + 1)),
-                        UPPER_SHAPE_BY_AGE.length - 1)]
-                : LOWER_SHAPE_BY_AGE[blockState.getValue(AGE)];
+    @Override
+    public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext context) { // NOSONAR - Ignore deprecation warning
+        return blockState.getValue(HALF) == DoubleBlockHalf.UPPER ? UPPER_SHAPE_BY_AGE[Math.min(Math.abs(MAX_AGE - (blockState.getValue(AGE) + 1)), UPPER_SHAPE_BY_AGE.length - 1)] : LOWER_SHAPE_BY_AGE[blockState.getValue(AGE)];
     }
 
-    public void entityInside(BlockState blockState, Level level, BlockPos blockPos, Entity entity) {
+    @Override
+    public void entityInside(BlockState blockState, Level level, BlockPos blockPos, Entity entity) { // NOSONAR - Ignore deprecation warning
         if (entity instanceof Ravager && level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING))
             level.destroyBlock(blockPos, true, entity);
 
-        // super.entityInside(blockState, level, blockPos, entity);
+        // super.entityInside(blockState, level, blockPos, entity); // NOSONAR - Ignore
     }
 
-    public boolean canBeReplaced(BlockState blockState, BlockPlaceContext context) {
+    @Override
+    public boolean canBeReplaced(BlockState blockState, BlockPlaceContext context) { // NOSONAR - Ignore deprecation warning
         return false;
     }
 
-    public void setPlacedBy(Level level, BlockPos blockPos, BlockState blockState, LivingEntity entity,
-            ItemStack itemStack) {
+    @Override
+    public void setPlacedBy(Level level, BlockPos blockPos, BlockState blockState, LivingEntity entity, ItemStack itemStack) { // NOSONAR - Ignore deprecation warning
+        super.setPlacedBy(level, blockPos, blockState, entity, itemStack);
     }
 
-    protected static float getGrowthSpeed(Block block, BlockGetter blockGetter, BlockPos blockPos) {
+    protected static float getGrowthSpeed(Block block, BlockGetter blockGetter, BlockPos blockPos) { // NOSONAR - Ignore complexity warning
         float f = 1.0F;
         BlockPos blockpos = blockPos.below();
 
@@ -149,8 +140,7 @@ public class TallCrop extends DoublePlantBlock implements BonemealableBlock {
                 float f1 = 0.0F;
 
                 BlockState blockstate = blockGetter.getBlockState(blockpos.offset(i, 0, j));
-                if (blockstate.canSustainPlant(blockGetter, blockpos.offset(i, 0, j), Direction.UP,
-                        (IPlantable) block)) {
+                if (blockstate.canSustainPlant(blockGetter, blockpos.offset(i, 0, j), Direction.UP, (IPlantable) block)) {
                     f1 = 1.0F;
 
                     if (blockstate.isFertile(blockGetter, blockPos.offset(i, 0, j)))
@@ -169,26 +159,21 @@ public class TallCrop extends DoublePlantBlock implements BonemealableBlock {
         BlockPos blockpos3 = blockPos.west();
         BlockPos blockpos4 = blockPos.east();
 
-        boolean flag = blockGetter.getBlockState(blockpos3).is(block)
-                || blockGetter.getBlockState(blockpos4).is(block);
-        boolean flag1 = blockGetter.getBlockState(blockpos1).is(block)
-                || blockGetter.getBlockState(blockpos2).is(block);
+        boolean flag = blockGetter.getBlockState(blockpos3).is(block) || blockGetter.getBlockState(blockpos4).is(block);
+        boolean flag1 = blockGetter.getBlockState(blockpos1).is(block) || blockGetter.getBlockState(blockpos2).is(block);
 
         if (flag && flag1)
             return f / 2.0F;
 
-        boolean flag2 = blockGetter.getBlockState(blockpos3.north()).is(block)
-                || blockGetter.getBlockState(blockpos4.north()).is(block)
-                || blockGetter.getBlockState(blockpos4.south()).is(block)
-                || blockGetter.getBlockState(blockpos3.south()).is(block);
+        boolean flag2 = blockGetter.getBlockState(blockpos3.north()).is(block) || blockGetter.getBlockState(blockpos4.north()).is(block) || blockGetter.getBlockState(blockpos4.south()).is(block) || blockGetter.getBlockState(blockpos3.south()).is(block);
         if (flag2)
             return f / 2.0F;
 
         return f;
     }
 
-    public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos,
-            RandomSource randomSource) {
+    @Override
+    public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) { // NOSONAR - Ignore deprecation warning
         float f = getGrowthSpeed(this, serverLevel, blockPos);
         boolean flag = randomSource.nextInt((int) (25.0F / f) + 1) == 0;
         if (flag) {
@@ -203,15 +188,14 @@ public class TallCrop extends DoublePlantBlock implements BonemealableBlock {
             serverLevel.setBlock(blockPos, blockState.setValue(AGE, Integer.valueOf(i)), 2);
             if (i >= DOUBLE_PLANT_AGE_INTERSECTION) {
                 BlockPos blockpos = blockPos.above();
-                serverLevel.setBlock(blockpos, copyWaterloggedFrom(serverLevel, blockPos, this.defaultBlockState()
-                        .setValue(AGE, Integer.valueOf(i)).setValue(HALF, DoubleBlockHalf.UPPER)),
-                        DOUBLE_PLANT_AGE_INTERSECTION);
+                serverLevel.setBlock(blockpos, copyWaterloggedFrom(serverLevel, blockPos, this.defaultBlockState().setValue(AGE, Integer.valueOf(i)).setValue(HALF, DoubleBlockHalf.UPPER)), DOUBLE_PLANT_AGE_INTERSECTION);
             }
         }
     }
 
     private static boolean canGrowInto(LevelReader levelReader, BlockPos blockPos) {
         BlockState blockstate = levelReader.getBlockState(blockPos);
+
         return blockstate.isAir() || blockstate.is(Blocks.PITCHER_CROP);
     }
 
@@ -228,8 +212,7 @@ public class TallCrop extends DoublePlantBlock implements BonemealableBlock {
     }
 
     private boolean canGrow(LevelReader levelReader, BlockPos blockPos, BlockState blockState, int growthAmount) {
-        return !this.isMaxAge(blockState) && sufficientLight(levelReader, blockPos)
-                && (growthAmount < MAX_AGE - 1 || canGrowInto(levelReader, blockPos.above()));
+        return !this.isMaxAge(blockState) && sufficientLight(levelReader, blockPos) && (growthAmount < MAX_AGE - 1 || canGrowInto(levelReader, blockPos.above()));
     }
 
     @Nullable
@@ -243,24 +226,20 @@ public class TallCrop extends DoublePlantBlock implements BonemealableBlock {
         }
     }
 
-    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState,
-            boolean unused) {
-        PosAndState pitchercropblock$posandstate = this.getLowerHalf(levelReader, blockPos, blockState);
-        return pitchercropblock$posandstate == null ? false
-                : this.canGrow(levelReader, pitchercropblock$posandstate.pos, pitchercropblock$posandstate.state,
-                        pitchercropblock$posandstate.state.getValue(AGE) + 1);
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState, boolean unused) {
+        PosAndState posAndState = this.getLowerHalf(levelReader, blockPos, blockState);
+
+        return posAndState != null && this.canGrow(levelReader, posAndState.pos, posAndState.state, posAndState.state.getValue(AGE) + 1);
     }
 
-    public boolean isBonemealSuccess(Level level, RandomSource randomSource, BlockPos blockPos,
-            BlockState blockState) {
+    public boolean isBonemealSuccess(Level level, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
         return true;
     }
 
-    public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos,
-            BlockState blockState) {
-        PosAndState pitchercropblock$posandstate = this.getLowerHalf(serverLevel, blockPos, blockState);
-        if (pitchercropblock$posandstate != null) {
-            this.grow(serverLevel, pitchercropblock$posandstate.state, pitchercropblock$posandstate.pos, 1);
+    public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
+        PosAndState posAndState = this.getLowerHalf(serverLevel, blockPos, blockState);
+        if (posAndState != null) {
+            this.grow(serverLevel, posAndState.state, posAndState.pos, 1);
         }
     }
 

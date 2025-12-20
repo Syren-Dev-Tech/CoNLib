@@ -18,8 +18,7 @@ public class Cauldrons {
         return create(register, name, Properties.copy(Blocks.CAULDRON));
     }
 
-    public static final Supplier<CauldronBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CauldronBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.CAULDRON), creativeTab);
     }
 
@@ -27,8 +26,7 @@ public class Cauldrons {
         return register.blockRegistry.register(name, () -> new CauldronBlock(properties));
     }
 
-    public static final Supplier<CauldronBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CauldronBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new CauldronBlock(properties), creativeTab);
     }
 

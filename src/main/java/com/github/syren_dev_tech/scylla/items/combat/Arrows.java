@@ -12,12 +12,14 @@ import net.minecraft.world.item.Item.Properties;
 
 public class Arrows {
 
+    private Arrows() {
+    }
+
     public static final Supplier<ArrowItem> create(ModRegister register, String name) {
         return create(register, name, new Item.Properties());
     }
 
-    public static final Supplier<ArrowItem> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<ArrowItem> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, new Item.Properties(), creativeTab);
     }
 
@@ -28,8 +30,7 @@ public class Arrows {
         return arrow;
     }
 
-    public static final Supplier<ArrowItem> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<ArrowItem> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         var arrow = register.itemRegistry.register(name, () -> new ArrowItem(properties), creativeTab);
         register.itemRegistry.weapons.put(name, arrow);
 

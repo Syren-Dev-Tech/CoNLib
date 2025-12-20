@@ -16,18 +16,15 @@ public class InfestedBlocks {
         return create(register, name, hostBlock, Properties.copy(hostBlock));
     }
 
-    public static final Supplier<InfestedBlock> create(ModRegister register, String name, Block hostBlock,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<InfestedBlock> create(ModRegister register, String name, Block hostBlock, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, hostBlock, Properties.copy(hostBlock), creativeTab);
     }
 
-    public static final Supplier<InfestedBlock> create(ModRegister register, String name, Block hostBlock,
-            Properties properties) {
+    public static final Supplier<InfestedBlock> create(ModRegister register, String name, Block hostBlock, Properties properties) {
         return register.blockRegistry.register(name, () -> new InfestedBlock(hostBlock, properties));
     }
 
-    public static final Supplier<InfestedBlock> create(ModRegister register, String name, Block hostBlock,
-            Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<InfestedBlock> create(ModRegister register, String name, Block hostBlock, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new InfestedBlock(hostBlock, properties), creativeTab);
     }
 

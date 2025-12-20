@@ -16,32 +16,15 @@ public class FullBlocks {
         return create(register, name, Properties.copy(Blocks.DIRT));
     }
 
-    public static final Supplier<Block> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<Block> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.DIRT), creativeTab);
     }
 
-    /**
-     * Creates and registers a standard block.
-     *
-     * @param name       The name of the block.
-     * @param properties The properties of the block.
-     * @return The registered block.
-     */
     public static final Supplier<Block> create(ModRegister register, String name, Properties properties) {
         return register.blockRegistry.register(name, () -> new Block(properties));
     }
 
-    /**
-     * Creates and registers a standard block with a specified creative tab.
-     *
-     * @param name        The name of the block.
-     * @param properties  The properties of the block.
-     * @param creativeTab The creative tab to which the block belongs.
-     * @return The registered block.
-     */
-    public static final Supplier<Block> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<Block> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new Block(properties), creativeTab);
     }
 

@@ -21,18 +21,15 @@ public class TallPondFoliage {
             return create(register, name, Properties.copy(Blocks.BIG_DRIPLEAF));
         }
 
-        public static final Supplier<BigDripleafBlock> create(ModRegister register, String name,
-                ResourceKey<CreativeModeTab> creativeTab) {
+        public static final Supplier<BigDripleafBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
             return create(register, name, Properties.copy(Blocks.BIG_DRIPLEAF), creativeTab);
         }
 
-        public static final Supplier<BigDripleafBlock> create(ModRegister register, String name,
-                Properties properties) {
+        public static final Supplier<BigDripleafBlock> create(ModRegister register, String name, Properties properties) {
             return register.blockRegistry.register(name, () -> new BigDripleafBlock(properties));
         }
 
-        public static final Supplier<BigDripleafBlock> create(ModRegister register, String name, Properties properties,
-                ResourceKey<CreativeModeTab> creativeTab) {
+        public static final Supplier<BigDripleafBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
             return register.blockRegistry.register(name, () -> new BigDripleafBlock(properties), creativeTab);
         }
 
@@ -47,18 +44,15 @@ public class TallPondFoliage {
             return create(register, name, Properties.copy(Blocks.BIG_DRIPLEAF_STEM));
         }
 
-        public static final Supplier<BigDripleafStemBlock> create(ModRegister register, String name,
-                ResourceKey<CreativeModeTab> creativeTab) {
+        public static final Supplier<BigDripleafStemBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
             return create(register, name, Properties.copy(Blocks.BIG_DRIPLEAF_STEM), creativeTab);
         }
 
-        public static final Supplier<BigDripleafStemBlock> create(ModRegister register, String name,
-                Properties properties) {
+        public static final Supplier<BigDripleafStemBlock> create(ModRegister register, String name, Properties properties) {
             return register.blockRegistry.register(name, () -> new BigDripleafStemBlock(properties));
         }
 
-        public static final Supplier<BigDripleafStemBlock> create(ModRegister register, String name,
-                Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
+        public static final Supplier<BigDripleafStemBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
             return register.blockRegistry.register(name, () -> new BigDripleafStemBlock(properties), creativeTab);
         }
 
@@ -67,26 +61,22 @@ public class TallPondFoliage {
         }
     }
 
-    public static final Tuple<Supplier<BigDripleafBlock>, Supplier<BigDripleafStemBlock>> create(ModRegister register,
-            String name) {
+    public static final Tuple<Supplier<BigDripleafBlock>, Supplier<BigDripleafStemBlock>> create(ModRegister register, String name) {
         return create(register, name, Properties.copy(Blocks.BIG_DRIPLEAF_STEM));
     }
 
-    public static final Tuple<Supplier<BigDripleafBlock>, Supplier<BigDripleafStemBlock>> create(ModRegister register,
-            String name, ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Tuple<Supplier<BigDripleafBlock>, Supplier<BigDripleafStemBlock>> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.BIG_DRIPLEAF_STEM), creativeTab);
     }
 
-    public static final Tuple<Supplier<BigDripleafBlock>, Supplier<BigDripleafStemBlock>> create(ModRegister register,
-            String name, Properties properties) {
+    public static final Tuple<Supplier<BigDripleafBlock>, Supplier<BigDripleafStemBlock>> create(ModRegister register, String name, Properties properties) {
         var leaves = TallPondFoliageLeaves.create(register, name, properties);
         var stem = TallPondFoliageStems.create(register, name, properties);
 
         return new Tuple<>(leaves, stem);
     }
 
-    public static final Tuple<Supplier<BigDripleafBlock>, Supplier<BigDripleafStemBlock>> create(ModRegister register,
-            String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Tuple<Supplier<BigDripleafBlock>, Supplier<BigDripleafStemBlock>> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         var leaves = TallPondFoliageLeaves.create(register, name, properties, creativeTab);
         var stem = TallPondFoliageStems.create(register, name, properties);
 

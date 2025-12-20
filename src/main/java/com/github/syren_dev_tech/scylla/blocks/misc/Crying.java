@@ -16,8 +16,7 @@ public class Crying {
         return create(register, name, Properties.copy(Blocks.CRYING_OBSIDIAN));
     }
 
-    public static final Supplier<CryingObsidianBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CryingObsidianBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.CRYING_OBSIDIAN), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Crying {
         return register.blockRegistry.register(name, () -> new CryingObsidianBlock(properties));
     }
 
-    public static final Supplier<CryingObsidianBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CryingObsidianBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new CryingObsidianBlock(properties), creativeTab);
     }
 

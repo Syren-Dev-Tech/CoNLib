@@ -16,8 +16,7 @@ public class Warts {
         return create(register, name, Properties.copy(Blocks.NETHER_WART));
     }
 
-    public static final Supplier<NetherWartBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<NetherWartBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.NETHER_WART), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Warts {
         return register.blockRegistry.register(name, () -> new NetherWartBlock(properties));
     }
 
-    public static final Supplier<NetherWartBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<NetherWartBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new NetherWartBlock(properties), creativeTab);
     }
 

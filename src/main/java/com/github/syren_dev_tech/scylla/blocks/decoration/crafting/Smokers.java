@@ -16,8 +16,7 @@ public class Smokers {
         return create(register, name, Properties.copy(Blocks.SMOKER));
     }
 
-    public static final Supplier<SmokerBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<SmokerBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.SMOKER), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Smokers {
         return register.blockRegistry.register(name, () -> new SmokerBlock(properties));
     }
 
-    public static final Supplier<SmokerBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<SmokerBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new SmokerBlock(properties), creativeTab);
     }
 

@@ -16,8 +16,7 @@ public class CrystalBlocks {
         return create(register, name, Properties.copy(Blocks.AMETHYST_BLOCK));
     }
 
-    public static final Supplier<AmethystBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<AmethystBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.AMETHYST_BLOCK), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class CrystalBlocks {
         return register.blockRegistry.register(name, () -> new AmethystBlock(properties));
     }
 
-    public static final Supplier<AmethystBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<AmethystBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new AmethystBlock(properties), creativeTab);
     }
 

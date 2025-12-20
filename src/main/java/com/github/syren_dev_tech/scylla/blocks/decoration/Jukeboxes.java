@@ -16,8 +16,7 @@ public class Jukeboxes {
         return create(register, name, Properties.copy(Blocks.JUKEBOX));
     }
 
-    public static final Supplier<JukeboxBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<JukeboxBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.JUKEBOX), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Jukeboxes {
         return register.blockRegistry.register(name, () -> new JukeboxBlock(properties));
     }
 
-    public static final Supplier<JukeboxBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<JukeboxBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new JukeboxBlock(properties), creativeTab);
     }
 

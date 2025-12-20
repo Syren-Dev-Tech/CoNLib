@@ -16,8 +16,7 @@ public class Stonecutters {
         return create(register, name, Properties.copy(Blocks.STONECUTTER));
     }
 
-    public static final Supplier<StonecutterBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<StonecutterBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.STONECUTTER), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Stonecutters {
         return register.blockRegistry.register(name, () -> new StonecutterBlock(properties));
     }
 
-    public static final Supplier<StonecutterBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<StonecutterBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new StonecutterBlock(properties), creativeTab);
     }
 

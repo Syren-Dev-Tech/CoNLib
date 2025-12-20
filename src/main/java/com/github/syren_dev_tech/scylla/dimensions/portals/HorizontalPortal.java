@@ -34,41 +34,41 @@ public class HorizontalPortal extends BaseEntityBlock {
         return new TheEndPortalBlockEntity(blockPos, blockState);
     }
 
-    public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos,
-            CollisionContext context) {
+    @Override
+    public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext context) { // NOSONAR - Ignore deprecation warning
         return SHAPE;
     }
 
-    public void entityInside(BlockState blockState, Level level, BlockPos blockPos, Entity entity) {
-        if (level instanceof ServerLevel && entity.canChangeDimensions()
-                && Shapes.joinIsNotEmpty(
-                        Shapes.create(entity.getBoundingBox().move((double) (-blockPos.getX()),
-                                (double) (-blockPos.getY()), (double) (-blockPos.getZ()))),
-                        blockState.getShape(level, blockPos), BooleanOp.AND)) {
-            ResourceKey<Level> resourcekey = level.dimension() == this.dimension ? Level.OVERWORLD : this.dimension;
+    @Override
+    public void entityInside(BlockState blockState, Level level, BlockPos blockPos, Entity entity) { // NOSONAR - Ignore deprecation warning
+        if (level instanceof ServerLevel serverlevel && entity.canChangeDimensions() && Shapes.joinIsNotEmpty(Shapes.create(entity.getBoundingBox().move((-blockPos.getX()), (-blockPos.getY()), (-blockPos.getZ()))), blockState.getShape(level, blockPos), BooleanOp.AND)) {
+            ResourceKey<Level> resourcekey = serverlevel.dimension() == this.dimension ? Level.OVERWORLD : this.dimension;
 
-            ServerLevel serverlevel = ((ServerLevel) level).getServer().getLevel(resourcekey);
+            ServerLevel targetServerLevel = serverlevel.getServer().getLevel(resourcekey);
 
-            if (serverlevel == null)
+            if (targetServerLevel == null)
                 return;
 
-            entity.changeDimension(serverlevel);
+            entity.changeDimension(targetServerLevel);
         }
     }
 
+    @Override
     public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
-        double d0 = (double) blockPos.getX() + randomSource.nextDouble();
-        double d1 = (double) blockPos.getY() + 0.8D;
-        double d2 = (double) blockPos.getZ() + randomSource.nextDouble();
+        double d0 = blockPos.getX() + randomSource.nextDouble();
+        double d1 = blockPos.getY() + 0.8D;
+        double d2 = blockPos.getZ() + randomSource.nextDouble();
 
         level.addParticle(ParticleTypes.SMOKE, d0, d1, d2, 0.0D, 0.0D, 0.0D);
     }
 
-    public ItemStack getCloneItemStack(BlockGetter p_53021_, BlockPos p_53022_, BlockState p_53023_) {
+    @Override
+    public ItemStack getCloneItemStack(BlockGetter p_53021_, BlockPos p_53022_, BlockState p_53023_) { // NOSONAR - Ignore deprecation warning
         return ItemStack.EMPTY;
     }
 
-    public boolean canBeReplaced(BlockState p_53035_, Fluid p_53036_) {
+    @Override
+    public boolean canBeReplaced(BlockState p_53035_, Fluid p_53036_) { // NOSONAR - Ignore deprecation warning
         return false;
     }
 }

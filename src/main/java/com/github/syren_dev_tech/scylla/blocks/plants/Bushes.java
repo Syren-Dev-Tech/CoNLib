@@ -18,8 +18,7 @@ public class Bushes {
         return create(register, name, Properties.copy(Blocks.SWEET_BERRY_BUSH));
     }
 
-    public static final Supplier<SweetBerryBushBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<SweetBerryBushBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.SWEET_BERRY_BUSH), creativeTab);
     }
 
@@ -27,8 +26,7 @@ public class Bushes {
         return register.blockRegistry.register(name, () -> new SweetBerryBushBlock(properties));
     }
 
-    public static final Supplier<SweetBerryBushBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<SweetBerryBushBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new SweetBerryBushBlock(properties), creativeTab);
     }
 

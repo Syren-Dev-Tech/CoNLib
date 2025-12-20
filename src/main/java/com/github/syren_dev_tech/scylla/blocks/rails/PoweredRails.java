@@ -16,8 +16,7 @@ public class PoweredRails {
         return create(register, name, Properties.copy(Blocks.POWERED_RAIL));
     }
 
-    public static final Supplier<PoweredRailsBase> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<PoweredRailsBase> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.POWERED_RAIL), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class PoweredRails {
         return register.blockRegistry.register(name, () -> new PoweredRailsBase(properties));
     }
 
-    public static final Supplier<PoweredRailsBase> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<PoweredRailsBase> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new PoweredRailsBase(properties), creativeTab);
     }
 

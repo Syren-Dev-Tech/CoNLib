@@ -16,18 +16,15 @@ public class EnchantmentTables {
         return create(register, name, Properties.copy(Blocks.ENCHANTING_TABLE));
     }
 
-    public static final Supplier<EnchantmentTableBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<EnchantmentTableBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.ENCHANTING_TABLE), creativeTab);
     }
 
-    public static final Supplier<EnchantmentTableBlock> create(ModRegister register, String name,
-            Properties properties) {
+    public static final Supplier<EnchantmentTableBlock> create(ModRegister register, String name, Properties properties) {
         return register.blockRegistry.register(name, () -> new EnchantmentTableBlock(properties));
     }
 
-    public static final Supplier<EnchantmentTableBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<EnchantmentTableBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new EnchantmentTableBlock(properties), creativeTab);
     }
 

@@ -16,8 +16,7 @@ public class Brush {
         return create(register, name, Properties.copy(Blocks.DEAD_BUSH));
     }
 
-    public static final Supplier<DeadBushBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<DeadBushBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.DEAD_BUSH), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Brush {
         return register.blockRegistry.register(name, () -> new DeadBushBlock(properties));
     }
 
-    public static final Supplier<DeadBushBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<DeadBushBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new DeadBushBlock(properties), creativeTab);
     }
 

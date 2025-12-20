@@ -16,8 +16,7 @@ public class Furnaces {
         return create(register, name, Properties.copy(Blocks.FURNACE));
     }
 
-    public static final Supplier<FurnaceBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<FurnaceBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.FURNACE), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Furnaces {
         return register.blockRegistry.register(name, () -> new FurnaceBlock(properties));
     }
 
-    public static final Supplier<FurnaceBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<FurnaceBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new FurnaceBlock(properties), creativeTab);
     }
 

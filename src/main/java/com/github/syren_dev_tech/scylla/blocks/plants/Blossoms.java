@@ -18,8 +18,7 @@ public class Blossoms {
         return create(register, name, Properties.copy(Blocks.SPORE_BLOSSOM));
     }
 
-    public static final Supplier<SporeBlossomBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<SporeBlossomBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.SPORE_BLOSSOM), creativeTab);
     }
 
@@ -27,8 +26,7 @@ public class Blossoms {
         return register.blockRegistry.register(name, () -> new SporeBlossomBlock(properties));
     }
 
-    public static final Supplier<SporeBlossomBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<SporeBlossomBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new SporeBlossomBlock(properties), creativeTab);
     }
 

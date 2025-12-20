@@ -16,8 +16,7 @@ public class ActivatorRails {
         return create(register, name, Properties.copy(Blocks.ACTIVATOR_RAIL));
     }
 
-    public static final Supplier<PoweredRailBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<PoweredRailBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.ACTIVATOR_RAIL), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class ActivatorRails {
         return register.blockRegistry.register(name, () -> new PoweredRailBlock(properties));
     }
 
-    public static final Supplier<PoweredRailBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<PoweredRailBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new PoweredRailBlock(properties), creativeTab);
     }
 

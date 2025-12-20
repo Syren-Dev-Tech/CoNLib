@@ -17,18 +17,15 @@ public class WallFanCorals {
         return create(register, name, Properties.copy(Blocks.FIRE_CORAL_WALL_FAN), Blocks.DEAD_FIRE_CORAL_WALL_FAN);
     }
 
-    public static final Supplier<CoralWallFanBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.FIRE_CORAL_WALL_FAN), Blocks.DEAD_FIRE_CORAL_WALL_FAN,
-                creativeTab);
+    public static final Supplier<CoralWallFanBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
+        return create(register, name, Properties.copy(Blocks.FIRE_CORAL_WALL_FAN), Blocks.DEAD_FIRE_CORAL_WALL_FAN, creativeTab);
     }
 
     public static final Supplier<CoralWallFanBlock> create(ModRegister register, String name, Properties properties) {
         return create(register, name, properties, Blocks.DEAD_FIRE_CORAL_WALL_FAN);
     }
 
-    public static final Supplier<CoralWallFanBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CoralWallFanBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, properties, Blocks.DEAD_FIRE_CORAL_WALL_FAN, creativeTab);
     }
 
@@ -36,18 +33,15 @@ public class WallFanCorals {
         return create(register, name, Properties.copy(Blocks.FIRE_CORAL_WALL_FAN), deadBlock);
     }
 
-    public static final Supplier<CoralWallFanBlock> create(ModRegister register, String name, Block deadBlock,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CoralWallFanBlock> create(ModRegister register, String name, Block deadBlock, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.FIRE_CORAL_WALL_FAN), deadBlock, creativeTab);
     }
 
-    public static final Supplier<CoralWallFanBlock> create(ModRegister register, String name, Properties properties,
-            Block deadBlock) {
+    public static final Supplier<CoralWallFanBlock> create(ModRegister register, String name, Properties properties, Block deadBlock) {
         return register.blockRegistry.register(name, () -> new CoralWallFanBlock(deadBlock, properties));
     }
 
-    public static final Supplier<CoralWallFanBlock> create(ModRegister register, String name, Properties properties,
-            Block deadBlock, ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CoralWallFanBlock> create(ModRegister register, String name, Properties properties, Block deadBlock, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new CoralWallFanBlock(deadBlock, properties), creativeTab);
     }
 

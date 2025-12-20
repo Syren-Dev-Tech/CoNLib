@@ -16,8 +16,7 @@ public class Bells {
         return create(register, name, Properties.copy(Blocks.BELL));
     }
 
-    public static final Supplier<BellBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<BellBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.BELL), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Bells {
         return register.blockRegistry.register(name, () -> new BellBlock(properties));
     }
 
-    public static final Supplier<BellBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<BellBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new BellBlock(properties), creativeTab);
     }
 

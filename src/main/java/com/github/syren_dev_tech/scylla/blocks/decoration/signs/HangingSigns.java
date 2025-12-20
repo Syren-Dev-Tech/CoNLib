@@ -21,30 +21,24 @@ public class HangingSigns {
             return create(register, name, Properties.copy(Blocks.OAK_SIGN), WoodType.OAK);
         }
 
-        public static final Supplier<CeilingHangingSignBlock> create(ModRegister register, String name,
-                ResourceKey<CreativeModeTab> creativeTab) {
+        public static final Supplier<CeilingHangingSignBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
             return create(register, name, Properties.copy(Blocks.OAK_SIGN), WoodType.OAK, creativeTab);
         }
 
-        public static final Supplier<CeilingHangingSignBlock> create(ModRegister register, String name,
-                Properties properties) {
+        public static final Supplier<CeilingHangingSignBlock> create(ModRegister register, String name, Properties properties) {
             return create(register, name, properties, WoodType.OAK);
         }
 
-        public static final Supplier<CeilingHangingSignBlock> create(ModRegister register, String name,
-                Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
+        public static final Supplier<CeilingHangingSignBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
             return create(register, name, properties, WoodType.OAK, creativeTab);
         }
 
-        public static final Supplier<CeilingHangingSignBlock> create(ModRegister register, String name,
-                Properties properties, WoodType woodType) {
+        public static final Supplier<CeilingHangingSignBlock> create(ModRegister register, String name, Properties properties, WoodType woodType) {
             return register.blockRegistry.register(name, () -> new CeilingHangingSignBlock(properties, woodType));
         }
 
-        public static final Supplier<CeilingHangingSignBlock> create(ModRegister register, String name,
-                Properties properties, WoodType woodType, ResourceKey<CreativeModeTab> creativeTab) {
-            return register.blockRegistry.register(name, () -> new CeilingHangingSignBlock(properties, woodType),
-                    creativeTab);
+        public static final Supplier<CeilingHangingSignBlock> create(ModRegister register, String name, Properties properties, WoodType woodType, ResourceKey<CreativeModeTab> creativeTab) {
+            return register.blockRegistry.register(name, () -> new CeilingHangingSignBlock(properties, woodType), creativeTab);
         }
 
         private CeilingHangingSigns() {
@@ -58,13 +52,11 @@ public class HangingSigns {
             return create(register, name, Properties.copy(Blocks.OAK_SIGN), WoodType.OAK);
         }
 
-        public static final Supplier<WallHangingSignBlock> create(ModRegister register, String name,
-                Properties properties) {
+        public static final Supplier<WallHangingSignBlock> create(ModRegister register, String name, Properties properties) {
             return create(register, name, properties, WoodType.OAK);
         }
 
-        public static final Supplier<WallHangingSignBlock> create(ModRegister register, String name,
-                Properties properties, WoodType woodType) {
+        public static final Supplier<WallHangingSignBlock> create(ModRegister register, String name, Properties properties, WoodType woodType) {
             return register.blockRegistry.register(name, () -> new WallHangingSignBlock(properties, woodType));
         }
 
@@ -73,32 +65,28 @@ public class HangingSigns {
         }
     }
 
-    public static final Tuple<Supplier<WallHangingSignBlock>, Supplier<CeilingHangingSignBlock>> create(
-            ModRegister register, String name) {
+    public static final Tuple<Supplier<WallHangingSignBlock>, Supplier<CeilingHangingSignBlock>> create(ModRegister register, String name) {
         var ceiling = CeilingHangingSigns.create(register, name);
         var wall = WallHangingSigns.create(register, name);
 
         return new Tuple<>(wall, ceiling);
     }
 
-    public static final Tuple<Supplier<WallHangingSignBlock>, Supplier<CeilingHangingSignBlock>> create(
-            ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Tuple<Supplier<WallHangingSignBlock>, Supplier<CeilingHangingSignBlock>> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         var ceiling = CeilingHangingSigns.create(register, name, creativeTab);
         var wall = WallHangingSigns.create(register, name);
 
         return new Tuple<>(wall, ceiling);
     }
 
-    public static final Tuple<Supplier<WallHangingSignBlock>, Supplier<CeilingHangingSignBlock>> create(
-            ModRegister register, String name, Properties properties) {
+    public static final Tuple<Supplier<WallHangingSignBlock>, Supplier<CeilingHangingSignBlock>> create(ModRegister register, String name, Properties properties) {
         var ceiling = CeilingHangingSigns.create(register, name, properties);
         var wall = WallHangingSigns.create(register, name, properties);
 
         return new Tuple<>(wall, ceiling);
     }
 
-    public static final Tuple<Supplier<WallHangingSignBlock>, Supplier<CeilingHangingSignBlock>> create(
-            ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Tuple<Supplier<WallHangingSignBlock>, Supplier<CeilingHangingSignBlock>> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         var ceiling = CeilingHangingSigns.create(register, "hanging_" + name + "_sign", properties, creativeTab);
         var wall = WallHangingSigns.create(register, "hanging_" + name + "_wall_sign", properties);
 

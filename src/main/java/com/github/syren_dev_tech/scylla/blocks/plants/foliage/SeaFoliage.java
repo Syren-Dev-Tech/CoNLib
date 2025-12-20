@@ -16,8 +16,7 @@ public class SeaFoliage {
         return create(register, name, Properties.copy(Blocks.SEAGRASS));
     }
 
-    public static final Supplier<SeagrassBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<SeagrassBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.SEAGRASS), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class SeaFoliage {
         return register.blockRegistry.register(name, () -> new SeagrassBlock(properties));
     }
 
-    public static final Supplier<SeagrassBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<SeagrassBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new SeagrassBlock(properties), creativeTab);
     }
 

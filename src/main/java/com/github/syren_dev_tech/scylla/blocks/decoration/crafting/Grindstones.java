@@ -16,8 +16,7 @@ public class Grindstones {
         return create(register, name, Properties.copy(Blocks.GRINDSTONE));
     }
 
-    public static final Supplier<GrindstoneBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<GrindstoneBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.GRINDSTONE), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Grindstones {
         return register.blockRegistry.register(name, () -> new GrindstoneBlock(properties));
     }
 
-    public static final Supplier<GrindstoneBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<GrindstoneBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new GrindstoneBlock(properties), creativeTab);
     }
 

@@ -18,8 +18,7 @@ public class TreeBushes {
         return create(register, name, Properties.copy(Blocks.AZALEA));
     }
 
-    public static final Supplier<AzaleaBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<AzaleaBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.AZALEA), creativeTab);
     }
 
@@ -27,8 +26,7 @@ public class TreeBushes {
         return register.blockRegistry.register(name, () -> new AzaleaBlock(properties));
     }
 
-    public static final Supplier<AzaleaBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<AzaleaBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new AzaleaBlock(properties), creativeTab);
     }
 

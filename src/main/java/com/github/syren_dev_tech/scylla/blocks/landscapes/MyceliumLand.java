@@ -16,8 +16,7 @@ public class MyceliumLand {
         return create(register, name, Properties.copy(Blocks.PODZOL));
     }
 
-    public static final Supplier<MyceliumBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<MyceliumBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.PODZOL), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class MyceliumLand {
         return register.blockRegistry.register(name, () -> new MyceliumBlock(properties));
     }
 
-    public static final Supplier<MyceliumBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<MyceliumBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new MyceliumBlock(properties), creativeTab);
     }
 

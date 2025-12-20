@@ -16,8 +16,7 @@ public class Campfires {
         return create(register, name, Properties.copy(Blocks.CAMPFIRE), true, 1);
     }
 
-    public static final Supplier<CampfireBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CampfireBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.CAMPFIRE), true, 1, creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Campfires {
         return create(register, name, properties, true, 1);
     }
 
-    public static final Supplier<CampfireBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CampfireBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, properties, true, 1, creativeTab);
     }
 
@@ -34,8 +32,7 @@ public class Campfires {
         return create(register, name, Properties.copy(Blocks.CAMPFIRE), spawnParticles, 1);
     }
 
-    public static final Supplier<CampfireBlock> create(ModRegister register, String name, Boolean spawnParticles,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CampfireBlock> create(ModRegister register, String name, Boolean spawnParticles, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.CAMPFIRE), spawnParticles, 1, creativeTab);
     }
 
@@ -43,20 +40,16 @@ public class Campfires {
         return create(register, name, Properties.copy(Blocks.CAMPFIRE), true, fireDamage);
     }
 
-    public static final Supplier<CampfireBlock> create(ModRegister register, String name, Integer fireDamage,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CampfireBlock> create(ModRegister register, String name, Integer fireDamage, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.CAMPFIRE), true, fireDamage, creativeTab);
     }
 
-    public static final Supplier<CampfireBlock> create(ModRegister register, String name, Properties properties,
-            Boolean spawnParticles, Integer fireDamage) {
+    public static final Supplier<CampfireBlock> create(ModRegister register, String name, Properties properties, Boolean spawnParticles, Integer fireDamage) {
         return register.blockRegistry.register(name, () -> new CampfireBlock(spawnParticles, fireDamage, properties));
     }
 
-    public static final Supplier<CampfireBlock> create(ModRegister register, String name, Properties properties,
-            Boolean spawnParticles, Integer fireDamage, ResourceKey<CreativeModeTab> creativeTab) {
-        return register.blockRegistry.register(name, () -> new CampfireBlock(spawnParticles, fireDamage, properties),
-                creativeTab);
+    public static final Supplier<CampfireBlock> create(ModRegister register, String name, Properties properties, Boolean spawnParticles, Integer fireDamage, ResourceKey<CreativeModeTab> creativeTab) {
+        return register.blockRegistry.register(name, () -> new CampfireBlock(spawnParticles, fireDamage, properties), creativeTab);
     }
 
     private Campfires() {

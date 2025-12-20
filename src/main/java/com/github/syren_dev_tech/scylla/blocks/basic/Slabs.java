@@ -17,8 +17,7 @@ public class Slabs {
         return create(register, name, Properties.copy(Blocks.SMOOTH_STONE_SLAB));
     }
 
-    public static final Supplier<SlabBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<SlabBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.SMOOTH_STONE_SLAB), creativeTab);
     }
 
@@ -26,8 +25,7 @@ public class Slabs {
         return create(register, name, Properties.copy(sourceBlock));
     }
 
-    public static final Supplier<SlabBlock> create(ModRegister register, String name, Block sourceBlock,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<SlabBlock> create(ModRegister register, String name, Block sourceBlock, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(sourceBlock), creativeTab);
     }
 
@@ -35,8 +33,7 @@ public class Slabs {
         return register.blockRegistry.register(name, () -> new SlabBlock(properties));
     }
 
-    public static final Supplier<SlabBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<SlabBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new SlabBlock(properties), creativeTab);
     }
 

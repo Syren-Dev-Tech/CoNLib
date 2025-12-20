@@ -16,8 +16,7 @@ public class SoulLands {
         return create(register, name, Properties.copy(Blocks.SOUL_SAND));
     }
 
-    public static final Supplier<SoulSandBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<SoulSandBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.SOUL_SAND), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class SoulLands {
         return register.blockRegistry.register(name, () -> new SoulSandBlock(properties));
     }
 
-    public static final Supplier<SoulSandBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<SoulSandBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new SoulSandBlock(properties), creativeTab);
     }
 

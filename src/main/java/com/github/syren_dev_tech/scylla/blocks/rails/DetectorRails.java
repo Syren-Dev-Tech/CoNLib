@@ -16,8 +16,7 @@ public class DetectorRails {
         return create(register, name, Properties.copy(Blocks.DETECTOR_RAIL));
     }
 
-    public static final Supplier<DetectorRailBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<DetectorRailBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.DETECTOR_RAIL), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class DetectorRails {
         return register.blockRegistry.register(name, () -> new DetectorRailBlock(properties));
     }
 
-    public static final Supplier<DetectorRailBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<DetectorRailBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new DetectorRailBlock(properties), creativeTab);
     }
 

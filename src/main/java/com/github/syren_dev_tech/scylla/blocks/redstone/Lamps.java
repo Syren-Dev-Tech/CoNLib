@@ -16,8 +16,7 @@ public class Lamps {
         return create(register, name, Properties.copy(Blocks.REDSTONE_LAMP));
     }
 
-    public static final Supplier<RedstoneLampBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<RedstoneLampBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.REDSTONE_LAMP), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Lamps {
         return register.blockRegistry.register(name, () -> new RedstoneLampBlock(properties));
     }
 
-    public static final Supplier<RedstoneLampBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<RedstoneLampBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new RedstoneLampBlock(properties), creativeTab);
     }
 

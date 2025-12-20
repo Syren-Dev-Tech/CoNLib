@@ -18,22 +18,18 @@ public class Mushrooms {
         return create(register, name, Properties.copy(Blocks.RED_MUSHROOM), TreeFeatures.HUGE_RED_MUSHROOM);
     }
 
-    public static final Supplier<MushroomBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.RED_MUSHROOM), TreeFeatures.HUGE_RED_MUSHROOM,
-                creativeTab);
+    public static final Supplier<MushroomBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
+        return create(register, name, Properties.copy(Blocks.RED_MUSHROOM), TreeFeatures.HUGE_RED_MUSHROOM, creativeTab);
     }
 
     // Cannot define methods that implement features and creative tab because
     // they're the same type.
 
-    public static final Supplier<MushroomBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<ConfiguredFeature<?, ?>> feature) {
+    public static final Supplier<MushroomBlock> create(ModRegister register, String name, Properties properties, ResourceKey<ConfiguredFeature<?, ?>> feature) {
         return register.blockRegistry.register(name, () -> new MushroomBlock(properties, feature));
     }
 
-    public static final Supplier<MushroomBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<ConfiguredFeature<?, ?>> feature, ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<MushroomBlock> create(ModRegister register, String name, Properties properties, ResourceKey<ConfiguredFeature<?, ?>> feature, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new MushroomBlock(properties, feature), creativeTab);
     }
 

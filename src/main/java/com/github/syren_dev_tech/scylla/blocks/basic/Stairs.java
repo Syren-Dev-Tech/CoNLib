@@ -17,8 +17,7 @@ public class Stairs {
         return create(register, name, Properties.copy(Blocks.STONE_STAIRS), () -> Blocks.STONE);
     }
 
-    public static final Supplier<StairBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<StairBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.STONE_STAIRS), () -> Blocks.STONE, creativeTab);
     }
 
@@ -26,21 +25,16 @@ public class Stairs {
         return create(register, name, Properties.copy(Blocks.STONE_STAIRS), sourceBlock);
     }
 
-    public static final Supplier<StairBlock> create(ModRegister register, String name, Supplier<Block> sourceBlock,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<StairBlock> create(ModRegister register, String name, Supplier<Block> sourceBlock, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.STONE_STAIRS), sourceBlock, creativeTab);
     }
 
-    public static final Supplier<StairBlock> create(ModRegister register, String name, Properties properties,
-            Supplier<Block> sourceBlock) {
-        return register.blockRegistry.register(name,
-                () -> new StairBlock(() -> sourceBlock.get().defaultBlockState(), properties));
+    public static final Supplier<StairBlock> create(ModRegister register, String name, Properties properties, Supplier<Block> sourceBlock) {
+        return register.blockRegistry.register(name, () -> new StairBlock(() -> sourceBlock.get().defaultBlockState(), properties));
     }
 
-    public static final Supplier<StairBlock> create(ModRegister register, String name, Properties properties,
-            Supplier<Block> sourceBlock, ResourceKey<CreativeModeTab> creativeTab) {
-        return register.blockRegistry.register(name,
-                () -> new StairBlock(() -> sourceBlock.get().defaultBlockState(), properties), creativeTab);
+    public static final Supplier<StairBlock> create(ModRegister register, String name, Properties properties, Supplier<Block> sourceBlock, ResourceKey<CreativeModeTab> creativeTab) {
+        return register.blockRegistry.register(name, () -> new StairBlock(() -> sourceBlock.get().defaultBlockState(), properties), creativeTab);
     }
 
     private Stairs() {

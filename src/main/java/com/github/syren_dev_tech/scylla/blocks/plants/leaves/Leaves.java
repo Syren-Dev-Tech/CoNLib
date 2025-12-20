@@ -17,8 +17,7 @@ public class Leaves {
         return create(register, name, Properties.copy(Blocks.OAK_LEAVES));
     }
 
-    public static final Supplier<CustomLeaves> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CustomLeaves> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.OAK_LEAVES), creativeTab);
     }
 
@@ -26,21 +25,18 @@ public class Leaves {
         return register.blockRegistry.register(name, () -> new CustomLeaves(properties));
     }
 
-    public static final Supplier<CustomLeaves> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CustomLeaves> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new CustomLeaves(properties), creativeTab);
     }
 
     // Adding particles makes the leaves like cherry blossom leaves instead of
     // defaults.
 
-    public static final Supplier<CustomLeaves> create(ModRegister register, String name, Properties properties,
-            ParticleOptions particles) {
+    public static final Supplier<CustomLeaves> create(ModRegister register, String name, Properties properties, ParticleOptions particles) {
         return register.blockRegistry.register(name, () -> new CustomLeaves(properties, particles));
     }
 
-    public static final Supplier<CustomLeaves> create(ModRegister register, String name, Properties properties,
-            ParticleOptions particles, ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CustomLeaves> create(ModRegister register, String name, Properties properties, ParticleOptions particles, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new CustomLeaves(properties, particles), creativeTab);
     }
 

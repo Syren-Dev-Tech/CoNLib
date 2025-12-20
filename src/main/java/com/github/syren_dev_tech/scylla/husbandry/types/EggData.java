@@ -8,12 +8,34 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Animal;
 
 public class EggData<T extends Animal> {
-    public EntityType<T> entityType;
-    public SoundEvent hatchSound;
-    public int ageOnHatch = -24000;
+
+    private final EntityType<T> entityType;
+    private SoundEvent hatchSound;
+
+    public SoundEvent getHatchSound() {
+        return hatchSound;
+    }
+
+    public void setHatchSound(SoundEvent hatchSound) {
+        this.hatchSound = hatchSound;
+    }
+
+    private int ageOnHatch = -24000;
+
+    public int getAgeOnHatch() {
+        return ageOnHatch;
+    }
+
+    public void setAgeOnHatch(int ageOnHatch) {
+        this.ageOnHatch = ageOnHatch;
+    }
 
     public EggData(EntityType<T> entityType) {
         this.entityType = entityType;
+    }
+
+    public EntityType<T> getEntityType() {
+        return entityType;
     }
 
     public T spawn(ServerLevel serverLevel) {

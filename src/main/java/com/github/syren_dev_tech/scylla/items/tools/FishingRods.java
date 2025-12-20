@@ -11,12 +11,14 @@ import net.minecraft.world.item.Item.Properties;
 
 public class FishingRods {
 
+    private FishingRods() {
+    }
+
     public static final Supplier<FishingRodItem> create(ModRegister register, String name) {
         return create(register, name, new Properties());
     }
 
-    public static final Supplier<FishingRodItem> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<FishingRodItem> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, new Properties(), creativeTab);
     }
 
@@ -27,8 +29,7 @@ public class FishingRods {
         return fas;
     }
 
-    public static final Supplier<FishingRodItem> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<FishingRodItem> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         var fas = register.itemRegistry.register(name, () -> new FishingRodItem(properties), creativeTab);
         register.itemRegistry.tools.put(name, fas);
 

@@ -16,8 +16,7 @@ public class Composters {
         return create(register, name, Properties.copy(Blocks.COMPOSTER));
     }
 
-    public static final Supplier<ComposterBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<ComposterBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.COMPOSTER), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Composters {
         return register.blockRegistry.register(name, () -> new ComposterBlock(properties));
     }
 
-    public static final Supplier<ComposterBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<ComposterBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new ComposterBlock(properties), creativeTab);
     }
 

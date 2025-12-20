@@ -16,8 +16,7 @@ public class MuddyLand {
         return create(register, name, Properties.copy(Blocks.MUD));
     }
 
-    public static final Supplier<MudBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<MudBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.MUD), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class MuddyLand {
         return register.blockRegistry.register(name, () -> new MudBlock(properties));
     }
 
-    public static final Supplier<MudBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<MudBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new MudBlock(properties), creativeTab);
     }
 

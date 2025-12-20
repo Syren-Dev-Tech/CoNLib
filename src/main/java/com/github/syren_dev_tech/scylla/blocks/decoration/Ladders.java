@@ -16,8 +16,7 @@ public class Ladders {
         return create(register, name, Properties.copy(Blocks.LADDER));
     }
 
-    public static final Supplier<LadderBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<LadderBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.LADDER), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Ladders {
         return register.blockRegistry.register(name, () -> new LadderBlock(properties));
     }
 
-    public static final Supplier<LadderBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<LadderBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new LadderBlock(properties), creativeTab);
     }
 

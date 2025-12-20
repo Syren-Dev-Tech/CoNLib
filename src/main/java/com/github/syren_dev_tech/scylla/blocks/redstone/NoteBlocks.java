@@ -16,8 +16,7 @@ public class NoteBlocks {
         return create(register, name, Properties.copy(Blocks.NOTE_BLOCK));
     }
 
-    public static final Supplier<NoteBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<NoteBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.NOTE_BLOCK), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class NoteBlocks {
         return register.blockRegistry.register(name, () -> new NoteBlock(properties));
     }
 
-    public static final Supplier<NoteBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<NoteBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new NoteBlock(properties), creativeTab);
     }
 

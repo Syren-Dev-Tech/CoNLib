@@ -16,8 +16,7 @@ public class Fires {
         return create(register, name, Properties.copy(Blocks.FIRE));
     }
 
-    public static final Supplier<FireBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<FireBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.FIRE), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Fires {
         return register.blockRegistry.register(name, () -> new FireBlock(properties));
     }
 
-    public static final Supplier<FireBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<FireBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new FireBlock(properties), creativeTab);
     }
 

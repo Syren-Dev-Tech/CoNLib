@@ -16,8 +16,7 @@ public class Pots {
         return create(register, name, Properties.copy(Blocks.DECORATED_POT));
     }
 
-    public static final Supplier<DecoratedPotBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<DecoratedPotBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.DECORATED_POT), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Pots {
         return register.blockRegistry.register(name, () -> new DecoratedPotBlock(properties));
     }
 
-    public static final Supplier<DecoratedPotBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<DecoratedPotBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new DecoratedPotBlock(properties), creativeTab);
     }
 

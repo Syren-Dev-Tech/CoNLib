@@ -12,12 +12,14 @@ import net.minecraft.world.item.ShearsItem;
 
 public class Shears {
 
+    private Shears() {
+    }
+
     public static final Supplier<ShearsItem> create(ModRegister register, String name) {
         return create(register, name, new Item.Properties());
     }
 
-    public static final Supplier<ShearsItem> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<ShearsItem> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, new Item.Properties(), creativeTab);
     }
 
@@ -28,8 +30,7 @@ public class Shears {
         return shears;
     }
 
-    public static final Supplier<ShearsItem> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<ShearsItem> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         var shears = register.itemRegistry.register(name, () -> new ShearsItem(properties), creativeTab);
         register.itemRegistry.tools.put(name, shears);
 

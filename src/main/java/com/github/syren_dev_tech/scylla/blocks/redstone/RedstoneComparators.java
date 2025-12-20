@@ -16,8 +16,7 @@ public class RedstoneComparators {
         return create(register, name, Properties.copy(Blocks.COMPARATOR));
     }
 
-    public static final Supplier<ComparatorBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<ComparatorBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.COMPARATOR), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class RedstoneComparators {
         return register.blockRegistry.register(name, () -> new ComparatorBlock(properties));
     }
 
-    public static final Supplier<ComparatorBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<ComparatorBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new ComparatorBlock(properties), creativeTab);
     }
 

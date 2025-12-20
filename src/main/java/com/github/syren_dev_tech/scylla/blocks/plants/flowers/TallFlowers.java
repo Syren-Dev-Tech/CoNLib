@@ -16,8 +16,7 @@ public class TallFlowers {
         return create(register, name, Properties.copy(Blocks.ROSE_BUSH));
     }
 
-    public static final Supplier<TallFlowerBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<TallFlowerBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.ROSE_BUSH), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class TallFlowers {
         return register.blockRegistry.register(name, () -> new TallFlowerBlock(properties));
     }
 
-    public static final Supplier<TallFlowerBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<TallFlowerBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new TallFlowerBlock(properties), creativeTab);
     }
 

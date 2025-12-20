@@ -16,8 +16,7 @@ public class Chains {
         return create(register, name, Properties.copy(Blocks.CHAIN));
     }
 
-    public static final Supplier<ChainBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<ChainBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.CHAIN), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Chains {
         return register.blockRegistry.register(name, () -> new ChainBlock(properties));
     }
 
-    public static final Supplier<ChainBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<ChainBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new ChainBlock(properties), creativeTab);
     }
 

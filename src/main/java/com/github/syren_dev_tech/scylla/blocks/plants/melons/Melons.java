@@ -16,8 +16,7 @@ public class Melons {
         return create(register, name, Properties.copy(Blocks.MELON));
     }
 
-    public static final Supplier<Melon> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<Melon> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.MELON), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Melons {
         return register.blockRegistry.register(name, () -> new Melon(properties));
     }
 
-    public static final Supplier<Melon> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<Melon> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new Melon(properties), creativeTab);
     }
 

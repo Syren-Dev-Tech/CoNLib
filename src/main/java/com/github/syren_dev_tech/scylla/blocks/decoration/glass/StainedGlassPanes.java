@@ -17,18 +17,15 @@ public class StainedGlassPanes {
         return create(register, name, Properties.copy(Blocks.WHITE_STAINED_GLASS_PANE), DyeColor.WHITE);
     }
 
-    public static final Supplier<StainedGlassPaneBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<StainedGlassPaneBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.WHITE_STAINED_GLASS_PANE), DyeColor.WHITE, creativeTab);
     }
 
-    public static final Supplier<StainedGlassPaneBlock> create(ModRegister register, String name,
-            Properties properties) {
+    public static final Supplier<StainedGlassPaneBlock> create(ModRegister register, String name, Properties properties) {
         return create(register, name, properties, DyeColor.WHITE);
     }
 
-    public static final Supplier<StainedGlassPaneBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<StainedGlassPaneBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, properties, DyeColor.WHITE, creativeTab);
     }
 
@@ -36,18 +33,15 @@ public class StainedGlassPanes {
         return create(register, name, Properties.copy(Blocks.WHITE_STAINED_GLASS_PANE), color);
     }
 
-    public static final Supplier<StainedGlassPaneBlock> create(ModRegister register, String name, DyeColor color,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<StainedGlassPaneBlock> create(ModRegister register, String name, DyeColor color, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.WHITE_STAINED_GLASS_PANE), color, creativeTab);
     }
 
-    public static final Supplier<StainedGlassPaneBlock> create(ModRegister register, String name, Properties properties,
-            DyeColor color) {
+    public static final Supplier<StainedGlassPaneBlock> create(ModRegister register, String name, Properties properties, DyeColor color) {
         return register.blockRegistry.register(name, () -> new StainedGlassPaneBlock(color, properties));
     }
 
-    public static final Supplier<StainedGlassPaneBlock> create(ModRegister register, String name, Properties properties,
-            DyeColor color, ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<StainedGlassPaneBlock> create(ModRegister register, String name, Properties properties, DyeColor color, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new StainedGlassPaneBlock(color, properties), creativeTab);
     }
 

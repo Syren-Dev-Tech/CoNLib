@@ -16,8 +16,7 @@ public class FlamableLand {
         return create(register, name, Properties.copy(Blocks.NETHERRACK));
     }
 
-    public static final Supplier<NetherrackBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<NetherrackBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.NETHERRACK), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class FlamableLand {
         return register.blockRegistry.register(name, () -> new NetherrackBlock(properties));
     }
 
-    public static final Supplier<NetherrackBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<NetherrackBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new NetherrackBlock(properties), creativeTab);
     }
 

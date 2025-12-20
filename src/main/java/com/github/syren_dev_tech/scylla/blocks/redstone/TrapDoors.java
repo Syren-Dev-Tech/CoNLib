@@ -18,8 +18,7 @@ public class TrapDoors {
         return create(register, name, Properties.copy(Blocks.OAK_TRAPDOOR), BlockSetType.OAK);
     }
 
-    public static final Supplier<TrapDoorBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<TrapDoorBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.OAK_TRAPDOOR), BlockSetType.OAK, creativeTab);
     }
 
@@ -27,8 +26,7 @@ public class TrapDoors {
         return create(register, name, properties, BlockSetType.OAK);
     }
 
-    public static final Supplier<TrapDoorBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<TrapDoorBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, properties, BlockSetType.OAK, creativeTab);
     }
 
@@ -36,8 +34,7 @@ public class TrapDoors {
         return create(register, name, Properties.copy(block), BlockSetType.OAK);
     }
 
-    public static final Supplier<TrapDoorBlock> create(ModRegister register, String name, Block block,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<TrapDoorBlock> create(ModRegister register, String name, Block block, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(block), BlockSetType.OAK, creativeTab);
     }
 
@@ -45,18 +42,15 @@ public class TrapDoors {
         return create(register, name, Properties.copy(Blocks.OAK_TRAPDOOR), blockSetType);
     }
 
-    public static final Supplier<TrapDoorBlock> create(ModRegister register, String name, BlockSetType blockSetType,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<TrapDoorBlock> create(ModRegister register, String name, BlockSetType blockSetType, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.OAK_TRAPDOOR), blockSetType, creativeTab);
     }
 
-    public static final Supplier<TrapDoorBlock> create(ModRegister register, String name, Properties properties,
-            BlockSetType blockSetType) {
+    public static final Supplier<TrapDoorBlock> create(ModRegister register, String name, Properties properties, BlockSetType blockSetType) {
         return register.blockRegistry.register(name, () -> new TrapDoorBlock(properties, blockSetType));
     }
 
-    public static final Supplier<TrapDoorBlock> create(ModRegister register, String name, Properties properties,
-            BlockSetType blockSetType, ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<TrapDoorBlock> create(ModRegister register, String name, Properties properties, BlockSetType blockSetType, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new TrapDoorBlock(properties, blockSetType), creativeTab);
     }
 

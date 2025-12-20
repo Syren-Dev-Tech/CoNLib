@@ -12,12 +12,14 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class Farmland {
 
+    private Farmland() {
+    }
+
     public static final Supplier<FarmBlock> create(ModRegister register, String name) {
         return create(register, name, Properties.copy(Blocks.FARMLAND));
     }
 
-    public static final Supplier<FarmBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<FarmBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.FARMLAND), creativeTab);
     }
 
@@ -25,8 +27,7 @@ public class Farmland {
         return register.blockRegistry.register(name, () -> new FarmBlock(properties));
     }
 
-    public static final Supplier<FarmBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<FarmBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new FarmBlock(properties), creativeTab);
     }
 }

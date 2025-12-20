@@ -16,18 +16,15 @@ public class Glazed {
         return create(register, name, Properties.copy(Blocks.WHITE_GLAZED_TERRACOTTA));
     }
 
-    public static final Supplier<GlazedTerracottaBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<GlazedTerracottaBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.WHITE_GLAZED_TERRACOTTA), creativeTab);
     }
 
-    public static final Supplier<GlazedTerracottaBlock> create(ModRegister register, String name,
-            Properties properties) {
+    public static final Supplier<GlazedTerracottaBlock> create(ModRegister register, String name, Properties properties) {
         return register.blockRegistry.register(name, () -> new GlazedTerracottaBlock(properties));
     }
 
-    public static final Supplier<GlazedTerracottaBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<GlazedTerracottaBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new GlazedTerracottaBlock(properties), creativeTab);
     }
 

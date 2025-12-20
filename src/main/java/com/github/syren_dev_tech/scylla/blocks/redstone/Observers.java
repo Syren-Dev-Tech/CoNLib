@@ -16,8 +16,7 @@ public class Observers {
         return create(register, name, Properties.copy(Blocks.OBSERVER));
     }
 
-    public static final Supplier<ObserverBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<ObserverBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.OBSERVER), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Observers {
         return register.blockRegistry.register(name, () -> new ObserverBlock(properties));
     }
 
-    public static final Supplier<ObserverBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<ObserverBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new ObserverBlock(properties), creativeTab);
     }
 

@@ -16,8 +16,7 @@ public class PowderSnow {
         return create(register, name, Properties.copy(Blocks.POWDER_SNOW));
     }
 
-    public static final Supplier<PowderSnowBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<PowderSnowBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.POWDER_SNOW), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class PowderSnow {
         return register.blockRegistry.register(name, () -> new PowderSnowBlock(properties));
     }
 
-    public static final Supplier<PowderSnowBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<PowderSnowBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new PowderSnowBlock(properties), creativeTab);
     }
 

@@ -16,25 +16,20 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 public class Concrete {
     public static class ConcretePowders {
 
-        public static final Supplier<ConcretePowderBlock> create(ModRegister register, String name,
-                Block hardenedBlock) {
+        public static final Supplier<ConcretePowderBlock> create(ModRegister register, String name, Block hardenedBlock) {
             return create(register, name, Properties.copy(Blocks.WHITE_GLAZED_TERRACOTTA), hardenedBlock);
         }
 
-        public static final Supplier<ConcretePowderBlock> create(ModRegister register, String name, Block hardenedBlock,
-                ResourceKey<CreativeModeTab> creativeTab) {
+        public static final Supplier<ConcretePowderBlock> create(ModRegister register, String name, Block hardenedBlock, ResourceKey<CreativeModeTab> creativeTab) {
             return create(register, name, Properties.copy(Blocks.WHITE_GLAZED_TERRACOTTA), hardenedBlock, creativeTab);
         }
 
-        public static final Supplier<ConcretePowderBlock> create(ModRegister register, String name,
-                Properties properties, Block hardenedBlock) {
+        public static final Supplier<ConcretePowderBlock> create(ModRegister register, String name, Properties properties, Block hardenedBlock) {
             return register.blockRegistry.register(name, () -> new ConcretePowderBlock(hardenedBlock, properties));
         }
 
-        public static final Supplier<ConcretePowderBlock> create(ModRegister register, String name,
-                Properties properties, Block hardenedBlock, ResourceKey<CreativeModeTab> creativeTab) {
-            return register.blockRegistry.register(name, () -> new ConcretePowderBlock(hardenedBlock, properties),
-                    creativeTab);
+        public static final Supplier<ConcretePowderBlock> create(ModRegister register, String name, Properties properties, Block hardenedBlock, ResourceKey<CreativeModeTab> creativeTab) {
+            return register.blockRegistry.register(name, () -> new ConcretePowderBlock(hardenedBlock, properties), creativeTab);
         }
 
         private ConcretePowders() {
@@ -42,28 +37,22 @@ public class Concrete {
         }
     }
 
-    public static final Tuple<Supplier<Block>, Supplier<ConcretePowderBlock>> create(ModRegister register,
-            String name) {
-        return create(register, name, Properties.copy(Blocks.WHITE_CONCRETE),
-                Properties.copy(Blocks.WHITE_CONCRETE_POWDER));
+    public static final Tuple<Supplier<Block>, Supplier<ConcretePowderBlock>> create(ModRegister register, String name) {
+        return create(register, name, Properties.copy(Blocks.WHITE_CONCRETE), Properties.copy(Blocks.WHITE_CONCRETE_POWDER));
     }
 
-    public static final Tuple<Supplier<Block>, Supplier<ConcretePowderBlock>> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.WHITE_CONCRETE),
-                Properties.copy(Blocks.WHITE_CONCRETE_POWDER), creativeTab);
+    public static final Tuple<Supplier<Block>, Supplier<ConcretePowderBlock>> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
+        return create(register, name, Properties.copy(Blocks.WHITE_CONCRETE), Properties.copy(Blocks.WHITE_CONCRETE_POWDER), creativeTab);
     }
 
-    public static final Tuple<Supplier<Block>, Supplier<ConcretePowderBlock>> create(ModRegister register, String name,
-            Properties hardenedProperties, Properties powderProperties) {
+    public static final Tuple<Supplier<Block>, Supplier<ConcretePowderBlock>> create(ModRegister register, String name, Properties hardenedProperties, Properties powderProperties) {
         var solid = FullBlocks.create(register, name, hardenedProperties);
         var powder = ConcretePowders.create(register, name, powderProperties, solid.get());
 
         return new Tuple<>(solid, powder);
     }
 
-    public static final Tuple<Supplier<Block>, Supplier<ConcretePowderBlock>> create(ModRegister register, String name,
-            Properties hardenedProperties, Properties powderProperties, ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Tuple<Supplier<Block>, Supplier<ConcretePowderBlock>> create(ModRegister register, String name, Properties hardenedProperties, Properties powderProperties, ResourceKey<CreativeModeTab> creativeTab) {
         var solid = FullBlocks.create(register, name, hardenedProperties, creativeTab);
         var powder = ConcretePowders.create(register, name, powderProperties, solid.get(), creativeTab);
 

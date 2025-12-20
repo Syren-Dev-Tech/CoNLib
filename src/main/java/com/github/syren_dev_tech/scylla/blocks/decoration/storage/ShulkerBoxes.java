@@ -17,18 +17,15 @@ public class ShulkerBoxes {
         return create(register, name, color, Properties.copy(Blocks.WHITE_SHULKER_BOX));
     }
 
-    public static final Supplier<ShulkerBoxBlock> create(ModRegister register, String name, DyeColor color,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<ShulkerBoxBlock> create(ModRegister register, String name, DyeColor color, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, color, Properties.copy(Blocks.WHITE_SHULKER_BOX), creativeTab);
     }
 
-    public static final Supplier<ShulkerBoxBlock> create(ModRegister register, String name, DyeColor color,
-            Properties properties) {
+    public static final Supplier<ShulkerBoxBlock> create(ModRegister register, String name, DyeColor color, Properties properties) {
         return register.blockRegistry.register(name, () -> new ShulkerBoxBlock(color, properties));
     }
 
-    public static final Supplier<ShulkerBoxBlock> create(ModRegister register, String name, DyeColor color,
-            Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<ShulkerBoxBlock> create(ModRegister register, String name, DyeColor color, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new ShulkerBoxBlock(color, properties), creativeTab);
     }
 

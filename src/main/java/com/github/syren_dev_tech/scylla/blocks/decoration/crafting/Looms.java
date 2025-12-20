@@ -16,8 +16,7 @@ public class Looms {
         return create(register, name, Properties.copy(Blocks.LOOM));
     }
 
-    public static final Supplier<LoomBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<LoomBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.LOOM), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Looms {
         return register.blockRegistry.register(name, () -> new LoomBlock(properties));
     }
 
-    public static final Supplier<LoomBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<LoomBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new LoomBlock(properties), creativeTab);
     }
 

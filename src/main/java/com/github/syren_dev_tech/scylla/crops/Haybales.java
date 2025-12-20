@@ -12,12 +12,14 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class Haybales {
 
+    private Haybales() {
+    }
+
     public static final Supplier<HayBlock> create(ModRegister register, String name) {
         return create(register, name, Properties.copy(Blocks.HAY_BLOCK));
     }
 
-    public static final Supplier<HayBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<HayBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.HAY_BLOCK), creativeTab);
     }
 
@@ -25,8 +27,7 @@ public class Haybales {
         return register.blockRegistry.register(name, () -> new HayBlock(properties));
     }
 
-    public static final Supplier<HayBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<HayBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new HayBlock(properties), creativeTab);
     }
 }

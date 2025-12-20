@@ -16,8 +16,7 @@ public class Cobwebs {
         return create(register, name, Properties.copy(Blocks.COBWEB));
     }
 
-    public static final Supplier<WebBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<WebBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.COBWEB), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Cobwebs {
         return register.blockRegistry.register(name, () -> new WebBlock(properties));
     }
 
-    public static final Supplier<WebBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<WebBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new WebBlock(properties), creativeTab);
     }
 

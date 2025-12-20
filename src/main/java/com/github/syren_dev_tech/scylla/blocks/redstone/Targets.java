@@ -16,8 +16,7 @@ public class Targets {
         return create(register, name, Properties.copy(Blocks.TARGET));
     }
 
-    public static final Supplier<TargetBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<TargetBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.TARGET), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Targets {
         return register.blockRegistry.register(name, () -> new TargetBlock(properties));
     }
 
-    public static final Supplier<TargetBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<TargetBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new TargetBlock(properties), creativeTab);
     }
 

@@ -5,6 +5,18 @@ pluginManagement {
             name = 'MinecraftForge'
             url = 'https://maven.minecraftforge.net/'
         }
+        maven {
+            name = 'Fabric'
+            url = 'https://maven.fabricmc.net/'
+        }
+        maven {
+            name = "ParchmentMC"
+            url = 'https://maven.parchmentmc.org'
+        }
+        maven {
+            name = "NeoForge"
+            url = 'https://maven.neoforged.net/'
+        }
     }
 }
 

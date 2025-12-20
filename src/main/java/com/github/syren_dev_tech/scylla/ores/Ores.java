@@ -9,7 +9,7 @@ import com.github.syren_dev_tech.scylla.registry.features.OreFeature;
 
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
@@ -17,23 +17,29 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class Ores {
 
-    public static class GemOre {
-        public static final void create(ModRegister register, String name,
-                net.minecraft.world.item.Item.Properties toolProperties, Tier toolTier,
-                ResourceKey<CreativeModeTab> creativeTab_Item, ResourceKey<CreativeModeTab> creativeTab_Block) {
-            ModItem.create(register, name, creativeTab_Item);
-            Ores.create(register, name + "_ore", creativeTab_Block);
+    private Ores() {
+    }
+
+    public class GemOre {
+
+        private GemOre() {
+        }
+
+        public static final void create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTabItem, ResourceKey<CreativeModeTab> creativeTabBlock) {
+            ModItem.create(register, name, creativeTabItem);
+            Ores.create(register, name + "_ore", creativeTabBlock);
         }
     }
 
-    public static class MetalOre {
-        public static final void create(ModRegister register, String name,
-                net.minecraft.world.item.Item.Properties ingotProperties,
-                net.minecraft.world.item.Item.Properties toolProperties, Tier toolTier,
-                ResourceKey<CreativeModeTab> creativeTab_Item, ResourceKey<CreativeModeTab> creativeTab_Block) {
-            ModItem.create(register, name + "_ingot", ingotProperties, creativeTab_Item);
-            ModItem.create(register, name + "_nugget", ingotProperties, creativeTab_Item);
-            Ores.create(register, name + "_ore", creativeTab_Block);
+    public class MetalOre {
+
+        private MetalOre() {
+        }
+
+        public static final void create(ModRegister register, String name, Item.Properties ingotProperties, ResourceKey<CreativeModeTab> creativeTabItem, ResourceKey<CreativeModeTab> creativeTabBlock) {
+            ModItem.create(register, name + "_ingot", ingotProperties, creativeTabItem);
+            ModItem.create(register, name + "_nugget", ingotProperties, creativeTabItem);
+            Ores.create(register, name + "_ore", creativeTabBlock);
         }
     }
 
@@ -41,8 +47,7 @@ public class Ores {
         return create(register, name, Properties.copy(Blocks.IRON_ORE));
     }
 
-    public static final Supplier<Ore> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<Ore> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.IRON_ORE), creativeTab);
     }
 
@@ -53,10 +58,8 @@ public class Ores {
         return ore;
     }
 
-    public static final Supplier<Ore> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
-        var ore = register.blockRegistry.register(name, () -> new Ore(properties.requiresCorrectToolForDrops()),
-                creativeTab);
+    public static final Supplier<Ore> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
+        var ore = register.blockRegistry.register(name, () -> new Ore(properties.requiresCorrectToolForDrops()), creativeTab);
         OreFeature.register(name, ore.get());
 
         return ore;

@@ -16,8 +16,7 @@ public class PondFoliage {
         return create(register, name, Properties.copy(Blocks.SMALL_DRIPLEAF));
     }
 
-    public static final Supplier<SmallDripleafBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<SmallDripleafBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.SMALL_DRIPLEAF), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class PondFoliage {
         return register.blockRegistry.register(name, () -> new SmallDripleafBlock(properties));
     }
 
-    public static final Supplier<SmallDripleafBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<SmallDripleafBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new SmallDripleafBlock(properties), creativeTab);
     }
 

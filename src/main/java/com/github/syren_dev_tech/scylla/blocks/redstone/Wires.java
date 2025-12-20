@@ -16,8 +16,7 @@ public class Wires {
         return create(register, name, Properties.copy(Blocks.REDSTONE_WIRE));
     }
 
-    public static final Supplier<RedStoneWireBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<RedStoneWireBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.REDSTONE_WIRE), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Wires {
         return register.blockRegistry.register(name, () -> new RedStoneWireBlock(properties));
     }
 
-    public static final Supplier<RedStoneWireBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<RedStoneWireBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new RedStoneWireBlock(properties), creativeTab);
     }
 

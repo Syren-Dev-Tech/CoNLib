@@ -16,32 +16,15 @@ public class PillarBlocks {
         return create(register, name, Properties.copy(Blocks.DIRT));
     }
 
-    public static final Supplier<RotatedPillarBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<RotatedPillarBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.DIRT), creativeTab);
     }
 
-    /**
-     * Creates and registers a pillar block.
-     *
-     * @param name       The name of the block.
-     * @param properties The properties of the block.
-     * @return The registered pillar block.
-     */
     public static final Supplier<RotatedPillarBlock> create(ModRegister register, String name, Properties properties) {
         return register.blockRegistry.register(name, () -> new RotatedPillarBlock(properties));
     }
 
-    /**
-     * Creates and registers a pillar block with a specified creative tab.
-     *
-     * @param name        The name of the block.
-     * @param properties  The properties of the block.
-     * @param creativeTab The creative tab to which the block belongs.
-     * @return The registered pillar block.
-     */
-    public static final Supplier<RotatedPillarBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<RotatedPillarBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new RotatedPillarBlock(properties), creativeTab);
     }
 

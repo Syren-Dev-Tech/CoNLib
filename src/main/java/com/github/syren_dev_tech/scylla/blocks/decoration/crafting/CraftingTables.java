@@ -16,8 +16,7 @@ public class CraftingTables {
         return create(register, name, Properties.copy(Blocks.CRAFTING_TABLE));
     }
 
-    public static final Supplier<CraftingTableBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CraftingTableBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.CRAFTING_TABLE), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class CraftingTables {
         return register.blockRegistry.register(name, () -> new CraftingTableBlock(properties));
     }
 
-    public static final Supplier<CraftingTableBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CraftingTableBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new CraftingTableBlock(properties), creativeTab);
     }
 

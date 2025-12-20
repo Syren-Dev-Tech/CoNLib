@@ -16,8 +16,7 @@ public class Ice {
         return create(register, name, Properties.copy(Blocks.ICE));
     }
 
-    public static final Supplier<CustomIce> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CustomIce> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.ICE), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Ice {
         return create(register, name, Properties.copy(Blocks.ICE), meltedBlock);
     }
 
-    public static final Supplier<CustomIce> create(ModRegister register, String name, Block meltedBlock,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CustomIce> create(ModRegister register, String name, Block meltedBlock, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.ICE), meltedBlock, creativeTab);
     }
 
@@ -34,18 +32,15 @@ public class Ice {
         return register.blockRegistry.register(name, () -> new CustomIce(properties));
     }
 
-    public static final Supplier<CustomIce> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CustomIce> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new CustomIce(properties), creativeTab);
     }
 
-    public static final Supplier<CustomIce> create(ModRegister register, String name, Properties properties,
-            Block meltedBlock) {
+    public static final Supplier<CustomIce> create(ModRegister register, String name, Properties properties, Block meltedBlock) {
         return register.blockRegistry.register(name, () -> new CustomIce(properties, meltedBlock));
     }
 
-    public static final Supplier<CustomIce> create(ModRegister register, String name, Properties properties,
-            Block meltedBlock, ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CustomIce> create(ModRegister register, String name, Properties properties, Block meltedBlock, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new CustomIce(properties, meltedBlock), creativeTab);
     }
 

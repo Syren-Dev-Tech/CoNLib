@@ -16,8 +16,7 @@ public class Beans {
         return create(register, name, Properties.copy(Blocks.CACTUS));
     }
 
-    public static final Supplier<CocoaBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CocoaBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.CACTUS), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Beans {
         return register.blockRegistry.register(name, () -> new CocoaBlock(properties));
     }
 
-    public static final Supplier<CocoaBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CocoaBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new CocoaBlock(properties), creativeTab);
     }
 

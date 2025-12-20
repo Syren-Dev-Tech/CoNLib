@@ -12,12 +12,14 @@ import net.minecraft.world.item.ShieldItem;
 
 public class Shields {
 
+    private Shields() {
+    }
+
     public static final Supplier<ShieldItem> create(ModRegister register, String name) {
         return create(register, name, new Item.Properties());
     }
 
-    public static final Supplier<ShieldItem> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<ShieldItem> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, new Item.Properties(), creativeTab);
     }
 
@@ -28,8 +30,7 @@ public class Shields {
         return shield;
     }
 
-    public static final Supplier<ShieldItem> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<ShieldItem> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         var shield = register.itemRegistry.register(name, () -> new ShieldItem(properties), creativeTab);
         register.itemRegistry.weapons.put(name, shield);
 

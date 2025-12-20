@@ -22,46 +22,37 @@ public class FlowerPots {
             return create(register, name, Properties.copy(Blocks.FLOWER_POT), flower);
         }
 
-        public static Supplier<FlowerPotBlock> create(ModRegister register, String name, Block flower,
-                ResourceKey<CreativeModeTab> creativeTab) {
+        public static Supplier<FlowerPotBlock> create(ModRegister register, String name, Block flower, ResourceKey<CreativeModeTab> creativeTab) {
             return create(register, name, Properties.copy(Blocks.FLOWER_POT), flower, creativeTab);
         }
 
         // Can't use "create" methods here because null is allowed for creative tabs.
 
-        public static Supplier<FlowerPotBlock> create(ModRegister register, String name, Properties properties,
-                Block flower) {
+        public static Supplier<FlowerPotBlock> create(ModRegister register, String name, Properties properties, Block flower) {
             return register.blockRegistry.register(name, () -> new FlowerPotBlock(null, () -> flower, properties));
         }
 
-        public static Supplier<FlowerPotBlock> create(ModRegister register, String name, Properties properties,
-                Block flower, ResourceKey<CreativeModeTab> creativeTab) {
-            return register.blockRegistry.register(name, () -> new FlowerPotBlock(null, () -> flower, properties),
-                    creativeTab);
+        public static Supplier<FlowerPotBlock> create(ModRegister register, String name, Properties properties, Block flower, ResourceKey<CreativeModeTab> creativeTab) {
+            return register.blockRegistry.register(name, () -> new FlowerPotBlock(null, () -> flower, properties), creativeTab);
         }
 
-        public static Supplier<FlowerPotBlock> create(ModRegister register, String name, Properties properties,
-                Block flower, @Nullable Supplier<FlowerPotBlock> emptyPot) {
+        public static Supplier<FlowerPotBlock> create(ModRegister register, String name, Properties properties, Block flower, @Nullable Supplier<FlowerPotBlock> emptyPot) {
             return register.blockRegistry.register(name, () -> new FlowerPotBlock(emptyPot, () -> flower, properties));
         }
 
-        public static Supplier<FlowerPotBlock> create(ModRegister register, String name, Properties properties,
-                Block flower, @Nullable Supplier<FlowerPotBlock> emptyPot, ResourceKey<CreativeModeTab> creativeTab) {
-            return register.blockRegistry.register(name, () -> new FlowerPotBlock(emptyPot, () -> flower, properties),
-                    creativeTab);
+        public static Supplier<FlowerPotBlock> create(ModRegister register, String name, Properties properties, Block flower, @Nullable Supplier<FlowerPotBlock> emptyPot, ResourceKey<CreativeModeTab> creativeTab) {
+            return register.blockRegistry.register(name, () -> new FlowerPotBlock(emptyPot, () -> flower, properties), creativeTab);
         }
 
         public static List<Supplier<FlowerPotBlock>> create(ModRegister register, String name, List<Block> flowers) {
             List<Supplier<FlowerPotBlock>> pots = new ArrayList<>();
 
-            flowers.forEach(
-                    (Block flower) -> pots.add(create(register, name, Properties.copy(Blocks.FLOWER_POT), flower)));
+            flowers.forEach((Block flower) -> pots.add(create(register, name, Properties.copy(Blocks.FLOWER_POT), flower)));
 
             return pots;
         }
 
-        public static List<Supplier<FlowerPotBlock>> create(ModRegister register, String name, List<Block> flowers,
-                Properties properties) {
+        public static List<Supplier<FlowerPotBlock>> create(ModRegister register, String name, List<Block> flowers, Properties properties) {
             List<Supplier<FlowerPotBlock>> pots = new ArrayList<>();
 
             flowers.forEach((Block flower) -> pots.add(create(register, name, properties, flower)));
@@ -78,8 +69,7 @@ public class FlowerPots {
         return create(register, name, Properties.copy(Blocks.FLOWER_POT));
     }
 
-    public static Supplier<FlowerPotBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static Supplier<FlowerPotBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.FLOWER_POT), creativeTab);
     }
 
@@ -87,10 +77,8 @@ public class FlowerPots {
         return register.blockRegistry.register(name, () -> new FlowerPotBlock(null, () -> Blocks.AIR, properties));
     }
 
-    public static Supplier<FlowerPotBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
-        return register.blockRegistry.register(name, () -> new FlowerPotBlock(null, () -> Blocks.AIR, properties),
-                creativeTab);
+    public static Supplier<FlowerPotBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
+        return register.blockRegistry.register(name, () -> new FlowerPotBlock(null, () -> Blocks.AIR, properties), creativeTab);
     }
 
     private FlowerPots() {

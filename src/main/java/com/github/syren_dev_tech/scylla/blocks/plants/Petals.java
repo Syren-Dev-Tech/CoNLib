@@ -16,8 +16,7 @@ public class Petals {
         return create(register, name, Properties.copy(Blocks.PINK_PETALS));
     }
 
-    public static final Supplier<PinkPetalsBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<PinkPetalsBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.PINK_PETALS), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Petals {
         return register.blockRegistry.register(name, () -> new PinkPetalsBlock(properties));
     }
 
-    public static final Supplier<PinkPetalsBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<PinkPetalsBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new PinkPetalsBlock(properties), creativeTab);
     }
 

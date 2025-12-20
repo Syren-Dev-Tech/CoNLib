@@ -18,13 +18,11 @@ public class Liquid {
         return create(register, name, Properties.copy(Blocks.WATER), () -> Fluids.WATER);
     }
 
-    public static final Supplier<LiquidBlock> create(ModRegister register, String name,
-            Supplier<? extends FlowingFluid> flowingFluid) {
+    public static final Supplier<LiquidBlock> create(ModRegister register, String name, Supplier<? extends FlowingFluid> flowingFluid) {
         return create(register, name, Properties.copy(Blocks.WATER), flowingFluid);
     }
 
-    public static final Supplier<LiquidBlock> create(ModRegister register, String name, Properties properties,
-            Supplier<? extends FlowingFluid> flowingFluid) {
+    public static final Supplier<LiquidBlock> create(ModRegister register, String name, Properties properties, Supplier<? extends FlowingFluid> flowingFluid) {
         return register.blockRegistry.register(name, () -> new LiquidBlock(flowingFluid, properties));
     }
 

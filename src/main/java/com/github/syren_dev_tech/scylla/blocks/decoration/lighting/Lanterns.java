@@ -16,8 +16,7 @@ public class Lanterns {
         return create(register, name, Properties.copy(Blocks.LANTERN));
     }
 
-    public static final Supplier<LanternBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<LanternBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.LANTERN), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Lanterns {
         return register.blockRegistry.register(name, () -> new LanternBlock(properties));
     }
 
-    public static final Supplier<LanternBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<LanternBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new LanternBlock(properties), creativeTab);
     }
 

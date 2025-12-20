@@ -16,8 +16,7 @@ public class RespawnAnchors {
         return create(register, name, Properties.copy(Blocks.RESPAWN_ANCHOR));
     }
 
-    public static final Supplier<RespawnAnchorBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<RespawnAnchorBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.RESPAWN_ANCHOR), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class RespawnAnchors {
         return register.blockRegistry.register(name, () -> new RespawnAnchorBlock(properties));
     }
 
-    public static final Supplier<RespawnAnchorBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<RespawnAnchorBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new RespawnAnchorBlock(properties), creativeTab);
     }
 

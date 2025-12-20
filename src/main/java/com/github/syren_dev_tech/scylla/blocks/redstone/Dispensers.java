@@ -16,8 +16,7 @@ public class Dispensers {
         return create(register, name, Properties.copy(Blocks.DISPENSER));
     }
 
-    public static final Supplier<DispenserBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<DispenserBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.DISPENSER), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Dispensers {
         return register.blockRegistry.register(name, () -> new DispenserBlock(properties));
     }
 
-    public static final Supplier<DispenserBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<DispenserBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new DispenserBlock(properties), creativeTab);
     }
 

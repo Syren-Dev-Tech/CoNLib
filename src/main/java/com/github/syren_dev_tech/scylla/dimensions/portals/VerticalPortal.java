@@ -44,21 +44,20 @@ public class VerticalPortal extends Block {
         this.registerDefaultState(this.stateDefinition.any().setValue(AXIS, Direction.Axis.X));
     }
 
-    public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos,
-            CollisionContext context) {
-        if ((Direction.Axis) blockState.getValue(AXIS) == Direction.Axis.Z)
+    @Override
+    public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext context) { // NOSONAR - Ignore deprecation warning
+        if (blockState.getValue(AXIS) == Direction.Axis.Z)
             return Z_AXIS_AABB;
 
         return X_AXIS_AABB;
     }
 
-    public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos,
-            RandomSource randomSource) {
+    @Override
+    public void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) { // NOSONAR - Ignore deprecation warning
         if (spawnableEntities.length == 0)
             return;
 
-        boolean spawningAllowed = serverLevel.dimensionType().natural()
-                && serverLevel.getGameRules().getBoolean(GameRules.RULE_DOMOBSPAWNING);
+        boolean spawningAllowed = serverLevel.dimensionType().natural() && serverLevel.getGameRules().getBoolean(GameRules.RULE_DOMOBSPAWNING);
         boolean onRand = randomSource.nextInt(2000) < serverLevel.getDifficulty().getId();
 
         if (spawningAllowed && onRand) {
@@ -76,72 +75,71 @@ public class VerticalPortal extends Block {
         }
     }
 
-    public BlockState updateShape(BlockState blockState, Direction direction, BlockState sourceBlockState,
-            LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPosY) {
-        Direction.Axis direction$axis = direction.getAxis();
-        Direction.Axis direction$axis1 = blockState.getValue(AXIS);
+    @Override
+    public BlockState updateShape(BlockState blockState, Direction direction, BlockState sourceBlockState, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPosY) { // NOSONAR - Ignore deprecation warning
+        Direction.Axis directionAxis = direction.getAxis();
+        Direction.Axis directionAxis1 = blockState.getValue(AXIS);
 
-        boolean flag = direction$axis1 != direction$axis && direction$axis.isHorizontal();
+        boolean flag = directionAxis1 != directionAxis && directionAxis.isHorizontal();
 
-        return !flag && !sourceBlockState.is(this)
-                && !(new PortalShape(levelAccessor, blockPos, direction$axis1)).isComplete()
-                        ? Blocks.AIR.defaultBlockState()
-                        : blockState;
+        return !flag && !sourceBlockState.is(this) && !(new PortalShape(levelAccessor, blockPos, directionAxis1)).isComplete() ? Blocks.AIR.defaultBlockState() : blockState;
     }
 
-    public void entityInside(BlockState blockState, Level level, BlockPos blockPos, Entity entity) {
+    @Override
+    public void entityInside(BlockState blockState, Level level, BlockPos blockPos, Entity entity) { // NOSONAR - Ignore deprecation warning
         if (entity.canChangeDimensions())
             entity.handleInsidePortal(blockPos);
     }
 
+    @Override
     public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
         if (randomSource.nextInt(100) == 0) {
-            level.playLocalSound((double) blockPos.getX() + 0.5D, (double) blockPos.getY() + 0.5D,
-                    (double) blockPos.getZ() + 0.5D, this.ambientSound, SoundSource.BLOCKS, 0.5F,
-                    randomSource.nextFloat() * 0.4F + 0.8F, false);
+            level.playLocalSound(blockPos.getX() + 0.5D, blockPos.getY() + 0.5D, blockPos.getZ() + 0.5D, this.ambientSound, SoundSource.BLOCKS, 0.5F, randomSource.nextFloat() * 0.4F + 0.8F, false);
         }
 
         for (int i = 0; i < 4; ++i) {
-            double d0 = (double) blockPos.getX() + randomSource.nextDouble();
-            double d1 = (double) blockPos.getY() + randomSource.nextDouble();
-            double d2 = (double) blockPos.getZ() + randomSource.nextDouble();
-            double d3 = ((double) randomSource.nextFloat() - 0.5D) * 0.5D;
-            double d4 = ((double) randomSource.nextFloat() - 0.5D) * 0.5D;
-            double d5 = ((double) randomSource.nextFloat() - 0.5D) * 0.5D;
+            double d0 = blockPos.getX() + randomSource.nextDouble();
+            double d1 = blockPos.getY() + randomSource.nextDouble();
+            double d2 = blockPos.getZ() + randomSource.nextDouble();
+            double d3 = (randomSource.nextFloat() - 0.5D) * 0.5D;
+            double d4 = (randomSource.nextFloat() - 0.5D) * 0.5D;
+            double d5 = (randomSource.nextFloat() - 0.5D) * 0.5D;
             int j = randomSource.nextInt(2) * 2 - 1;
             if (!level.getBlockState(blockPos.west()).is(this) && !level.getBlockState(blockPos.east()).is(this)) {
-                d0 = (double) blockPos.getX() + 0.5D + 0.25D * (double) j;
-                d3 = (double) (randomSource.nextFloat() * 2.0F * (float) j);
+                d0 = blockPos.getX() + 0.5D + 0.25D * j;
+                d3 = (randomSource.nextFloat() * 2.0F * j);
             } else {
-                d2 = (double) blockPos.getZ() + 0.5D + 0.25D * (double) j;
-                d5 = (double) (randomSource.nextFloat() * 2.0F * (float) j);
+                d2 = blockPos.getZ() + 0.5D + 0.25D * j;
+                d5 = (randomSource.nextFloat() * 2.0F * j);
             }
 
             level.addParticle(this.particles, d0, d1, d2, d3, d4, d5);
         }
     }
 
-    public ItemStack getCloneItemStack(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState) {
+    @Override
+    public ItemStack getCloneItemStack(BlockGetter blockGetter, BlockPos blockPos, BlockState blockState) { // NOSONAR - Ignore deprecation warning
         return ItemStack.EMPTY;
     }
 
-    public BlockState rotate(BlockState blockState, Rotation rotation) {
+    @Override
+    public BlockState rotate(BlockState blockState, Rotation rotation) { // NOSONAR - Ignore deprecation warning
         switch (rotation) {
-            case COUNTERCLOCKWISE_90:
-            case CLOCKWISE_90:
-                switch ((Direction.Axis) blockState.getValue(AXIS)) {
-                    case Z:
-                        return blockState.setValue(AXIS, Direction.Axis.X);
-                    case X:
-                        return blockState.setValue(AXIS, Direction.Axis.Z);
-                    default:
-                        return blockState;
-                }
+        case COUNTERCLOCKWISE_90, CLOCKWISE_90:
+            switch (blockState.getValue(AXIS)) {
+            case Z:
+                return blockState.setValue(AXIS, Direction.Axis.X);
+            case X:
+                return blockState.setValue(AXIS, Direction.Axis.Z);
             default:
                 return blockState;
+            }
+        default:
+            return blockState;
         }
     }
 
+    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(AXIS);
     }

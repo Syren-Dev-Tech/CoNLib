@@ -16,8 +16,7 @@ public class TallSeaFoliage {
         return create(register, name, Properties.copy(Blocks.TALL_SEAGRASS));
     }
 
-    public static final Supplier<TallSeagrassBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<TallSeagrassBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.TALL_SEAGRASS), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class TallSeaFoliage {
         return register.blockRegistry.register(name, () -> new TallSeagrassBlock(properties));
     }
 
-    public static final Supplier<TallSeagrassBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<TallSeagrassBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new TallSeagrassBlock(properties), creativeTab);
     }
 

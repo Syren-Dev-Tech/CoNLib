@@ -16,8 +16,7 @@ public class EndRods {
         return create(register, name, Properties.copy(Blocks.END_ROD));
     }
 
-    public static Supplier<EndRodBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static Supplier<EndRodBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.END_ROD), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class EndRods {
         return register.blockRegistry.register(name, () -> new EndRodBlock(properties));
     }
 
-    public static Supplier<EndRodBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static Supplier<EndRodBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new EndRodBlock(properties), creativeTab);
     }
 

@@ -16,8 +16,7 @@ public class TintedGlass {
         return create(register, name, Properties.copy(Blocks.TINTED_GLASS));
     }
 
-    public static final Supplier<TintedGlassBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<TintedGlassBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.TINTED_GLASS), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class TintedGlass {
         return register.blockRegistry.register(name, () -> new TintedGlassBlock(properties));
     }
 
-    public static final Supplier<TintedGlassBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<TintedGlassBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new TintedGlassBlock(properties), creativeTab);
     }
 

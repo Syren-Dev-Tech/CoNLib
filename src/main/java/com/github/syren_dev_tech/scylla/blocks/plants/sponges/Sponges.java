@@ -20,8 +20,7 @@ public class Sponges {
             return create(register, name, Properties.copy(Blocks.WET_SPONGE));
         }
 
-        public static final Supplier<WetSpongeBlock> create(ModRegister register, String name,
-                ResourceKey<CreativeModeTab> creativeTab) {
+        public static final Supplier<WetSpongeBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
             return create(register, name, Properties.copy(Blocks.WET_SPONGE), creativeTab);
         }
 
@@ -29,8 +28,7 @@ public class Sponges {
             return register.blockRegistry.register(name, () -> new WetSpongeBlock(properties));
         }
 
-        public static final Supplier<WetSpongeBlock> create(ModRegister register, String name, Properties properties,
-                ResourceKey<CreativeModeTab> creativeTab) {
+        public static final Supplier<WetSpongeBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
             return register.blockRegistry.register(name, () -> new WetSpongeBlock(properties), creativeTab);
         }
 
@@ -40,8 +38,7 @@ public class Sponges {
     }
 
     // Add sea foliage and liquid to dry sponge after this.
-    public static final Tuple<Supplier<Sponge>, Supplier<WetSpongeBlock>> create(ModRegister register, String name,
-            Properties dryProperties, Properties wetProperties) {
+    public static final Tuple<Supplier<Sponge>, Supplier<WetSpongeBlock>> create(ModRegister register, String name, Properties dryProperties, Properties wetProperties) {
         var wet = WetSponges.create(register, "wet_" + name, wetProperties);
         var dry = register.blockRegistry.register(name, () -> new Sponge(dryProperties));
         dry.get().setWetSponge(wet.get());
@@ -50,8 +47,7 @@ public class Sponges {
     }
 
     // Add sea foliage and liquid to dry sponge after this.
-    public static final Tuple<Supplier<Sponge>, Supplier<WetSpongeBlock>> create(ModRegister register, String name,
-            Properties dryProperties, Properties wetProperties, ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Tuple<Supplier<Sponge>, Supplier<WetSpongeBlock>> create(ModRegister register, String name, Properties dryProperties, Properties wetProperties, ResourceKey<CreativeModeTab> creativeTab) {
         var wet = WetSponges.create(register, "wet_" + name, wetProperties, creativeTab);
         var dry = register.blockRegistry.register(name, () -> new Sponge(dryProperties), creativeTab);
         dry.get().setWetSponge(wet.get());

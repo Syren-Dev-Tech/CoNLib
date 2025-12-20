@@ -16,8 +16,7 @@ public class Lichen {
         return create(register, name, Properties.copy(Blocks.GLOW_LICHEN));
     }
 
-    public static final Supplier<GlowLichenBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<GlowLichenBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.GLOW_LICHEN), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Lichen {
         return register.blockRegistry.register(name, () -> new GlowLichenBlock(properties));
     }
 
-    public static final Supplier<GlowLichenBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<GlowLichenBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new GlowLichenBlock(properties), creativeTab);
     }
 

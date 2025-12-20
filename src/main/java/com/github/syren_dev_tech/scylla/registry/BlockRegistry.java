@@ -1,6 +1,7 @@
 package com.github.syren_dev_tech.scylla.registry;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Supplier;
 
 import com.github.syren_dev_tech.scylla.Scylla;
@@ -17,36 +18,36 @@ import net.minecraft.world.item.CreativeModeTab;
 
 public class BlockRegistry {
     private final ModRegister registry;
-    private final DeferredRegister<Block> BLOCKS;
+    private final DeferredRegister<Block> blocksRegistry;
 
-    public final HashMap<String, RegistryObject<? extends Block>> blocks = new HashMap<>();
-    public final HashMap<String, RegistryObject<? extends Block>> transparentBlocks = new HashMap<>();
+    public final Map<String, RegistryObject<? extends Block>> blocks = new HashMap<>();
+    public final Map<String, RegistryObject<? extends Block>> transparentBlocks = new HashMap<>();
 
     public final void finish(IEventBus bus) {
-        BLOCKS.register(bus);
+        blocksRegistry.register(bus);
     }
 
     public final <T extends Block> Supplier<T> register(String name, Supplier<T> block) {
-        var blockRegistry = this.BLOCKS.register(name, block);
+        var blockRegistry = this.blocksRegistry.register(name, block);
         this.blocks.put(name, blockRegistry);
 
-        Scylla.LOGGER.info("Registered new block: " + registry.modId + ":" + name);
+        if (Scylla.LOGGER.isInfoEnabled()) {
+            Scylla.LOGGER.info(String.format("Registered new block: %s:%s", registry.modId, name));
+        }
 
         return blockRegistry;
     }
 
-    public final <T extends Block> Supplier<T> register(String name, Supplier<T> block,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public final <T extends Block> Supplier<T> register(String name, Supplier<T> block, ResourceKey<CreativeModeTab> creativeTab) {
         var blockRegistry = register(name, block);
 
-        this.registry.itemRegistry.register(name, () -> new BlockItem(blockRegistry.get(), new Item.Properties()),
-                creativeTab);
+        this.registry.itemRegistry.register(name, () -> new BlockItem(blockRegistry.get(), new Item.Properties()), creativeTab);
 
         return blockRegistry;
     }
 
     public BlockRegistry(ModRegister registry) {
         this.registry = registry;
-        this.BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, registry.modId);
+        this.blocksRegistry = DeferredRegister.create(ForgeRegistries.BLOCKS, registry.modId);
     }
 }

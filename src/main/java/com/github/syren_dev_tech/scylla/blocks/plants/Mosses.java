@@ -16,8 +16,7 @@ public class Mosses {
         return create(register, name, Properties.copy(Blocks.MOSS_BLOCK));
     }
 
-    public static final Supplier<MossBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<MossBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.MOSS_BLOCK), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Mosses {
         return register.blockRegistry.register(name, () -> new MossBlock(properties));
     }
 
-    public static final Supplier<MossBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<MossBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new MossBlock(properties), creativeTab);
     }
 

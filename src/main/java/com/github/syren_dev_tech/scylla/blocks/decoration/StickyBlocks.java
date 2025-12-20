@@ -18,8 +18,7 @@ public class StickyBlocks {
             return create(register, name, Properties.copy(Blocks.SLIME_BLOCK));
         }
 
-        public static final Supplier<SlimeBlock> create(ModRegister register, String name,
-                ResourceKey<CreativeModeTab> creativeTab) {
+        public static final Supplier<SlimeBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
             return create(register, name, Properties.copy(Blocks.SLIME_BLOCK), creativeTab);
         }
 
@@ -27,8 +26,7 @@ public class StickyBlocks {
             return register.blockRegistry.register(name, () -> new SlimeBlock(properties));
         }
 
-        public static final Supplier<SlimeBlock> create(ModRegister register, String name, Properties properties,
-                ResourceKey<CreativeModeTab> creativeTab) {
+        public static final Supplier<SlimeBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
             return register.blockRegistry.register(name, () -> new SlimeBlock(properties), creativeTab);
         }
 
@@ -43,8 +41,7 @@ public class StickyBlocks {
             return create(register, name, Properties.copy(Blocks.HONEY_BLOCK));
         }
 
-        public static final Supplier<HoneyBlock> create(ModRegister register, String name,
-                ResourceKey<CreativeModeTab> creativeTab) {
+        public static final Supplier<HoneyBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
             return create(register, name, Properties.copy(Blocks.HONEY_BLOCK), creativeTab);
         }
 
@@ -52,8 +49,7 @@ public class StickyBlocks {
             return register.blockRegistry.register(name, () -> new HoneyBlock(properties));
         }
 
-        public static final Supplier<HoneyBlock> create(ModRegister register, String name, Properties properties,
-                ResourceKey<CreativeModeTab> creativeTab) {
+        public static final Supplier<HoneyBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
             return register.blockRegistry.register(name, () -> new HoneyBlock(properties), creativeTab);
         }
 

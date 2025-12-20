@@ -16,8 +16,7 @@ public class GravelLand {
         return create(register, name, Properties.copy(Blocks.GRAVEL));
     }
 
-    public static final Supplier<GravelBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<GravelBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.GRAVEL), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class GravelLand {
         return register.blockRegistry.register(name, () -> new GravelBlock(properties));
     }
 
-    public static final Supplier<GravelBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<GravelBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new GravelBlock(properties), creativeTab);
     }
 

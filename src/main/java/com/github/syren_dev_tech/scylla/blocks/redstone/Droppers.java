@@ -16,8 +16,7 @@ public class Droppers {
         return create(register, name, Properties.copy(Blocks.DROPPER));
     }
 
-    public static final Supplier<DropperBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<DropperBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.DROPPER), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Droppers {
         return register.blockRegistry.register(name, () -> new DropperBlock(properties));
     }
 
-    public static final Supplier<DropperBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<DropperBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new DropperBlock(properties), creativeTab);
     }
 

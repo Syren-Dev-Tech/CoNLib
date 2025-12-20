@@ -16,8 +16,7 @@ public class BlastFurnaces {
         return create(register, name, Properties.copy(Blocks.BLAST_FURNACE));
     }
 
-    public static final Supplier<BlastFurnaceBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<BlastFurnaceBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.BLAST_FURNACE), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class BlastFurnaces {
         return register.blockRegistry.register(name, () -> new BlastFurnaceBlock(properties));
     }
 
-    public static final Supplier<BlastFurnaceBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<BlastFurnaceBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new BlastFurnaceBlock(properties), creativeTab);
     }
 

@@ -11,14 +11,14 @@ import net.minecraft.world.entity.EntityType;
 
 public class Creatures {
     public static final Supplier<EntityType<CustomCreature>> create(ModRegister register, String name) {
-        return register.mobRegistry.register(name, CustomCreature::new);
+        return new CreatureBuilder<>(name, register, CustomCreature::new).register();
     }
 
-    public static final Supplier<EntityType<CustomCreature>> createSwimming(ModRegister register, String name) {
-        return register.mobRegistry.register(name, CustomSwimmingCreature::new);
+    public static final Supplier<EntityType<CustomSwimmingCreature>> createSwimming(ModRegister register, String name) {
+        return new CreatureBuilder<>(name, register, CustomSwimmingCreature::new).register();
     }
 
-    public static final Supplier<EntityType<CustomCreature>> createFlying(ModRegister register, String name) {
-        return register.mobRegistry.register(name, CustomFlyingCreature::new);
+    public static final Supplier<EntityType<CustomFlyingCreature>> createFlying(ModRegister register, String name) {
+        return new CreatureBuilder<>(name, register, CustomFlyingCreature::new).register();
     }
 }

@@ -16,8 +16,7 @@ public class Levers {
         return create(register, name, Properties.copy(Blocks.LEVER));
     }
 
-    public static final Supplier<LeverBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<LeverBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.LEVER), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Levers {
         return register.blockRegistry.register(name, () -> new LeverBlock(properties));
     }
 
-    public static final Supplier<LeverBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<LeverBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new LeverBlock(properties), creativeTab);
     }
 

@@ -16,8 +16,7 @@ public class Piles {
         return create(register, name, Properties.copy(Blocks.SNOW));
     }
 
-    public static final Supplier<SnowLayerBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<SnowLayerBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.SNOW), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Piles {
         return register.blockRegistry.register(name, () -> new SnowLayerBlock(properties));
     }
 
-    public static final Supplier<SnowLayerBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<SnowLayerBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new SnowLayerBlock(properties), creativeTab);
     }
 

@@ -18,8 +18,7 @@ public class Chests {
         return create(register, name, Properties.copy(Blocks.CHEST), BlockEntityType.CHEST);
     }
 
-    public static final Supplier<ChestBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<ChestBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.CHEST), BlockEntityType.CHEST, creativeTab);
     }
 
@@ -27,20 +26,16 @@ public class Chests {
         return create(register, name, properties, BlockEntityType.CHEST);
     }
 
-    public static final Supplier<ChestBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<ChestBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, properties, BlockEntityType.CHEST, creativeTab);
     }
 
-    public static final <T extends ChestBlockEntity> Supplier<ChestBlock> create(ModRegister register, String name,
-            Properties properties, BlockEntityType<T> blockEntityType) {
+    public static final <T extends ChestBlockEntity> Supplier<ChestBlock> create(ModRegister register, String name, Properties properties, BlockEntityType<T> blockEntityType) {
         return register.blockRegistry.register(name, () -> new ChestBlock(properties, () -> blockEntityType));
     }
 
-    public static final <T extends ChestBlockEntity> Supplier<ChestBlock> create(ModRegister register, String name,
-            Properties properties, BlockEntityType<T> blockEntityType, ResourceKey<CreativeModeTab> creativeTab) {
-        return register.blockRegistry.register(name, () -> new ChestBlock(properties, () -> blockEntityType),
-                creativeTab);
+    public static final <T extends ChestBlockEntity> Supplier<ChestBlock> create(ModRegister register, String name, Properties properties, BlockEntityType<T> blockEntityType, ResourceKey<CreativeModeTab> creativeTab) {
+        return register.blockRegistry.register(name, () -> new ChestBlock(properties, () -> blockEntityType), creativeTab);
     }
 
     private Chests() {

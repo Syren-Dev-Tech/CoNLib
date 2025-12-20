@@ -16,8 +16,7 @@ public class Lily {
         return create(register, name, Properties.copy(Blocks.LILY_PAD));
     }
 
-    public static final Supplier<WaterlilyBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<WaterlilyBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.LILY_PAD), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Lily {
         return register.blockRegistry.register(name, () -> new WaterlilyBlock(properties));
     }
 
-    public static final Supplier<WaterlilyBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<WaterlilyBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new WaterlilyBlock(properties), creativeTab);
     }
 

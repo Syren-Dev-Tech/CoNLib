@@ -24,8 +24,15 @@ import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 import net.minecraft.world.level.levelgen.placement.RarityFilter;
 
 public class PlacedFeatureRegistry {
-    public static class PlacedOreFeatureRegistry {
-        public static final Map<String, ResourceKey<PlacedFeature>> KEYS = new HashMap<>();
+    public class PlacedOreFeatureRegistry {
+        protected static final Map<String, ResourceKey<PlacedFeature>> keys = new HashMap<>();
+
+        private PlacedOreFeatureRegistry() {
+        }
+
+        public static final Map<String, ResourceKey<PlacedFeature>> getKeys() {
+            return keys;
+        }
 
         public static List<PlacementModifier> orePlacement(PlacementModifier modifier1, PlacementModifier modifier2) {
             return List.of(modifier1, InSquarePlacement.spread(), modifier2, BiomeFilter.biome());
@@ -41,7 +48,7 @@ public class PlacedFeatureRegistry {
 
         public static final ResourceKey<PlacedFeature> register(String name) {
             ResourceKey<PlacedFeature> key = PlacedFeatureRegistry.registerKey(name);
-            KEYS.put(name, key);
+            keys.put(name, key);
 
             return key;
         }
@@ -50,15 +57,11 @@ public class PlacedFeatureRegistry {
     public static void bootstrap(BootstapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
 
-        PlacedOreFeatureRegistry.KEYS.forEach((key, value) -> {
-            var placedFeatureKey = PlacedOreFeatureRegistry.KEYS.get(key);
+        PlacedOreFeatureRegistry.getKeys().forEach((key, value) -> {
+            var placedFeatureKey = PlacedOreFeatureRegistry.keys.get(key);
             var oreFeatureKey = OreFeatureRegistry.ORES.get(key).x;
 
-            register(context,
-                    placedFeatureKey,
-                    configuredFeatures.getOrThrow(oreFeatureKey),
-                    PlacedOreFeatureRegistry.commonOrePlacement(12,
-                            HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(80))));
+            register(context, placedFeatureKey, configuredFeatures.getOrThrow(oreFeatureKey), PlacedOreFeatureRegistry.commonOrePlacement(12, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(80))));
         });
     }
 
@@ -66,9 +69,7 @@ public class PlacedFeatureRegistry {
         return ResourceKey.create(Registries.PLACED_FEATURE, new ResourceLocation(Scylla.MOD_ID, name));
     }
 
-    private static void register(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key,
-            Holder<ConfiguredFeature<?, ?>> configuration,
-            List<PlacementModifier> modifiers) {
+    private static void register(BootstapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key, Holder<ConfiguredFeature<?, ?>> configuration, List<PlacementModifier> modifiers) {
         context.register(key, new PlacedFeature(configuration, List.copyOf(modifiers)));
     }
 }

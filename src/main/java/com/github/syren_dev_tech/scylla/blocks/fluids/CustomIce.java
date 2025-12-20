@@ -37,8 +37,8 @@ public class CustomIce extends HalfTransparentBlock {
         return this.liquid.defaultBlockState();
     }
 
-    public void playerDestroy(Level level, Player player, BlockPos blockPos, BlockState blockState,
-            @Nullable BlockEntity blockEntity, ItemStack itemStack) {
+    @Override
+    public void playerDestroy(Level level, Player player, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity, ItemStack itemStack) {
         super.playerDestroy(level, player, blockPos, blockState, blockEntity, itemStack);
         if (EnchantmentHelper.getTagEnchantmentLevel(Enchantments.SILK_TOUCH, itemStack) == 0) {
             if (level.dimensionType().ultraWarm()) {
@@ -51,14 +51,15 @@ public class CustomIce extends HalfTransparentBlock {
 
     }
 
-    public void randomTick(BlockState blockState, ServerLevel level, BlockPos blockPos, RandomSource randomSource) {
+    @Override
+    public void randomTick(BlockState blockState, ServerLevel level, BlockPos blockPos, RandomSource randomSource) { // NOSONAR - Ignore deprecation warning
         if (level.getBrightness(LightLayer.BLOCK, blockPos) > 11 - blockState.getLightBlock(level, blockPos)) {
             this.melt(blockState, level, blockPos);
         }
 
     }
 
-    protected void melt(BlockState blockState, Level level, BlockPos blockPos) {
+    protected void melt(BlockState blockState, Level level, BlockPos blockPos) { // NOSONAR - Ignore unused warning
         if (level.dimensionType().ultraWarm()) {
             level.removeBlock(blockPos, false);
         } else {

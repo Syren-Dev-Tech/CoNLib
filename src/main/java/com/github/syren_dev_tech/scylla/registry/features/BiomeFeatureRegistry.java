@@ -21,13 +21,20 @@ import net.minecraftforge.common.world.ForgeBiomeModifiers;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class BiomeFeatureRegistry {
-    public static class BiomeOreFeatureRegistry {
-        public static final Map<String, Tuple<TagKey<Biome>, ResourceKey<PlacedFeature>>> MODIFIERS = new HashMap<>();
 
-        public static final void register(String name, TagKey<Biome> biome,
-                ResourceKey<PlacedFeature> placedFeatureKey) {
+    private BiomeFeatureRegistry() {
+    }
+
+    public class BiomeOreFeatureRegistry {
+
+        private BiomeOreFeatureRegistry() {
+        }
+
+        protected static final Map<String, Tuple<TagKey<Biome>, ResourceKey<PlacedFeature>>> modifiers = new HashMap<>();
+
+        public static final void register(String name, TagKey<Biome> biome, ResourceKey<PlacedFeature> placedFeatureKey) {
             Tuple<TagKey<Biome>, ResourceKey<PlacedFeature>> value = new Tuple<>(biome, placedFeatureKey);
-            MODIFIERS.put(name, value);
+            modifiers.put(name, value);
         }
     }
 
@@ -35,13 +42,10 @@ public class BiomeFeatureRegistry {
         var placedFeatures = context.lookup(Registries.PLACED_FEATURE);
         var biomes = context.lookup(Registries.BIOME);
 
-        BiomeOreFeatureRegistry.MODIFIERS.forEach((key, value) -> {
-            var placedFeatureKey = PlacedOreFeatureRegistry.KEYS.get(key);
+        BiomeOreFeatureRegistry.modifiers.forEach((key, value) -> {
+            var placedFeatureKey = PlacedOreFeatureRegistry.getKeys().get(key);
 
-            var feature = new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
-                    biomes.getOrThrow(value.x),
-                    HolderSet.direct(placedFeatures.getOrThrow(placedFeatureKey)),
-                    GenerationStep.Decoration.UNDERGROUND_ORES);
+            var feature = new ForgeBiomeModifiers.AddFeaturesBiomeModifier(biomes.getOrThrow(value.x), HolderSet.direct(placedFeatures.getOrThrow(placedFeatureKey)), GenerationStep.Decoration.UNDERGROUND_ORES);
 
             context.register(registerKey(key), feature);
         });

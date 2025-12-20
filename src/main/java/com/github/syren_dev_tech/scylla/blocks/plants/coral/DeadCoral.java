@@ -16,8 +16,7 @@ public class DeadCoral {
         return create(register, name, Properties.copy(Blocks.DEAD_FIRE_CORAL));
     }
 
-    public static final Supplier<BaseCoralPlantBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<BaseCoralPlantBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.DEAD_FIRE_CORAL), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class DeadCoral {
         return register.blockRegistry.register(name, () -> new BaseCoralPlantBlock(properties));
     }
 
-    public static final Supplier<BaseCoralPlantBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<BaseCoralPlantBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new BaseCoralPlantBlock(properties), creativeTab);
     }
 

@@ -38,8 +38,7 @@ public class Gourd extends PumpkinBlock {
         super(properties);
     }
 
-    public Gourd(Properties properties, Block carvedBlock, StemBlock stemBlock, AttachedStemBlock attachedStemBlock,
-            Item seeds) {
+    public Gourd(Properties properties, Block carvedBlock, StemBlock stemBlock, AttachedStemBlock attachedStemBlock, Item seeds) {
         super(properties);
         this.carvedBlock = carvedBlock;
         this.stemBlock = stemBlock;
@@ -78,27 +77,21 @@ public class Gourd extends PumpkinBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player,
-            InteractionHand hand, BlockHitResult hitResult) {
+    public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand hand, BlockHitResult hitResult) { // NOSONAR - Ignore deprecation warning
         ItemStack itemstack = player.getItemInHand(hand);
 
         if (itemstack.canPerformAction(net.minecraftforge.common.ToolActions.SHEARS_CARVE)) {
             if (!level.isClientSide) {
                 Direction direction = hitResult.getDirection();
-                Direction direction1 = direction.getAxis() == Direction.Axis.Y ? player.getDirection().getOpposite()
-                        : direction;
+                Direction direction1 = direction.getAxis() == Direction.Axis.Y ? player.getDirection().getOpposite() : direction;
 
                 level.playSound((Player) null, blockPos, SoundEvents.PUMPKIN_CARVE, SoundSource.BLOCKS, 1.0F, 1.0F);
 
-                level.setBlock(blockPos,
-                        this.carvedBlock.defaultBlockState().setValue(CarvedPumpkinBlock.FACING, direction1), 11);
+                level.setBlock(blockPos, this.carvedBlock.defaultBlockState().setValue(CarvedPumpkinBlock.FACING, direction1), 11);
 
-                ItemEntity itementity = new ItemEntity(level, blockPos.getX() + 0.5D + direction1.getStepX() * 0.65D,
-                        blockPos.getY() + 0.1D, blockPos.getZ() + 0.5D + direction1.getStepZ() * 0.65D,
-                        new ItemStack(this.seeds, this.seedCount));
+                ItemEntity itementity = new ItemEntity(level, blockPos.getX() + 0.5D + direction1.getStepX() * 0.65D, blockPos.getY() + 0.1D, blockPos.getZ() + 0.5D + direction1.getStepZ() * 0.65D, new ItemStack(this.seeds, this.seedCount));
 
-                itementity.setDeltaMovement(0.05D * direction1.getStepX() + level.random.nextDouble() * 0.02D, 0.05D,
-                        0.05D * direction1.getStepZ() + level.random.nextDouble() * 0.02D);
+                itementity.setDeltaMovement(0.05D * direction1.getStepX() + level.random.nextDouble() * 0.02D, 0.05D, 0.05D * direction1.getStepZ() + level.random.nextDouble() * 0.02D);
 
                 level.addFreshEntity(itementity);
 

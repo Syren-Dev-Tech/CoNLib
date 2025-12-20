@@ -17,8 +17,7 @@ public class Buttons {
         return create(register, name, Properties.copy(Blocks.STONE_BUTTON));
     }
 
-    public static final Supplier<ButtonBase> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<ButtonBase> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.STONE_BUTTON), creativeTab);
     }
 
@@ -26,8 +25,7 @@ public class Buttons {
         return create(register, name, Properties.copy(sourceBlock));
     }
 
-    public static final Supplier<ButtonBase> create(ModRegister register, String name, Block sourceBlock,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<ButtonBase> create(ModRegister register, String name, Block sourceBlock, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(sourceBlock), creativeTab);
     }
 
@@ -35,8 +33,7 @@ public class Buttons {
         return register.blockRegistry.register(name, () -> new ButtonBase(properties));
     }
 
-    public static final Supplier<ButtonBase> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<ButtonBase> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new ButtonBase(properties), creativeTab);
     }
 

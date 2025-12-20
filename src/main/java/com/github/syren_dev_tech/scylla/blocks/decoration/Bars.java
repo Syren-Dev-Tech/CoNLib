@@ -16,8 +16,7 @@ public class Bars {
         return create(register, name, Properties.copy(Blocks.IRON_BARS));
     }
 
-    public static final Supplier<IronBarsBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<IronBarsBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.IRON_BARS), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Bars {
         return register.blockRegistry.register(name, () -> new IronBarsBlock(properties));
     }
 
-    public static final Supplier<IronBarsBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<IronBarsBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new IronBarsBlock(properties), creativeTab);
     }
 

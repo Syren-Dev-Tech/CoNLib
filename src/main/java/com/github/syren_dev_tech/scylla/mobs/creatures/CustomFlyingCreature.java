@@ -2,6 +2,8 @@ package com.github.syren_dev_tech.scylla.mobs.creatures;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import software.bernie.geckolib.constant.DefaultAnimations;
@@ -20,8 +22,7 @@ public class CustomFlyingCreature extends CustomCreature {
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(
                 // Add our flying animation controller
-                new AnimationController<>(this, 10,
-                        state -> state.setAndContinue(this.isFlying ? DefaultAnimations.FLY : DefaultAnimations.IDLE))
+                new AnimationController<>(this, 10, state -> state.setAndContinue(this.isFlying ? DefaultAnimations.FLY : DefaultAnimations.IDLE))
                         // Handle the custom instruction keyframe that is part of our animation json
                         .setCustomInstructionKeyframeHandler(state -> {
                             Player player = ClientUtils.getClientPlayer();
@@ -35,7 +36,9 @@ public class CustomFlyingCreature extends CustomCreature {
 
     @Override
     protected void registerGoals() {
-        // Add flying related goals here
+        this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 6.0F));
+        this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
+        
         super.registerGoals();
     }
 }

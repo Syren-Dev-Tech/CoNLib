@@ -18,8 +18,7 @@ public class Paths {
         return create(register, name, Properties.copy(Blocks.DIRT_PATH));
     }
 
-    public static final Supplier<DirtPathBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<DirtPathBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.DIRT_PATH), creativeTab);
     }
 
@@ -27,8 +26,7 @@ public class Paths {
         return register.blockRegistry.register(name, () -> new DirtPathBlock(properties));
     }
 
-    public static final Supplier<DirtPathBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<DirtPathBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new DirtPathBlock(properties), creativeTab);
     }
 

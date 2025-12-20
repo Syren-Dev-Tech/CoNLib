@@ -16,18 +16,15 @@ public class DaylightDetectors {
         return create(register, name, Properties.copy(Blocks.DAYLIGHT_DETECTOR));
     }
 
-    public static final Supplier<DaylightDetectorBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<DaylightDetectorBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.DAYLIGHT_DETECTOR), creativeTab);
     }
 
-    public static final Supplier<DaylightDetectorBlock> create(ModRegister register, String name,
-            Properties properties) {
+    public static final Supplier<DaylightDetectorBlock> create(ModRegister register, String name, Properties properties) {
         return register.blockRegistry.register(name, () -> new DaylightDetectorBlock(properties));
     }
 
-    public static final Supplier<DaylightDetectorBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<DaylightDetectorBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new DaylightDetectorBlock(properties), creativeTab);
     }
 

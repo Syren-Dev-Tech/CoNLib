@@ -13,23 +13,19 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class Saplings {
 
-    public static final Supplier<SaplingBlock> create(ModRegister register, String name,
-            AbstractTreeGrower treeGrower) {
+    public static final Supplier<SaplingBlock> create(ModRegister register, String name, AbstractTreeGrower treeGrower) {
         return create(register, name, Properties.copy(Blocks.OAK_SAPLING), treeGrower);
     }
 
-    public static final Supplier<SaplingBlock> create(ModRegister register, String name, AbstractTreeGrower treeGrower,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<SaplingBlock> create(ModRegister register, String name, AbstractTreeGrower treeGrower, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.OAK_SAPLING), treeGrower, creativeTab);
     }
 
-    public static final Supplier<SaplingBlock> create(ModRegister register, String name, Properties properties,
-            AbstractTreeGrower treeGrower) {
+    public static final Supplier<SaplingBlock> create(ModRegister register, String name, Properties properties, AbstractTreeGrower treeGrower) {
         return register.blockRegistry.register(name, () -> new SaplingBlock(treeGrower, properties));
     }
 
-    public static final Supplier<SaplingBlock> create(ModRegister register, String name, Properties properties,
-            AbstractTreeGrower treeGrower, ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<SaplingBlock> create(ModRegister register, String name, Properties properties, AbstractTreeGrower treeGrower, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new SaplingBlock(treeGrower, properties), creativeTab);
     }
 

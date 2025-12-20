@@ -16,8 +16,7 @@ public class LightningRod {
         return create(register, name, Properties.copy(Blocks.LIGHTNING_ROD));
     }
 
-    public static final Supplier<LightningRodBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<LightningRodBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.LIGHTNING_ROD), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class LightningRod {
         return register.blockRegistry.register(name, () -> new LightningRodBlock(properties));
     }
 
-    public static final Supplier<LightningRodBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<LightningRodBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new LightningRodBlock(properties), creativeTab);
     }
 

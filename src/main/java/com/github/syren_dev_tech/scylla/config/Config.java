@@ -24,8 +24,7 @@ public class Config {
         this.root = new ConfigGroup(this);
         this.file = Path.of(CONFIG_DIR, this.name + TOML_EXTENSION).toFile();
         this.path = "";
-        this.fileConfig = CommentedFileConfig.builder(this.file).sync().autosave().writingMode(WritingMode.REPLACE)
-                .build();
+        this.fileConfig = CommentedFileConfig.builder(this.file).sync().autosave().writingMode(WritingMode.REPLACE).build();
     }
 
     public Config(String path, String name) {
@@ -33,8 +32,7 @@ public class Config {
         this.root = new ConfigGroup(this);
         this.path = path;
         this.file = Path.of(CONFIG_DIR, this.path, this.name + TOML_EXTENSION).toFile();
-        this.fileConfig = CommentedFileConfig.builder(this.file).sync().autosave().writingMode(WritingMode.REPLACE)
-                .build();
+        this.fileConfig = CommentedFileConfig.builder(this.file).sync().autosave().writingMode(WritingMode.REPLACE).build();
     }
 
     public ConfigGroup getRoot() {

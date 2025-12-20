@@ -23,22 +23,37 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 
 public class FeatureRegistry {
 
-    public static RuleTest STONE_REPLACEABLES = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
-    public static RuleTest DEEPSLATE_REPLACEABLES = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
-    public static RuleTest NETHERRACK_REPLACEABLES = new BlockMatchTest(Blocks.NETHERRACK);
-    public static RuleTest ENDSTONE_REPLACEABLES = new BlockMatchTest(Blocks.END_STONE);
+    private static final RuleTest stoneReplaceables = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
+
+    public static RuleTest getStoneReplaceables() {
+        return stoneReplaceables;
+    }
+
+    private static final RuleTest deepslateReplaceables = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
+
+    public static RuleTest getDeepslateReplaceables() {
+        return deepslateReplaceables;
+    }
+
+    private static final RuleTest netherrackReplaceables = new BlockMatchTest(Blocks.NETHERRACK);
+
+    public static RuleTest getNetherrackReplaceables() {
+        return netherrackReplaceables;
+    }
+
+    private static final RuleTest endstoneReplaceables = new BlockMatchTest(Blocks.END_STONE);
+
+    public static RuleTest getEndstoneReplaceables() {
+        return endstoneReplaceables;
+    }
 
     public static class OreFeatureRegistry {
-        public static final Map<String, Tuple<ResourceKey<ConfiguredFeature<?, ?>>, List<OreConfiguration.TargetBlockState>>> ORES = new HashMap<>();
 
-        /*
-         * Example:
-         * List<OreConfiguration.TargetBlockState> overworldSapphireOres = List.of(
-         * OreConfiguration.target(STONE_REPLACEABLES,
-         * Blocks.IRON_ORE.defaultBlockState()),
-         * OreConfiguration.target(DEEPSLATE_REPLACEABLES,
-         * Blocks.DEEPSLATE_IRON_ORE.defaultBlockState()));
-         */
+        protected static final Map<String, Tuple<ResourceKey<ConfiguredFeature<?, ?>>, List<OreConfiguration.TargetBlockState>>> ORES = new HashMap<>();
+
+        private OreFeatureRegistry() {
+        }
+
         public static final void register(String name, List<OreConfiguration.TargetBlockState> ore) {
             ORES.put(name, new Tuple<>(FeatureRegistry.registerKey(name), ore));
         }
@@ -54,9 +69,7 @@ public class FeatureRegistry {
         return ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(Scylla.MOD_ID, name));
     }
 
-    private static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(
-            BootstapContext<ConfiguredFeature<?, ?>> context,
-            ResourceKey<ConfiguredFeature<?, ?>> key, F feature, FC configuration) {
+    private static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(BootstapContext<ConfiguredFeature<?, ?>> context, ResourceKey<ConfiguredFeature<?, ?>> key, F feature, FC configuration) {
         context.register(key, new ConfiguredFeature<>(feature, configuration));
     }
 }

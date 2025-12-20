@@ -20,8 +20,7 @@ public class Gourds {
         return create(register, name, Properties.copy(Blocks.PUMPKIN));
     }
 
-    public static final Supplier<Gourd> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<Gourd> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.PUMPKIN), creativeTab);
     }
 
@@ -29,36 +28,24 @@ public class Gourds {
         return register.blockRegistry.register(name, () -> new Gourd(properties));
     }
 
-    public static final Supplier<Gourd> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<Gourd> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new Gourd(properties), creativeTab);
     }
 
-    public static final Supplier<Gourd> create(ModRegister register, String name, Block carvedBlock,
-            StemBlock stemBlock, AttachedStemBlock attachedStemBlock, Item seeds) {
-        return register.blockRegistry.register(name,
-                () -> new Gourd(Properties.copy(Blocks.PUMPKIN), carvedBlock, stemBlock, attachedStemBlock, seeds));
+    public static final Supplier<Gourd> create(ModRegister register, String name, Block carvedBlock, StemBlock stemBlock, AttachedStemBlock attachedStemBlock, Item seeds) {
+        return register.blockRegistry.register(name, () -> new Gourd(Properties.copy(Blocks.PUMPKIN), carvedBlock, stemBlock, attachedStemBlock, seeds));
     }
 
-    public static final Supplier<Gourd> create(ModRegister register, String name, Block carvedBlock,
-            StemBlock stemBlock, AttachedStemBlock attachedStemBlock, Item seeds,
-            ResourceKey<CreativeModeTab> creativeTab) {
-        return register.blockRegistry.register(name,
-                () -> new Gourd(Properties.copy(Blocks.PUMPKIN), carvedBlock, stemBlock, attachedStemBlock, seeds),
-                creativeTab);
+    public static final Supplier<Gourd> create(ModRegister register, String name, Block carvedBlock, StemBlock stemBlock, AttachedStemBlock attachedStemBlock, Item seeds, ResourceKey<CreativeModeTab> creativeTab) {
+        return register.blockRegistry.register(name, () -> new Gourd(Properties.copy(Blocks.PUMPKIN), carvedBlock, stemBlock, attachedStemBlock, seeds), creativeTab);
     }
 
-    public static final Supplier<Gourd> create(ModRegister register, String name, Properties properties,
-            Block carvedBlock, StemBlock stemBlock, AttachedStemBlock attachedStemBlock, Item seeds) {
-        return register.blockRegistry.register(name,
-                () -> new Gourd(properties, carvedBlock, stemBlock, attachedStemBlock, seeds));
+    public static final Supplier<Gourd> create(ModRegister register, String name, Properties properties, Block carvedBlock, StemBlock stemBlock, AttachedStemBlock attachedStemBlock, Item seeds) {
+        return register.blockRegistry.register(name, () -> new Gourd(properties, carvedBlock, stemBlock, attachedStemBlock, seeds));
     }
 
-    public static final Supplier<Gourd> create(ModRegister register, String name, Properties properties,
-            Block carvedBlock, StemBlock stemBlock, AttachedStemBlock attachedStemBlock, Item seeds,
-            ResourceKey<CreativeModeTab> creativeTab) {
-        return register.blockRegistry.register(name,
-                () -> new Gourd(properties, carvedBlock, stemBlock, attachedStemBlock, seeds), creativeTab);
+    public static final Supplier<Gourd> create(ModRegister register, String name, Properties properties, Block carvedBlock, StemBlock stemBlock, AttachedStemBlock attachedStemBlock, Item seeds, ResourceKey<CreativeModeTab> creativeTab) {
+        return register.blockRegistry.register(name, () -> new Gourd(properties, carvedBlock, stemBlock, attachedStemBlock, seeds), creativeTab);
     }
 
     private Gourds() {

@@ -16,8 +16,7 @@ public class SeaPickles {
         return create(register, name, Properties.copy(Blocks.SEA_PICKLE));
     }
 
-    public static final Supplier<SeaPickleBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<SeaPickleBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.SEA_PICKLE), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class SeaPickles {
         return register.blockRegistry.register(name, () -> new SeaPickleBlock(properties));
     }
 
-    public static final Supplier<SeaPickleBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<SeaPickleBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new SeaPickleBlock(properties), creativeTab);
     }
 

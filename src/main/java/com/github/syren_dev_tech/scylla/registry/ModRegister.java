@@ -23,10 +23,11 @@ public class ModRegister {
     public final ItemRegistry itemRegistry;
     public final CreativeTabRegistry creativeTabRegistry;
     public final MobRegistry mobRegistry;
+    public final ModelRegistry modelRegistry;
     public final Map<String, Config> configs = new HashMap<>();
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        Scylla.LOGGER.info("CONLIB COMMON SETUP");
+        Scylla.LOGGER.info("COMMON SETUP");
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
@@ -45,6 +46,7 @@ public class ModRegister {
         this.itemRegistry = new ItemRegistry(this);
         this.creativeTabRegistry = new CreativeTabRegistry(this);
         this.mobRegistry = new MobRegistry(this);
+        this.modelRegistry = new ModelRegistry();
     }
 
     public void initEvents(FMLJavaModLoadingContext context) {
@@ -63,9 +65,9 @@ public class ModRegister {
     }
 
     public void onClientSetup(FMLClientSetupEvent event) {
-        Scylla.LOGGER.info("CONLIB CLIENT SETUP");
+        Scylla.LOGGER.info("CLIENT SETUP");
 
-        this.mobRegistry.registerEntityModels(event);
+        this.modelRegistry.registerEntityModels(this.mobRegistry, event);
     }
 
     private void finishRegistries(IEventBus bus) {
@@ -75,6 +77,7 @@ public class ModRegister {
         this.itemRegistry.finish(bus);
         this.creativeTabRegistry.finish(bus);
         this.mobRegistry.finish(bus);
+
     }
 
     public Config createConfig(String name) {

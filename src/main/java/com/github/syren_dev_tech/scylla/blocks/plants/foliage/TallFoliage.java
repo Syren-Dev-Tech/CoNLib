@@ -16,8 +16,7 @@ public class TallFoliage {
         return create(register, name, Properties.copy(Blocks.TALL_GRASS));
     }
 
-    public static final Supplier<TallGrassBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<TallGrassBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.TALL_GRASS), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class TallFoliage {
         return register.blockRegistry.register(name, () -> new TallGrassBlock(properties));
     }
 
-    public static final Supplier<TallGrassBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<TallGrassBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new TallGrassBlock(properties), creativeTab);
     }
 

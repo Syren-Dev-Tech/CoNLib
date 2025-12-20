@@ -20,8 +20,7 @@ public class Roots {
             return create(register, name, Properties.copy(Blocks.HANGING_ROOTS));
         }
 
-        public static final Supplier<RootsBlock> create(ModRegister register, String name,
-                ResourceKey<CreativeModeTab> creativeTab) {
+        public static final Supplier<RootsBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
             return create(register, name, Properties.copy(Blocks.HANGING_ROOTS), creativeTab);
         }
 
@@ -29,8 +28,7 @@ public class Roots {
             return register.blockRegistry.register(name, () -> new RootsBlock(properties));
         }
 
-        public static final Supplier<RootsBlock> create(ModRegister register, String name, Properties properties,
-                ResourceKey<CreativeModeTab> creativeTab) {
+        public static final Supplier<RootsBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
             return register.blockRegistry.register(name, () -> new RootsBlock(properties), creativeTab);
         }
 
@@ -45,18 +43,15 @@ public class Roots {
             return create(register, name, Properties.copy(Blocks.MANGROVE_ROOTS));
         }
 
-        public static final Supplier<MangroveRootsBlock> create(ModRegister register, String name,
-                ResourceKey<CreativeModeTab> creativeTab) {
+        public static final Supplier<MangroveRootsBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
             return create(register, name, Properties.copy(Blocks.MANGROVE_ROOTS), creativeTab);
         }
 
-        public static final Supplier<MangroveRootsBlock> create(ModRegister register, String name,
-                Properties properties) {
+        public static final Supplier<MangroveRootsBlock> create(ModRegister register, String name, Properties properties) {
             return register.blockRegistry.register(name, () -> new MangroveRootsBlock(properties));
         }
 
-        public static final Supplier<MangroveRootsBlock> create(ModRegister register, String name,
-                Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
+        public static final Supplier<MangroveRootsBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
             return register.blockRegistry.register(name, () -> new MangroveRootsBlock(properties), creativeTab);
         }
 
@@ -70,8 +65,7 @@ public class Roots {
             return create(register, name, Properties.copy(Blocks.ROOTED_DIRT));
         }
 
-        public static final Supplier<RootedDirtBlock> create(ModRegister register, String name,
-                ResourceKey<CreativeModeTab> creativeTab) {
+        public static final Supplier<RootedDirtBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
             return create(register, name, Properties.copy(Blocks.ROOTED_DIRT), creativeTab);
         }
 
@@ -79,8 +73,7 @@ public class Roots {
             return register.blockRegistry.register(name, () -> new RootedDirtBlock(properties));
         }
 
-        public static final Supplier<RootedDirtBlock> create(ModRegister register, String name, Properties properties,
-                ResourceKey<CreativeModeTab> creativeTab) {
+        public static final Supplier<RootedDirtBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
             return register.blockRegistry.register(name, () -> new RootedDirtBlock(properties), creativeTab);
         }
 

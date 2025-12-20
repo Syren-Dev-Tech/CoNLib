@@ -5,13 +5,17 @@ import com.github.syren_dev_tech.scylla.collections.PrimitiveTriplet.PrimDoubleT
 
 public class Transform3D {
 
+    private Transform3D() {
+    }
+
     // Takes a point in 3D space (origin) and transforms it by rotating it around a
     // pivot point (radians).
-    public static PrimDoubleTriplet transformCoordinate(PrimDoubleTriplet point, PrimDoubleTriplet pivot,
-            PrimDoubleTriplet rotation) {
-        Scylla.LOGGER.debug(" :: Point: " + point.x + ", " + point.y + ", " + point.z);
-        Scylla.LOGGER.debug(" :: Pivot: " + pivot.x + ", " + pivot.y + ", " + pivot.z);
-        Scylla.LOGGER.debug(" :: Rotation: " + rotation.x + ", " + rotation.y + ", " + rotation.z);
+    public static PrimDoubleTriplet transformCoordinate(PrimDoubleTriplet point, PrimDoubleTriplet pivot, PrimDoubleTriplet rotation) {
+        if (Scylla.LOGGER.isDebugEnabled()) {
+            Scylla.LOGGER.debug(String.format(" :: Point: %f, %f, %f", point.x, point.y, point.z));
+            Scylla.LOGGER.debug(String.format(" :: Pivot: %f, %f, %f", pivot.x, pivot.y, pivot.z));
+            Scylla.LOGGER.debug(String.format(" :: Rotation: %f, %f, %f", rotation.x, rotation.y, rotation.z));
+        }
 
         double translatedX = point.x - pivot.x;
         double translatedY = point.y - pivot.y;

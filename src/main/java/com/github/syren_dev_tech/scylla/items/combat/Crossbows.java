@@ -12,12 +12,14 @@ import net.minecraft.world.item.Item.Properties;
 
 public class Crossbows {
 
+    private Crossbows() {
+    }
+
     public static final Supplier<CrossbowItem> create(ModRegister register, String name) {
         return create(register, name, new Item.Properties());
     }
 
-    public static final Supplier<CrossbowItem> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CrossbowItem> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, new Item.Properties(), creativeTab);
     }
 
@@ -28,8 +30,7 @@ public class Crossbows {
         return crossbow;
     }
 
-    public static final Supplier<CrossbowItem> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CrossbowItem> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         var crossbow = register.itemRegistry.register(name, () -> new CrossbowItem(properties), creativeTab);
         register.itemRegistry.weapons.put(name, crossbow);
 

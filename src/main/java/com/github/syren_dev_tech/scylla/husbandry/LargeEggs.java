@@ -15,23 +15,19 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class LargeEggs {
 
-    public static final <T extends Animal> Supplier<DragonEggBlock> create(ModRegister register, String name,
-            LargeEggData<T> eggData) {
+    public static final <T extends Animal> Supplier<DragonEggBlock> create(ModRegister register, String name, LargeEggData<T> eggData) {
         return create(register, name, Properties.copy(Blocks.DRAGON_EGG), eggData);
     }
 
-    public static final <T extends Animal> Supplier<DragonEggBlock> create(ModRegister register, String name,
-            LargeEggData<T> eggData, ResourceKey<CreativeModeTab> creativeTab) {
+    public static final <T extends Animal> Supplier<DragonEggBlock> create(ModRegister register, String name, LargeEggData<T> eggData, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.DRAGON_EGG), eggData, creativeTab);
     }
 
-    public static final <T extends Animal> Supplier<DragonEggBlock> create(ModRegister register, String name,
-            Properties properties, LargeEggData<T> eggData) {
+    public static final <T extends Animal> Supplier<DragonEggBlock> create(ModRegister register, String name, Properties properties, LargeEggData<T> eggData) {
         return register.blockRegistry.register(name, () -> new LargeEgg<T>(properties, eggData));
     }
 
-    public static final <T extends Animal> Supplier<DragonEggBlock> create(ModRegister register, String name,
-            Properties properties, LargeEggData<T> eggData, ResourceKey<CreativeModeTab> creativeTab) {
+    public static final <T extends Animal> Supplier<DragonEggBlock> create(ModRegister register, String name, Properties properties, LargeEggData<T> eggData, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new LargeEgg<T>(properties, eggData), creativeTab);
     }
 

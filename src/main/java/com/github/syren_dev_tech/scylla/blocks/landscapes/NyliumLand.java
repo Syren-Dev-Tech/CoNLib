@@ -16,8 +16,7 @@ public class NyliumLand {
         return create(register, name, Properties.copy(Blocks.WARPED_NYLIUM));
     }
 
-    public static final Supplier<NyliumBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<NyliumBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.WARPED_NYLIUM), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class NyliumLand {
         return register.blockRegistry.register(name, () -> new NyliumBlock(properties));
     }
 
-    public static final Supplier<NyliumBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<NyliumBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new NyliumBlock(properties), creativeTab);
     }
 

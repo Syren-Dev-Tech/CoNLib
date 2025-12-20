@@ -3,6 +3,7 @@ package com.github.syren_dev_tech.scylla.common;
 import java.io.File;
 import java.io.PrintWriter;
 import java.nio.file.Path;
+import java.util.Arrays;
 
 import org.slf4j.Logger;
 
@@ -13,13 +14,9 @@ import net.minecraftforge.fml.loading.FMLPaths;
 public class Files {
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    /**
-     *
-     * @param path
-     * @param name
-     * @param data
-     * @param ext
-     */
+    private Files() {
+    }
+
     public static final void write(String path, String name, String data, String ext) {
         Path p = FMLPaths.GAMEDIR.get().resolve(path);
         final File dir = p.toFile();
@@ -28,22 +25,15 @@ public class Files {
             dir.mkdirs();
 
         try {
-            PrintWriter out = new PrintWriter(path + "/" + name + ext);
-            out.write(data);
-            out.close();
+            try (PrintWriter out = new PrintWriter(path + "/" + name + ext)) {
+                out.write(data);
+            }
         } catch (Exception err) {
-            LOGGER.error("Failed to write to file: " + path + "/" + name + ext);
-            LOGGER.error(err.getStackTrace().toString());
+            LOGGER.error("Failed to write to file: {}/{}/{}", path, name, ext);
+            LOGGER.error(Arrays.toString(err.getStackTrace()));
         }
     }
 
-    /**
-     *
-     * @param path
-     * @param name
-     * @param data
-     * @param ext
-     */
     public static final void writeToSave(String path, String name, String data, String ext) {
         File[] saves = new File(FMLPaths.GAMEDIR.get().resolve("saves").toString()).listFiles(File::isDirectory);
 
@@ -55,12 +45,12 @@ public class Files {
                 dir.mkdirs();
 
             try {
-                PrintWriter out = new PrintWriter(p.toString() + "/" + name + ext);
-                out.write(data);
-                out.close();
+                try (PrintWriter out = new PrintWriter(p.toString() + "/" + name + ext)) {
+                    out.write(data);
+                }
             } catch (Exception err) {
-                LOGGER.error("Failed to write to file: " + p.toString() + "/" + name + ext);
-                LOGGER.error(err.getStackTrace().toString());
+                LOGGER.error("Failed to write to file: {}/{}/{}", p, name, ext);
+                LOGGER.error(Arrays.toString(err.getStackTrace()));
             }
         }
     }

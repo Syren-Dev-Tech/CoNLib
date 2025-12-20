@@ -27,8 +27,7 @@ public class CustomBrushableBlock extends BaseEntityBlock {
     private final SoundEvent brushSound;
     private final SoundEvent brushCompletedSound;
 
-    public CustomBrushableBlock(Block turnsInto, Properties properties, SoundEvent brushSound,
-            SoundEvent brushCompletedSound) {
+    public CustomBrushableBlock(Block turnsInto, Properties properties, SoundEvent brushSound, SoundEvent brushCompletedSound) {
         super(properties);
         this.turnsInto = turnsInto;
         this.brushSound = brushSound;
@@ -36,26 +35,30 @@ public class CustomBrushableBlock extends BaseEntityBlock {
         this.registerDefaultState(this.stateDefinition.any().setValue(DUSTED, Integer.valueOf(0)));
     }
 
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> p_277623_) {
-        p_277623_.add(DUSTED);
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(DUSTED);
     }
 
-    public RenderShape getRenderShape(BlockState blockState) {
+    @Override
+    public RenderShape getRenderShape(BlockState blockState) { // NOSONAR - Ignore deprecation warning
         return RenderShape.MODEL;
     }
 
-    public void onPlace(BlockState unused1, Level level, BlockPos blockPos, BlockState unused2, boolean unused3) {
+    @Override
+    public void onPlace(BlockState unused1, Level level, BlockPos blockPos, BlockState unused2, boolean unused3) { // NOSONAR - Ignore deprecation warning
         level.scheduleTick(blockPos, this, 2);
     }
 
-    public BlockState updateShape(BlockState blockState, Direction direction, BlockState nextBlockState,
-            LevelAccessor levelAccessor, BlockPos blockPos, BlockPos nextBlockPos) {
+    @Override
+    public BlockState updateShape(BlockState blockState, Direction direction, BlockState nextBlockState, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos nextBlockPos) { // NOSONAR - Ignore deprecation warning
         levelAccessor.scheduleTick(blockPos, this, 2);
 
         return blockState;
     }
 
-    public void tick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
+    @Override
+    public void tick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) { // NOSONAR - Ignore deprecation warning
         BlockEntity blockentity = serverLevel.getBlockEntity(blockPos);
         if (blockentity instanceof BrushableBlockEntity brushableblockentity) {
             brushableblockentity.checkReset();

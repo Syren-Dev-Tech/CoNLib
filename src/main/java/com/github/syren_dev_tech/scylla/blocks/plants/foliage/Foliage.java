@@ -16,8 +16,7 @@ public class Foliage {
         return create(register, name, Properties.copy(Blocks.GRASS));
     }
 
-    public static final Supplier<GrassBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<GrassBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.GRASS), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Foliage {
         return register.blockRegistry.register(name, () -> new GrassBlock(properties));
     }
 
-    public static final Supplier<GrassBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<GrassBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new GrassBlock(properties), creativeTab);
     }
 

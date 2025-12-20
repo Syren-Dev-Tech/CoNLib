@@ -16,8 +16,7 @@ public class Barrels {
         return create(register, name, Properties.copy(Blocks.BARREL));
     }
 
-    public static final Supplier<BarrelBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<BarrelBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.BARREL), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Barrels {
         return register.blockRegistry.register(name, () -> new BarrelBlock(properties));
     }
 
-    public static final Supplier<BarrelBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<BarrelBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new BarrelBlock(properties), creativeTab);
     }
 

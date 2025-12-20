@@ -22,8 +22,7 @@ public class Torches {
             return create(register, name, Properties.copy(Blocks.TORCH), ParticleTypes.FLAME);
         }
 
-        public static final Supplier<TorchBlock> create(ModRegister register, String name,
-                ResourceKey<CreativeModeTab> creativeTab) {
+        public static final Supplier<TorchBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
             return create(register, name, Properties.copy(Blocks.TORCH), ParticleTypes.FLAME, creativeTab);
         }
 
@@ -31,18 +30,15 @@ public class Torches {
             return create(register, name, properties, ParticleTypes.FLAME);
         }
 
-        public static final Supplier<TorchBlock> create(ModRegister register, String name, Properties properties,
-                ResourceKey<CreativeModeTab> creativeTab) {
+        public static final Supplier<TorchBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
             return create(register, name, properties, ParticleTypes.FLAME, creativeTab);
         }
 
-        public static final Supplier<TorchBlock> create(ModRegister register, String name, Properties properties,
-                ParticleOptions particle) {
+        public static final Supplier<TorchBlock> create(ModRegister register, String name, Properties properties, ParticleOptions particle) {
             return register.blockRegistry.register(name, () -> new TorchBlock(properties, particle));
         }
 
-        public static final Supplier<TorchBlock> create(ModRegister register, String name, Properties properties,
-                ParticleOptions particle, ResourceKey<CreativeModeTab> creativeTab) {
+        public static final Supplier<TorchBlock> create(ModRegister register, String name, Properties properties, ParticleOptions particle, ResourceKey<CreativeModeTab> creativeTab) {
             return register.blockRegistry.register(name, () -> new TorchBlock(properties, particle), creativeTab);
         }
 
@@ -57,8 +53,7 @@ public class Torches {
             return create(register, name, Properties.copy(Blocks.TORCH), ParticleTypes.FLAME);
         }
 
-        public static final Supplier<WallTorchBlock> create(ModRegister register, String name,
-                ResourceKey<CreativeModeTab> creativeTab) {
+        public static final Supplier<WallTorchBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
             return create(register, name, Properties.copy(Blocks.TORCH), ParticleTypes.FLAME, creativeTab);
         }
 
@@ -66,18 +61,15 @@ public class Torches {
             return create(register, name, properties, ParticleTypes.FLAME);
         }
 
-        public static final Supplier<WallTorchBlock> create(ModRegister register, String name, Properties properties,
-                ResourceKey<CreativeModeTab> creativeTab) {
+        public static final Supplier<WallTorchBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
             return create(register, name, properties, ParticleTypes.FLAME, creativeTab);
         }
 
-        public static final Supplier<WallTorchBlock> create(ModRegister register, String name, Properties properties,
-                ParticleOptions particle) {
+        public static final Supplier<WallTorchBlock> create(ModRegister register, String name, Properties properties, ParticleOptions particle) {
             return register.blockRegistry.register(name, () -> new WallTorchBlock(properties, particle));
         }
 
-        public static final Supplier<WallTorchBlock> create(ModRegister register, String name, Properties properties,
-                ParticleOptions particle, ResourceKey<CreativeModeTab> creativeTab) {
+        public static final Supplier<WallTorchBlock> create(ModRegister register, String name, Properties properties, ParticleOptions particle, ResourceKey<CreativeModeTab> creativeTab) {
             return register.blockRegistry.register(name, () -> new WallTorchBlock(properties, particle), creativeTab);
         }
 
@@ -88,32 +80,28 @@ public class Torches {
 
     private static final String WALL_PREFIX = "wall_";
 
-    public static final Tuple<Supplier<TorchBlock>, Supplier<WallTorchBlock>> create(ModRegister register,
-            String name) {
+    public static final Tuple<Supplier<TorchBlock>, Supplier<WallTorchBlock>> create(ModRegister register, String name) {
         var standing = StandingTorches.create(register, name);
         var wall = WallTorches.create(register, WALL_PREFIX + name);
 
         return new Tuple<>(standing, wall);
     }
 
-    public static final Tuple<Supplier<TorchBlock>, Supplier<WallTorchBlock>> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Tuple<Supplier<TorchBlock>, Supplier<WallTorchBlock>> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         var standing = StandingTorches.create(register, name, creativeTab);
         var wall = WallTorches.create(register, WALL_PREFIX + name);
 
         return new Tuple<>(standing, wall);
     }
 
-    public static final Tuple<Supplier<TorchBlock>, Supplier<WallTorchBlock>> create(ModRegister register, String name,
-            Properties properties) {
+    public static final Tuple<Supplier<TorchBlock>, Supplier<WallTorchBlock>> create(ModRegister register, String name, Properties properties) {
         var standing = StandingTorches.create(register, name, properties);
         var wall = WallTorches.create(register, WALL_PREFIX + name, properties);
 
         return new Tuple<>(standing, wall);
     }
 
-    public static final Tuple<Supplier<TorchBlock>, Supplier<WallTorchBlock>> create(ModRegister register, String name,
-            Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Tuple<Supplier<TorchBlock>, Supplier<WallTorchBlock>> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         var standing = StandingTorches.create(register, name, properties, creativeTab);
         var wall = WallTorches.create(register, WALL_PREFIX + name, properties);
 

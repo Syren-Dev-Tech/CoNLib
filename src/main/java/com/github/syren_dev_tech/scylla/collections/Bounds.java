@@ -1,13 +1,65 @@
 package com.github.syren_dev_tech.scylla.collections;
 
 public class Bounds {
-    public double x1;
-    public double y1;
-    public double z1;
+    private double x1;
 
-    public double x2;
-    public double y2;
-    public double z2;
+    public double getX1() {
+        return x1;
+    }
+
+    public void setX1(double x1) {
+        this.x1 = x1;
+    }
+
+    private double y1;
+
+    public double getY1() {
+        return y1;
+    }
+
+    public void setY1(double y1) {
+        this.y1 = y1;
+    }
+
+    private double z1;
+
+    public double getZ1() {
+        return z1;
+    }
+
+    public void setZ1(double z1) {
+        this.z1 = z1;
+    }
+
+    private double x2;
+
+    public double getX2() {
+        return x2;
+    }
+
+    public void setX2(double x2) {
+        this.x2 = x2;
+    }
+
+    private double y2;
+
+    public double getY2() {
+        return y2;
+    }
+
+    public void setY2(double y2) {
+        this.y2 = y2;
+    }
+
+    private double z2;
+
+    public double getZ2() {
+        return z2;
+    }
+
+    public void setZ2(double z2) {
+        this.z2 = z2;
+    }
 
     public void add(double x, double y, double z, double width, double height, double depth) {
         this.x1 = Math.min(this.x1, x);

@@ -15,41 +15,28 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class BrushableSands {
 
-    public static final Supplier<CustomFallingBrushableBlock> create(ModRegister register, String name,
-            Supplier<Block> dustedBlock) {
+    public static final Supplier<CustomFallingBrushableBlock> create(ModRegister register, String name, Supplier<Block> dustedBlock) {
         return create(register, name, Properties.copy(Blocks.SAND), dustedBlock);
     }
 
-    public static final Supplier<CustomFallingBrushableBlock> create(ModRegister register, String name,
-            Supplier<Block> dustedBlock, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.SAND), dustedBlock, SoundEvents.BRUSH_SAND,
-                SoundEvents.BRUSH_SAND_COMPLETED, creativeTab);
+    public static final Supplier<CustomFallingBrushableBlock> create(ModRegister register, String name, Supplier<Block> dustedBlock, ResourceKey<CreativeModeTab> creativeTab) {
+        return create(register, name, Properties.copy(Blocks.SAND), dustedBlock, SoundEvents.BRUSH_SAND, SoundEvents.BRUSH_SAND_COMPLETED, creativeTab);
     }
 
-    public static final Supplier<CustomFallingBrushableBlock> create(ModRegister register, String name,
-            Properties properties, Supplier<Block> dustedBlock) {
-        return create(register, name, properties, dustedBlock, SoundEvents.BRUSH_SAND,
-                SoundEvents.BRUSH_SAND_COMPLETED);
+    public static final Supplier<CustomFallingBrushableBlock> create(ModRegister register, String name, Properties properties, Supplier<Block> dustedBlock) {
+        return create(register, name, properties, dustedBlock, SoundEvents.BRUSH_SAND, SoundEvents.BRUSH_SAND_COMPLETED);
     }
 
-    public static final Supplier<CustomFallingBrushableBlock> create(ModRegister register, String name,
-            Properties properties, Supplier<Block> dustedBlock, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, properties, dustedBlock, SoundEvents.BRUSH_SAND, SoundEvents.BRUSH_SAND_COMPLETED,
-                creativeTab);
+    public static final Supplier<CustomFallingBrushableBlock> create(ModRegister register, String name, Properties properties, Supplier<Block> dustedBlock, ResourceKey<CreativeModeTab> creativeTab) {
+        return create(register, name, properties, dustedBlock, SoundEvents.BRUSH_SAND, SoundEvents.BRUSH_SAND_COMPLETED, creativeTab);
     }
 
-    public static final Supplier<CustomFallingBrushableBlock> create(ModRegister register, String name,
-            Properties properties, Supplier<Block> dustedBlock, SoundEvent dustingSound,
-            SoundEvent dustingCompletedSound) {
-        return register.blockRegistry.register(name, () -> new CustomFallingBrushableBlock(dustedBlock.get(),
-                properties, dustingSound, dustingCompletedSound));
+    public static final Supplier<CustomFallingBrushableBlock> create(ModRegister register, String name, Properties properties, Supplier<Block> dustedBlock, SoundEvent dustingSound, SoundEvent dustingCompletedSound) {
+        return register.blockRegistry.register(name, () -> new CustomFallingBrushableBlock(dustedBlock.get(), properties, dustingSound, dustingCompletedSound));
     }
 
-    public static final Supplier<CustomFallingBrushableBlock> create(ModRegister register, String name,
-            Properties properties, Supplier<Block> dustedBlock, SoundEvent dustingSound,
-            SoundEvent dustingCompletedSound, ResourceKey<CreativeModeTab> creativeTab) {
-        return register.blockRegistry.register(name, () -> new CustomFallingBrushableBlock(dustedBlock.get(),
-                properties, dustingSound, dustingCompletedSound), creativeTab);
+    public static final Supplier<CustomFallingBrushableBlock> create(ModRegister register, String name, Properties properties, Supplier<Block> dustedBlock, SoundEvent dustingSound, SoundEvent dustingCompletedSound, ResourceKey<CreativeModeTab> creativeTab) {
+        return register.blockRegistry.register(name, () -> new CustomFallingBrushableBlock(dustedBlock.get(), properties, dustingSound, dustingCompletedSound), creativeTab);
     }
 
     private BrushableSands() {

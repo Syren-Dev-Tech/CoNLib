@@ -18,8 +18,7 @@ public class Doors {
         return create(register, name, Blocks.OAK_DOOR, BlockSetType.OAK);
     }
 
-    public static final Supplier<DoorBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<DoorBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Blocks.OAK_DOOR, BlockSetType.OAK, creativeTab);
     }
 
@@ -27,8 +26,7 @@ public class Doors {
         return create(register, name, properties, BlockSetType.OAK);
     }
 
-    public static final Supplier<DoorBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<DoorBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, properties, BlockSetType.OAK, creativeTab);
     }
 
@@ -36,8 +34,7 @@ public class Doors {
         return create(register, name, Blocks.OAK_DOOR, blockSetType);
     }
 
-    public static final Supplier<DoorBlock> create(ModRegister register, String name, BlockSetType blockSetType,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<DoorBlock> create(ModRegister register, String name, BlockSetType blockSetType, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Blocks.OAK_DOOR, blockSetType, creativeTab);
     }
 
@@ -45,30 +42,24 @@ public class Doors {
         return create(register, name, Properties.copy(sourceBlock), BlockSetType.OAK);
     }
 
-    public static final Supplier<DoorBlock> create(ModRegister register, String name, Block sourceBlock,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<DoorBlock> create(ModRegister register, String name, Block sourceBlock, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(sourceBlock), BlockSetType.OAK, creativeTab);
     }
 
-    public static final Supplier<DoorBlock> create(ModRegister register, String name, Block sourceBlock,
-            BlockSetType blockSetType) {
+    public static final Supplier<DoorBlock> create(ModRegister register, String name, Block sourceBlock, BlockSetType blockSetType) {
         return create(register, name, Properties.copy(sourceBlock), blockSetType);
     }
 
-    public static final Supplier<DoorBlock> create(ModRegister register, String name, Block sourceBlock,
-            BlockSetType blockSetType, ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<DoorBlock> create(ModRegister register, String name, Block sourceBlock, BlockSetType blockSetType, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(sourceBlock), blockSetType, creativeTab);
     }
 
-    public static final Supplier<DoorBlock> create(ModRegister register, String name, Properties properties,
-            BlockSetType blockSetType) {
+    public static final Supplier<DoorBlock> create(ModRegister register, String name, Properties properties, BlockSetType blockSetType) {
         return register.blockRegistry.register(name, () -> new DoorBlock(properties.noOcclusion(), blockSetType));
     }
 
-    public static final Supplier<DoorBlock> create(ModRegister register, String name, Properties properties,
-            BlockSetType blockSetType, ResourceKey<CreativeModeTab> creativeTab) {
-        return register.blockRegistry.register(name, () -> new DoorBlock(properties.noOcclusion(), blockSetType),
-                creativeTab);
+    public static final Supplier<DoorBlock> create(ModRegister register, String name, Properties properties, BlockSetType blockSetType, ResourceKey<CreativeModeTab> creativeTab) {
+        return register.blockRegistry.register(name, () -> new DoorBlock(properties.noOcclusion(), blockSetType), creativeTab);
     }
 
     private Doors() {

@@ -21,18 +21,15 @@ public class CaveVines {
             return create(register, name, Properties.copy(Blocks.CAVE_VINES_PLANT));
         }
 
-        public static final Supplier<CaveVinesPlantBlock> create(ModRegister register, String name,
-                ResourceKey<CreativeModeTab> creativeTab) {
+        public static final Supplier<CaveVinesPlantBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
             return create(register, name, Properties.copy(Blocks.CAVE_VINES_PLANT), creativeTab);
         }
 
-        public static final Supplier<CaveVinesPlantBlock> create(ModRegister register, String name,
-                Properties properties) {
+        public static final Supplier<CaveVinesPlantBlock> create(ModRegister register, String name, Properties properties) {
             return register.blockRegistry.register(name, () -> new CaveVinesPlantBlock(properties));
         }
 
-        public static final Supplier<CaveVinesPlantBlock> create(ModRegister register, String name,
-                Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
+        public static final Supplier<CaveVinesPlantBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
             return register.blockRegistry.register(name, () -> new CaveVinesPlantBlock(properties), creativeTab);
         }
 
@@ -47,8 +44,7 @@ public class CaveVines {
             return create(register, name, Properties.copy(Blocks.CAVE_VINES));
         }
 
-        public static final Supplier<CaveVinesBlock> create(ModRegister register, String name,
-                ResourceKey<CreativeModeTab> creativeTab) {
+        public static final Supplier<CaveVinesBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
             return create(register, name, Properties.copy(Blocks.CAVE_VINES), creativeTab);
         }
 
@@ -56,8 +52,7 @@ public class CaveVines {
             return register.blockRegistry.register(name, () -> new CaveVinesBlock(properties));
         }
 
-        public static final Supplier<CaveVinesBlock> create(ModRegister register, String name, Properties properties,
-                ResourceKey<CreativeModeTab> creativeTab) {
+        public static final Supplier<CaveVinesBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
             return register.blockRegistry.register(name, () -> new CaveVinesBlock(properties), creativeTab);
         }
 
@@ -66,28 +61,22 @@ public class CaveVines {
         }
     }
 
-    public static final Tuple<Supplier<CaveVinesBlock>, Supplier<CaveVinesPlantBlock>> create(ModRegister register,
-            String name) {
+    public static final Tuple<Supplier<CaveVinesBlock>, Supplier<CaveVinesPlantBlock>> create(ModRegister register, String name) {
         return create(register, name, Properties.copy(Blocks.CAVE_VINES), Properties.copy(Blocks.CAVE_VINES_PLANT));
     }
 
-    public static final Tuple<Supplier<CaveVinesBlock>, Supplier<CaveVinesPlantBlock>> create(ModRegister register,
-            String name, ResourceKey<CreativeModeTab> creativeTab) {
-        return create(register, name, Properties.copy(Blocks.CAVE_VINES), Properties.copy(Blocks.CAVE_VINES_PLANT),
-                creativeTab);
+    public static final Tuple<Supplier<CaveVinesBlock>, Supplier<CaveVinesPlantBlock>> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
+        return create(register, name, Properties.copy(Blocks.CAVE_VINES), Properties.copy(Blocks.CAVE_VINES_PLANT), creativeTab);
     }
 
-    public static final Tuple<Supplier<CaveVinesBlock>, Supplier<CaveVinesPlantBlock>> create(ModRegister register,
-            String name, Properties topProperties, Properties bodyProperties) {
+    public static final Tuple<Supplier<CaveVinesBlock>, Supplier<CaveVinesPlantBlock>> create(ModRegister register, String name, Properties topProperties, Properties bodyProperties) {
         var top = CaveVineTips.create(register, name, topProperties);
         var body = CaveVineBodies.create(register, name + "_plant", bodyProperties);
 
         return new Tuple<>(top, body);
     }
 
-    public static final Tuple<Supplier<CaveVinesBlock>, Supplier<CaveVinesPlantBlock>> create(ModRegister register,
-            String name, Properties topProperties, Properties bodyProperties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Tuple<Supplier<CaveVinesBlock>, Supplier<CaveVinesPlantBlock>> create(ModRegister register, String name, Properties topProperties, Properties bodyProperties, ResourceKey<CreativeModeTab> creativeTab) {
         var top = CaveVineTips.create(register, name, topProperties, creativeTab);
         var body = CaveVineBodies.create(register, name + "_plant", bodyProperties, creativeTab);
 

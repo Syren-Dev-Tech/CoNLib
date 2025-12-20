@@ -16,8 +16,7 @@ public class Explosives {
         return create(register, name, Properties.copy(Blocks.TNT));
     }
 
-    public static final Supplier<TntBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<TntBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.TNT), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Explosives {
         return register.blockRegistry.register(name, () -> new TntBlock(properties));
     }
 
-    public static final Supplier<TntBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<TntBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new TntBlock(properties), creativeTab);
     }
 

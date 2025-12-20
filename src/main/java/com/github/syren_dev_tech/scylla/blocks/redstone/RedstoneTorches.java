@@ -16,8 +16,7 @@ public class RedstoneTorches {
         return create(register, name, Properties.copy(Blocks.REDSTONE_TORCH));
     }
 
-    public static final Supplier<RedstoneTorchBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<RedstoneTorchBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.REDSTONE_TORCH), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class RedstoneTorches {
         return register.blockRegistry.register(name, () -> new RedstoneTorchBlock(properties));
     }
 
-    public static final Supplier<RedstoneTorchBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<RedstoneTorchBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new RedstoneTorchBlock(properties), creativeTab);
     }
 

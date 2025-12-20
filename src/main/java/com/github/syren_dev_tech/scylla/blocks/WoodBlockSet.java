@@ -59,8 +59,7 @@ public class WoodBlockSet {
             Doors.create(register, name + "_door", plankProperties, blockSetType, creativeTab);
             TrapDoors.create(register, name + "_trapdoor", plankProperties, blockSetType, creativeTab);
 
-            PressurePlates.create(register, name + "_pressure_plate", plankProperties, Sensitivity.EVERYTHING,
-                    blockSetType, creativeTab);
+            PressurePlates.create(register, name + "_pressure_plate", plankProperties, Sensitivity.EVERYTHING, blockSetType, creativeTab);
             Buttons.create(register, name + "_button", plankProperties, creativeTab);
 
             Signs.create(register, name, plankProperties, creativeTab);
@@ -75,10 +74,8 @@ public class WoodBlockSet {
     public static class MiscWoodenSets {
 
         public static final void create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
-            register.itemRegistry.register(name + "_boat",
-                    () -> new BoatItem(false, Boat.Type.OAK, new Item.Properties().stacksTo(1)), creativeTab);
-            register.itemRegistry.register(name + "_chest_boat",
-                    () -> new BoatItem(true, Boat.Type.OAK, new Item.Properties().stacksTo(1)), creativeTab);
+            register.itemRegistry.register(name + "_boat", () -> new BoatItem(false, Boat.Type.OAK, new Item.Properties().stacksTo(1)), creativeTab);
+            register.itemRegistry.register(name + "_chest_boat", () -> new BoatItem(true, Boat.Type.OAK, new Item.Properties().stacksTo(1)), creativeTab);
         }
 
         private MiscWoodenSets() {

@@ -14,17 +14,18 @@ import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguratio
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration.TargetBlockState;
 
 public class OreFeature {
+
+    private OreFeature() {
+    }
+
     public static final void register(String name, Block ore) {
-        var oreList = List.of(
-                OreConfiguration.target(FeatureRegistry.STONE_REPLACEABLES, ore.defaultBlockState()));
+        var oreList = List.of(OreConfiguration.target(FeatureRegistry.getStoneReplaceables(), ore.defaultBlockState()));
 
         register(name, oreList, BiomeTags.IS_OVERWORLD);
     }
 
     public static final void register(String name, Block ore, Block deepslateOre) {
-        var oreList = List.of(
-                OreConfiguration.target(FeatureRegistry.STONE_REPLACEABLES, ore.defaultBlockState()),
-                OreConfiguration.target(FeatureRegistry.DEEPSLATE_REPLACEABLES, deepslateOre.defaultBlockState()));
+        var oreList = List.of(OreConfiguration.target(FeatureRegistry.getStoneReplaceables(), ore.defaultBlockState()), OreConfiguration.target(FeatureRegistry.getDeepslateReplaceables(), deepslateOre.defaultBlockState()));
 
         register(name, oreList, BiomeTags.IS_OVERWORLD);
     }

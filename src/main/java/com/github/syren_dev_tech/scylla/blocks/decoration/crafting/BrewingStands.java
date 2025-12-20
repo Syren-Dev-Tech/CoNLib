@@ -16,8 +16,7 @@ public class BrewingStands {
         return create(register, name, Properties.copy(Blocks.BREWING_STAND));
     }
 
-    public static final Supplier<BrewingStandBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<BrewingStandBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.BREWING_STAND), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class BrewingStands {
         return register.blockRegistry.register(name, () -> new BrewingStandBlock(properties));
     }
 
-    public static final Supplier<BrewingStandBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<BrewingStandBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new BrewingStandBlock(properties), creativeTab);
     }
 

@@ -2,6 +2,7 @@ package com.github.syren_dev_tech.scylla.blocks.decoration.crystals;
 
 import java.util.function.Supplier;
 
+import com.github.syren_dev_tech.scylla.blocks.decoration.crystals.types.BuddingCrystalProperties;
 import com.github.syren_dev_tech.scylla.registry.ModRegister;
 
 import net.minecraft.resources.ResourceKey;
@@ -14,21 +15,24 @@ public class CrystalSet {
         var mediumCrystal = MediumCrystals.create(register, "medium_" + name + "_bud");
         var largeCrystal = LargeCrystals.create(register, "large_" + name + "_bud");
         var fullCrystal = FullCrystals.create(register, name + "_cluster");
-        var buddingCrystal = CrystalBudBlocks.create(register, "budding_" + name, smallCrystal.get(),
-                mediumCrystal.get(), largeCrystal.get(), fullCrystal.get());
+
+        var budProperties = new BuddingCrystalProperties<>(smallCrystal, mediumCrystal, largeCrystal, fullCrystal);
+
+        var buddingCrystal = CrystalBudBlocks.create(register, "budding_" + name, budProperties);
         var block = CrystalBlocks.create(register, name + "_block");
 
         return new Supplier<?>[] { smallCrystal, mediumCrystal, largeCrystal, fullCrystal, buddingCrystal, block };
     }
 
-    public static final Supplier<?>[] create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<?>[] create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         var smallCrystal = SmallCrystals.create(register, "small_" + name + "_bud", creativeTab);
         var mediumCrystal = MediumCrystals.create(register, "medium_" + name + "_bud", creativeTab);
         var largeCrystal = LargeCrystals.create(register, "large_" + name + "_bud", creativeTab);
         var fullCrystal = FullCrystals.create(register, name + "_cluster", creativeTab);
-        var buddingCrystal = CrystalBudBlocks.create(register, "budding_" + name, smallCrystal.get(),
-                mediumCrystal.get(), largeCrystal.get(), fullCrystal.get(), creativeTab);
+
+        var budProperties = new BuddingCrystalProperties<>(smallCrystal, mediumCrystal, largeCrystal, fullCrystal);
+
+        var buddingCrystal = CrystalBudBlocks.create(register, "budding_" + name, budProperties, creativeTab);
         var block = CrystalBlocks.create(register, name + "_block", creativeTab);
 
         return new Supplier<?>[] { smallCrystal, mediumCrystal, largeCrystal, fullCrystal, buddingCrystal, block };

@@ -16,8 +16,7 @@ public class EnderChests {
         return create(register, name, Properties.copy(Blocks.ENDER_CHEST));
     }
 
-    public static final Supplier<EnderChestBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<EnderChestBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.ENDER_CHEST), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class EnderChests {
         return register.blockRegistry.register(name, () -> new EnderChestBlock(properties));
     }
 
-    public static final Supplier<EnderChestBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<EnderChestBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new EnderChestBlock(properties), creativeTab);
     }
 

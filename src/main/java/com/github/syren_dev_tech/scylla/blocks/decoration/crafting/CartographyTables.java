@@ -16,18 +16,15 @@ public class CartographyTables {
         return create(register, name, Properties.copy(Blocks.CARTOGRAPHY_TABLE));
     }
 
-    public static final Supplier<CartographyTableBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CartographyTableBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.CARTOGRAPHY_TABLE), creativeTab);
     }
 
-    public static final Supplier<CartographyTableBlock> create(ModRegister register, String name,
-            Properties properties) {
+    public static final Supplier<CartographyTableBlock> create(ModRegister register, String name, Properties properties) {
         return register.blockRegistry.register(name, () -> new CartographyTableBlock(properties));
     }
 
-    public static final Supplier<CartographyTableBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<CartographyTableBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new CartographyTableBlock(properties), creativeTab);
     }
 

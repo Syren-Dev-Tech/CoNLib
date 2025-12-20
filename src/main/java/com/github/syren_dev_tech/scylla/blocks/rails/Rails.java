@@ -16,8 +16,7 @@ public class Rails {
         return create(register, name, Properties.copy(Blocks.RAIL));
     }
 
-    public static final Supplier<RailBlock> create(ModRegister register, String name,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<RailBlock> create(ModRegister register, String name, ResourceKey<CreativeModeTab> creativeTab) {
         return create(register, name, Properties.copy(Blocks.RAIL), creativeTab);
     }
 
@@ -25,8 +24,7 @@ public class Rails {
         return register.blockRegistry.register(name, () -> new RailBlock(properties));
     }
 
-    public static final Supplier<RailBlock> create(ModRegister register, String name, Properties properties,
-            ResourceKey<CreativeModeTab> creativeTab) {
+    public static final Supplier<RailBlock> create(ModRegister register, String name, Properties properties, ResourceKey<CreativeModeTab> creativeTab) {
         return register.blockRegistry.register(name, () -> new RailBlock(properties), creativeTab);
     }
 

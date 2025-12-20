@@ -26,21 +26,17 @@ public class MediumEgg<T extends Animal> extends SnifferEggBlock {
     }
 
     @Override
-    public void tick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randSource) {
+    public void tick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randSource) { // NOSONAR - Ignore deprecation warning
         if (!this.readyToHatch(blockState)) {
-            serverLevel.playSound((Player) null, blockPos, SoundEvents.SNIFFER_EGG_CRACK, SoundSource.BLOCKS, 0.7F,
-                    0.9F + randSource.nextFloat() * 0.2F);
-            serverLevel.setBlock(blockPos,
-                    blockState.setValue(HATCH, Integer.valueOf(this.getHatchLevel(blockState) + 1)), 2);
+            serverLevel.playSound((Player) null, blockPos, SoundEvents.SNIFFER_EGG_CRACK, SoundSource.BLOCKS, 0.7F, 0.9F + randSource.nextFloat() * 0.2F);
+            serverLevel.setBlock(blockPos, blockState.setValue(HATCH, Integer.valueOf(this.getHatchLevel(blockState) + 1)), 2);
         } else {
-            serverLevel.playSound((Player) null, blockPos, SoundEvents.SNIFFER_EGG_HATCH, SoundSource.BLOCKS, 0.7F,
-                    0.9F + randSource.nextFloat() * 0.2F);
+            serverLevel.playSound((Player) null, blockPos, SoundEvents.SNIFFER_EGG_HATCH, SoundSource.BLOCKS, 0.7F, 0.9F + randSource.nextFloat() * 0.2F);
             serverLevel.destroyBlock(blockPos, false);
 
             this.eggData.spawn(serverLevel, (T newCreature) -> {
                 Vec3 vec3 = blockPos.getCenter();
-                newCreature.moveTo(vec3.x(), vec3.y(), vec3.z(),
-                        Mth.wrapDegrees(serverLevel.random.nextFloat() * 360.0F), 0.0F);
+                newCreature.moveTo(vec3.x(), vec3.y(), vec3.z(), Mth.wrapDegrees(serverLevel.random.nextFloat() * 360.0F), 0.0F);
             });
         }
     }
