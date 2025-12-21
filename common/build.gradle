@@ -1,0 +1,48 @@
+plugins {
+    id 'java'
+    id 'eclipse'
+    id 'idea'
+    id 'maven-publish'
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+    id 'org.spongepowered.mixin' version '0.7.+'
+    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+}
+
+archivesBaseName = "scylla-common"
+group = mod_group_id
+
+minecraft {
+    mappings channel: mapping_channel, version: "${parchment_version}-${minecraft_version}"
+}
+
+repositories {
+   maven {
+        name = 'GeckoLib'
+        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+        content {
+            includeGroupByRegex("software\\.bernie.*")
+            includeGroup("com.eliotlash.mclib")
+        }
+    }
+}
+
+dependencies {
+    // Conditional dependencies for Forge, Fabric, or NeoForge
+    if (project.hasProperty('platform') && project.platform == 'fabric') {
+        implementation "net.fabricmc:fabric-api:${fabric_version}"
+    } else if (project.hasProperty('platform') && project.platform == 'neoforge') {
+        implementation "dev.neoforge:neoforge:${minecraft_version}-${neoforge_version}"
+    } else {
+        minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+        implementation fg.deobf("software.bernie.geckolib:geckolib-forge-${minecraft_version}:${geckolib_version}")
+        implementation "com.eliotlash.mclib:mclib:20"
+    }
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
