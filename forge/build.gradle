@@ -1,155 +1,65 @@
-buildscript {
-    repositories {
-        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
-    }
-}
-
 plugins {
-    id 'java'
-    id 'eclipse'
-    id 'idea'
-    id 'maven-publish'
-    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
-    id 'org.spongepowered.mixin' version '0.7.+'
-    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+    id 'net.neoforged.moddev.legacyforge' version '2.0.134' // Use a version that supports 1.20.1
+    id 'groovy' // Optional, if using Groovy for build script logic
 }
 
+// apply from: '../common/build.gradle'
+
+// Read properties from gradle.properties
 version = mod_version
 group = mod_group_id
+archivesBaseName = mod_id
 
-base {
-    archivesName = "scylla-forge-${minecraft_version}"
-}
-
+// Set Java compatibility to Java 17, which is required for Minecraft 1.20.1
 java {
-    withSourcesJar()
-    withJavadocJar()
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
     }
 }
 
-minecraft {
-    mappings channel: mapping_channel, version: "${parchment_version}-${minecraft_version}"
-
-    copyIdeResources = true
-
-    runs {
-        configureEach {
-            workingDirectory project.file('run')
-
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
-            property 'geckolib.disable_examples', 'true'
-
-            mods {
-                "${mod_id}" {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        client {
-            property 'forge.enabledGameTestNamespaces', mod_id
-        }
-
-        server {
-            property 'forge.enabledGameTestNamespaces', mod_id
-            args '--nogui'
-        }
-
-        gameTestServer {
-            property 'forge.enabledGameTestNamespaces', mod_id
-        }
-
-        data {
-            workingDirectory project.file('run-data')
-            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-        }
-    }
-}
-
-sourceSets.main.resources { srcDir 'src/generated/resources' }
-
 repositories {
-    maven {
-        name = 'GeckoLib'
-        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
-        content {
-            includeGroupByRegex("software\\.bernie.*")
-            includeGroup("com.eliotlash.mclib")
-        }
-    }
+    // Add repositories for any additional dependencies (e.g., JEI)
 }
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-    implementation fg.deobf("software.bernie.geckolib:geckolib-forge-${minecraft_version}:${geckolib_version}")
-    implementation "com.eliotlash.mclib:mclib:20"
-    implementation project(":common")
+    // The "net.neoforged.moddev.legacyforge" plugin automatically adds the NeoForge dependencies
+    // Add your own dependencies here
+    // implementation 'org.example:example-library:1.0.0'
+    compileOnly project(":common")
 }
 
-jarJar.enable()
+// General modding configuration
+// neoforge {
+//     // You can set mapping versions here, but it's often done in gradle.properties
+//     parchment {
+//         minecraftVersion = minecraft_version
+//         mappingsVersion = parchment_version // Get version from parchmentmc.org
+//     }
+// }
 
-sourcesJar {
-    from project(":common").sourceSets.main.allSource
-}
+// Configure the JAR file
+// jar {
+//     manifest {
+//         attributes([
+//             // "FMLModType": "GAMELIBRARY&FORGELIBRARY" // Example, check NeoForge docs for correct value
+//         ])
+//     }
+// }
 
-tasks.named('processResources', ProcessResources).configure {
-    var replaceProperties = [
-            minecraft_version: minecraft_version, minecraft_version_range: minecraft_version_range,
-            forge_version: forge_version, forge_version_range: forge_version_range,
-            loader_version_range: loader_version_range,
-            mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
-            mod_authors: mod_authors, mod_description: mod_description,
+// Process resources to substitute variables (like ${mod_id}) from gradle.properties into your mods.toml file
+tasks.withType(ProcessResources).configureEach {
+    def props = [
+        // Add all properties you want to be replaced in resource files
+        'mod_id': mod_id,
+        'mod_name': mod_name,
+        'mod_version': mod_version,
+        'mod_license': mod_license,
+        'mod_authors': mod_authors,
+        'minecraft_version': minecraft_version
     ]
-    inputs.properties replaceProperties
-
-    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
-        expand replaceProperties + [project: project]
-    }
-}
-
-tasks.named('jar', Jar).configure {
-    manifest {
-        attributes([
-                'Specification-Title'     : mod_id,
-                'Specification-Vendor'    : mod_authors,
-                'Specification-Version'   : '1',
-                'Implementation-Title'    : project.name,
-                'Implementation-Version'  : project.jar.archiveVersion,
-                'Implementation-Vendor'   : mod_authors,
-                'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-        ])
-    }
-}
-
-tasks.named('publish').configure {
-    dependsOn 'reobfJar'
-    doLast {
-        project.ext.set("reobf", false)
-    }
-}
-
-publishing {
-    publications {
-        register('mavenJava', MavenPublication) {
-            artifact jar
-        }
-    }
-    repositories {
-        maven {
-            url "file://${project.projectDir}/mcmodsrepo"
-        }
-    }
-}
-
-tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8'
-}
-
-tasks.register("projectVersion") {
-    doLast {
-        println("VERSION: "+rootProject.version)
+    inputs.properties props
+    filteringCharset 'UTF-8'
+    filesMatching(['META-INF/mods.toml']) {
+        expand props
     }
 }

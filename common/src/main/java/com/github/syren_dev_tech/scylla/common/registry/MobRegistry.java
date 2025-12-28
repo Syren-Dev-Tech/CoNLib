@@ -10,6 +10,7 @@ import com.github.syren_dev_tech.scylla.common.mobs.CreatureRegistrar;
 import com.github.syren_dev_tech.scylla.common.mobs.creatures.CustomCreature;
 
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -19,7 +20,7 @@ import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 public class MobRegistry {
 
     private final ModRegister registry;
-    private final IMobRegistrar<EntityType<?>> registrar;
+    private final IMobRegistrar<EntityType<? extends LivingEntity>> registrar;
 
     public final Map<String, CreatureRegistrar<?>> entities = new HashMap<>();
 
@@ -33,10 +34,13 @@ public class MobRegistry {
         if (ScyllaCommon.LOGGER.isInfoEnabled())
             ScyllaCommon.LOGGER.info("Registering entity: {}", builder.name);
 
-        return this.registrar.register(registry.modId, builder.name, () -> EntityType.Builder.of(builder.factory, MobCategory.CREATURE).sized(0.6F, 1.8F).build(builder.name));
+        return this.registrar.register(registry.modId, builder.name, () -> EntityType.Builder
+                .of(builder.factory, MobCategory.CREATURE).sized(0.6F, 1.8F).build(builder.name));
     }
 
     public void registerEntityAttributes(EntityAttributeCreationEvent event) {
+        registrar.setAttributeCreationEvent(event);
+
         if (ScyllaCommon.LOGGER.isInfoEnabled())
             ScyllaCommon.LOGGER.info("Registering entity attributes");
 
@@ -51,7 +55,7 @@ public class MobRegistry {
         this.registrar.finish(bus);
     }
 
-    public MobRegistry(ModRegister registry, IMobRegistrar<EntityType<?>> registrar) {
+    public MobRegistry(ModRegister registry, IMobRegistrar<EntityType<? extends LivingEntity>> registrar) {
         this.registry = registry;
         this.registrar = registrar;
     }

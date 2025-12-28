@@ -9,6 +9,7 @@ import com.github.syren_dev_tech.scylla.common.registry.IMobRegistrar;
 
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 
 public class CreatureRegistrar<T extends CustomCreature> {
@@ -17,7 +18,8 @@ public class CreatureRegistrar<T extends CustomCreature> {
     private final Supplier<EntityType<T>> entityType;
     private final Supplier<AttributeSupplier.Builder> attributes;
 
-    public CreatureRegistrar(CreatureBuilder<T> builder, Supplier<EntityType<T>> entityType, Supplier<AttributeSupplier.Builder> attributes) {
+    public CreatureRegistrar(CreatureBuilder<T> builder, Supplier<EntityType<T>> entityType,
+            Supplier<AttributeSupplier.Builder> attributes) {
         this.builder = builder;
         this.entityType = entityType;
         this.attributes = attributes;
@@ -27,7 +29,7 @@ public class CreatureRegistrar<T extends CustomCreature> {
         return entityType;
     }
 
-    public void registerAttributes(IMobRegistrar<EntityType<?>> registrar) {
+    public void registerAttributes(IMobRegistrar<EntityType<? extends LivingEntity>> registrar) {
         ScyllaCommon.LOGGER.info("Registering attributes for entity: " + this.builder.name);
 
         if (entityType == null) {

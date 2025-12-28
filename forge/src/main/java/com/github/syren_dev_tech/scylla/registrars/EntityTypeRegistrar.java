@@ -2,19 +2,28 @@ package com.github.syren_dev_tech.scylla.registrars;
 
 import com.github.syren_dev_tech.scylla.common.mobs.CreatureRegistrar;
 import com.github.syren_dev_tech.scylla.common.registry.IMobRegistrar;
-import com.github.syren_dev_tech.scylla.common.registry.IRegistrar;
 
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.function.Supplier;
 
-public class EntityTypeRegistrar<T extends EntityType<?>> implements IMobRegistrar<T> {
+public class EntityTypeRegistrar<T extends EntityType<? extends LivingEntity>> implements IMobRegistrar<T> {
+
+    @Override
+    public <X> void setAttributeCreationEvent(X event) {
+        this.attributeCreationEvent = (EntityAttributeCreationEvent) event;
+    }
 
     private final DeferredRegister<EntityType<?>> entityTypesRegistry;
+    private EntityAttributeCreationEvent attributeCreationEvent;
+    private FMLClientSetupEvent clientSetupEvent;
 
     public EntityTypeRegistrar(String modId) {
         this.entityTypesRegistry = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, modId);
@@ -31,13 +40,7 @@ public class EntityTypeRegistrar<T extends EntityType<?>> implements IMobRegistr
 
     @Override
     public <X extends T> void register(X entity, AttributeSupplier attributes) {
-
-    }
-
-    @Override
-    public void register(CreatureRegistrar<?> registrar) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'register'");
+        attributeCreationEvent.put(entity, attributes);
     }
 
     @Override

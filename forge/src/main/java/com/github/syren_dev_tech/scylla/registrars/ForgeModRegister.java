@@ -49,7 +49,11 @@ public class ForgeModRegister extends ModRegister {
     public void onClientSetup(FMLClientSetupEvent event) {
         Scylla.LOGGER.info("CLIENT SETUP");
 
-        this.modelRegistry.registerEntityModels(this.mobRegistry);
+        this.mobRegistry.entities.forEach((name, creatureRegistrar) -> {
+            Scylla.LOGGER.info("SETTING UP RENDERER FOR: {}", name);
+
+            creatureRegistrar.register();
+        });
     }
 
     private void finishRegistries(IEventBus bus) {

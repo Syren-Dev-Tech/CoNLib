@@ -15,7 +15,6 @@ public class ModRegister {
     public final ItemRegistry itemRegistry;
     public final CreativeTabRegistry creativeTabRegistry;
     public final MobRegistry mobRegistry;
-    public final ModelRegistry modelRegistry;
     public final Map<String, Config> configs = new HashMap<>();
 
     public ModRegister(String modId, ModRegistrars registrars) {
@@ -26,7 +25,6 @@ public class ModRegister {
         this.itemRegistry = new ItemRegistry(this, registrars.itemRegistrar);
         this.creativeTabRegistry = new CreativeTabRegistry(this, registrars.creativeTabRegistrar);
         this.mobRegistry = new MobRegistry(this, registrars.entityRegistrar);
-        this.modelRegistry = new ModelRegistry(this, registrars.entityRegistrar);
     }
 
     public Config createConfig(String name) {
