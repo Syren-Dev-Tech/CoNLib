@@ -8,7 +8,6 @@ build-forge: SHELL := /bin/bash
 build-forge:
 	source "${HOME}/.sdkman/bin/sdkman-init.sh" && \
 	sdk use gradle ${FORGE_GRADLE_VERSION} && \
-	sdk use java 17.0.17-tem && \
 	gradle clean build -Pforge=true && \
 	mkdir -p ./dist && \
 	cp build/libs/*.jar ./dist/scylla-forge.jar
@@ -17,7 +16,6 @@ build-neoforge: SHELL := /bin/bash
 build-neoforge:
 	source "${HOME}/.sdkman/bin/sdkman-init.sh" && \
 	sdk use gradle ${FORGE_GRADLE_VERSION} && \
-	sdk use java 17.0.17-tem && \
 	gradle clean build -Pneoforge=true && \
 	mkdir -p ./dist && \
 	cp build/libs/*.jar ./dist/scylla-neoforge.jar
@@ -26,12 +24,10 @@ publish-forge: SHELL := /bin/bash
 publish-forge:
 	source "${HOME}/.sdkman/bin/sdkman-init.sh" && \
 	sdk use gradle ${FORGE_GRADLE_VERSION} && \
-	sdk use java 17.0.17-tem && \
 	gradle publish -Pforge=true
 
 publish-neoforge: SHELL := /bin/bash
 publish-neoforge:
 	source "${HOME}/.sdkman/bin/sdkman-init.sh" && \
 	sdk use gradle ${FORGE_GRADLE_VERSION} && \
-	sdk use java 17.0.17-tem && \
 	gradle publish -Pneoforge=true
