@@ -1,13 +1,7 @@
 package com.github.syren_dev_tech.scylla;
 
 import com.github.syren_dev_tech.scylla.common.ScyllaCommon;
-import com.github.syren_dev_tech.scylla.common.registry.ModRegistrars;
-import com.github.syren_dev_tech.scylla.registrars.BlockRegistrar;
-import com.github.syren_dev_tech.scylla.registrars.CreativeTabRegistrar;
-import com.github.syren_dev_tech.scylla.registrars.EntityTypeRegistrar;
-import com.github.syren_dev_tech.scylla.registrars.ForgeModRegister;
-import com.github.syren_dev_tech.scylla.registrars.ItemRegistrar;
-
+import com.github.syren_dev_tech.scylla.registrars.NeoForgeModRegister;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -20,7 +14,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 public final class Scylla extends ScyllaCommon {
 
     public static final String MOD_ID = "scylla";
-    public static final ForgeModRegister MOD_REGISTER = new ForgeModRegister(MOD_ID, new ModRegistrars().setBlockRegistrar(new BlockRegistrar<>(MOD_ID)).setItemRegistrar(new ItemRegistrar<>(MOD_ID)).setCreativeTabRegistrar(new CreativeTabRegistrar<>(MOD_ID)).setEntityRegistrar(new EntityTypeRegistrar<>(MOD_ID)));
+    public static final NeoForgeModRegister MOD_REGISTER = new NeoForgeModRegister(MOD_ID);
 
     public Scylla() { // NOSONAR - Constructor must be public
         super();

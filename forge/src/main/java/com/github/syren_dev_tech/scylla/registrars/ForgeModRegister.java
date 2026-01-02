@@ -14,8 +14,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 public class ForgeModRegister extends ModRegister {
 
-    public ForgeModRegister(String modId, ModRegistrars registrars) {
-        super(modId, registrars);
+    public ForgeModRegister(String modId) {
+        super(modId, new ModRegistrars().setBlockRegistrar(new BlockRegistrar<>(modId)).setItemRegistrar(new ItemRegistrar<>(modId)).setCreativeTabRegistrar(new CreativeTabRegistrar<>(modId)).setEntityRegistrar(new EntityTypeRegistrar<>(modId)));
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

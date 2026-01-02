@@ -20,7 +20,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 public final class Scylla extends ScyllaCommon {
 
     public static final String MOD_ID = "scylla";
-    public static final ForgeModRegister MOD_REGISTER = new ForgeModRegister(MOD_ID, new ModRegistrars().setBlockRegistrar(new BlockRegistrar<>(MOD_ID)).setItemRegistrar(new ItemRegistrar<>(MOD_ID)).setCreativeTabRegistrar(new CreativeTabRegistrar<>(MOD_ID)).setEntityRegistrar(new EntityTypeRegistrar<>(MOD_ID)));
+    public static final ForgeModRegister MOD_REGISTER = new ForgeModRegister(MOD_ID);
 
     public Scylla() { // NOSONAR - Constructor must be public
         super();

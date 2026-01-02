@@ -1,6 +1,5 @@
 package com.github.syren_dev_tech.scylla.registrars;
 
-import com.github.syren_dev_tech.scylla.Scylla;
 import com.github.syren_dev_tech.scylla.common.ScyllaCommon;
 import com.github.syren_dev_tech.scylla.common.registry.ModRegister;
 import com.github.syren_dev_tech.scylla.common.registry.ModRegistrars;
@@ -13,10 +12,10 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-public class ForgeModRegister extends ModRegister {
+public class NeoForgeModRegister extends ModRegister {
 
-    public ForgeModRegister(String modId, ModRegistrars registrars) {
-        super(modId, registrars);
+    public NeoForgeModRegister(String modId) {
+        super(modId, new ModRegistrars().setBlockRegistrar(new BlockRegistrar<>(modId)).setItemRegistrar(new ItemRegistrar<>(modId)).setCreativeTabRegistrar(new CreativeTabRegistrar(modId)).setEntityRegistrar(new EntityTypeRegistrar<>(modId)));
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
