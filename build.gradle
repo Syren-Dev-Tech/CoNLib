@@ -16,19 +16,16 @@ plugins {
     id 'groovy'
     id 'eclipse'
     id 'maven-publish'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
     id 'fabric-loom' version "${loom_version}" apply false
     id 'net.minecraftforge.gradle' version '[6.0,6.2)' apply false
     id 'net.neoforged.moddev.legacyforge' version "${neoforge_version}" apply false
     id 'org.parchmentmc.librarian.forgegradle' version '1.+' apply false
     id 'org.spongepowered.mixin' version '0.7.+' apply false
-    id 'com.github.johnrengelman.shadow' version '8.1.1' apply false
 }
 
 group = mod_group_id
 version = mod_version
-
-// Set temp variable for artifact ID
-def artifact_id = ""
 
 java {
     toolchain {
@@ -44,15 +41,56 @@ def isForge = project.hasProperty('forge') && project.forge == 'true'
 def isFabric = project.hasProperty('fabric') && project.fabric == 'true'
 def isNeoForge = project.hasProperty('neoforge') && project.neoforge == 'true'
 
-if (isForge) {
+def allBuilds(artifact_id) {
+    shadowJar {
+        println "Configuring shadowJar task"
+
+        configurations = [project.configurations.shadowed]
+        mergeServiceFiles()
+
+        archiveClassifier = ''
+
+        manifest {
+            attributes([
+                "Specification-Title": mod_name,
+                "Specification-Vendor": mod_authors,
+                "Specification-Version": mod_version,
+                "Implementation-Title": mod_name,
+                "Implementation-Version": "${version}",
+                "Implementation-Vendor": mod_authors,
+            ])
+        }
+
+        finalizedBy 'reobfJar'
+    }
+
+    artifacts {
+        archives jar
+        archives shadowJar
+    }
+
+    publishing {
+        publications {
+            register('mavenJava', MavenPublication) {
+                artifactId "${artifact_id}"
+                artifact tasks.named('shadowJar').get().archiveFile.get().asFile
+            }
+        }
+        repositories {
+            maven {
+                url "file://${project.projectDir}/dist"
+            }
+        }
+    }
+}
+
+// Define function that runs a Forge-specific block
+def withForge() {
     println "Building with Forge"
 
     apply plugin: 'net.minecraftforge.gradle'
     apply plugin: 'org.spongepowered.mixin'
     apply plugin: 'org.parchmentmc.librarian.forgegradle'
-    apply plugin: 'com.github.johnrengelman.shadow'
-
-    artifact_id = "${mod_id}_forge"
 
     sourceSets.main.java.srcDirs = [file('forge/src/main/java')]
     sourceSets.main.resources.srcDirs = [file('forge/src/main/resources')]
@@ -70,12 +108,15 @@ if (isForge) {
 
     jar {
         archiveClassifier = 'slim' // Adds '-slim' to the regular jar's filename
+
         manifest {
             attributes([
                 "FMLModType": "GAMELIBRARY", // Adjust as needed
                 "Manifest-Version": "1.0"
             ])
         }
+
+        finalizedBy 'reobfJar'
     }
 
     minecraft {
@@ -93,15 +134,29 @@ if (isForge) {
         shadowJar {} // Apply reobfuscation settings to the shadowJar task
     }
 
-    // Ensure running `gradlew build` produces the shadowJar as the main output
-    assemble.dependsOn shadowJar
-} 
-else if (isFabric) {
+    tasks.withType(ProcessResources).configureEach {
+        var replaceProperties = [
+            minecraft_version: minecraft_version, minecraft_version_range: minecraft_version_range,
+            forge_version: forge_version, forge_version_range: forge_version_range,
+            loader_version_range: loader_version_range,
+            mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
+            mod_authors: mod_authors, mod_description: mod_description,
+            geckolib_version: geckolib_version,
+        ]
+        inputs.properties replaceProperties
+
+        filesMatching(['META-INF/neoforge.mods.toml', 'META-INF/mods.toml', 'pack.mcmeta']) {
+            expand replaceProperties + [project: project]
+        }
+    }
+
+    tasks.build.dependsOn 'shadowJar'
+}
+
+def withFabric() {
     println "Building with Fabric"
 
     apply plugin: 'fabric-loom'
-
-    artifact_id = "${mod_id}_fabric"
 
     sourceSets.main.java.srcDirs = [file('fabric/src/main/java')]
     sourceSets.main.resources.srcDirs = [file('fabric/src/main/resources')]
@@ -130,14 +185,12 @@ else if (isFabric) {
             }
         }
     }
-} 
-else if (isNeoForge) {
+}
+
+def withNeoForge() {
     println "Building with NeoForge"
 
     apply plugin: 'net.neoforged.moddev.legacyforge'
-    apply plugin: 'com.github.johnrengelman.shadow'
-
-    artifact_id = "${mod_id}_neoforge"
 
     sourceSets.main.java.srcDirs = [file('neoforge/src/main/java')]
     sourceSets.main.resources.srcDirs = [file('neoforge/src/main/resources')]
@@ -167,10 +220,6 @@ else if (isNeoForge) {
             ])
         }
 
-        finalizedBy 'reobfJar'
-    }
-
-    shadowJar {
         finalizedBy 'reobfJar'
     }
 
@@ -215,9 +264,25 @@ else if (isNeoForge) {
     }
 
     tasks.build.dependsOn 'shadowJar'
-    // Ensure running `gradlew build` produces the reobfuscated shadowJar as the main output
-    assemble.dependsOn 'shadowJar'
+}
+
+if (isForge) {
+    withForge()
+    allBuilds("${mod_id}_forge")
 } 
+else if (isFabric) {
+    withFabric()
+    allBuilds("${mod_id}_fabric")
+} 
+else if (isNeoForge) {
+    if (minecraft_version == '1.20.1') {
+        withForge()
+    } 
+    else {
+        withNeoForge()
+    }
+    allBuilds("${mod_id}_neoforge")
+}
 else {
     println "No platform property set. Please specify -Pforge, -Pfabric, or -Pneoforge."
     throw new GradleException("No platform property set.")
@@ -239,30 +304,6 @@ repositories {
         content {
             includeGroupByRegex("software\\.bernie.*")
             includeGroup("com.eliotlash.mclib")
-        }
-    }
-}
-
-shadowJar {
-    println "Configuring shadowJar task"
-
-    configurations = [project.configurations.shadowed]
-    mergeServiceFiles() 
-    archiveClassifier.set('')
-
-    finalizedBy 'reobfJar'
-}
-
-publishing {
-    publications {
-        register('mavenJava', MavenPublication) {
-            artifactId "${artifact_id}"
-            artifact tasks.named('shadowJar').get().archiveFile.get().asFile
-        }
-    }
-    repositories {
-        maven {
-            url "file://${project.projectDir}/dist"
         }
     }
 }
