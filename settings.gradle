@@ -1,5 +1,6 @@
 pluginManagement {
     repositories {
+        mavenLocal()
         mavenCentral()
         gradlePluginPortal()
         maven {
@@ -22,3 +23,10 @@ plugins {
 }
 
 rootProject.name = 'scylla'
+
+dependencyResolutionManagement {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+}

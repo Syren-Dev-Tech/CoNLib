@@ -1,8 +1,11 @@
 FORGE_GRADLE_VERSION=8.8
 FABRIC_GRADLE_VERSION=8.8
 
-all: build-forge build-neoforge
+all: build publish-local
+
+build: build-forge build-neoforge
 publish: publish-forge publish-neoforge
+publish-local: publish-forge-local publish-neoforge-local
 
 build-forge: SHELL := /bin/bash
 build-forge:
@@ -32,6 +35,19 @@ publish-neoforge:
 	sdk use gradle ${FORGE_GRADLE_VERSION} && \
 	gradle publish -Pneoforge=true
 
-prism:
-	VERSION=$$(grep 'mod_version=' gradle.properties | cut -d'=' -f2) && \
-	cp ./dist/neoforge/scylla-$${VERSION}.jar ${HOME}/.var/app/org.prismlauncher.PrismLauncher/data/PrismLauncher/instances/1.20.1/minecraft/mods/
+publish-forge-local: SHELL := /bin/bash
+publish-forge-local:
+	source "${HOME}/.sdkman/bin/sdkman-init.sh" && \
+	sdk use gradle ${FORGE_GRADLE_VERSION} && \
+	gradle publishToMavenLocal -Pforge=true
+
+publish-neoforge-local: SHELL := /bin/bash
+publish-neoforge-local:
+	source "${HOME}/.sdkman/bin/sdkman-init.sh" && \
+	sdk use gradle ${FORGE_GRADLE_VERSION} && \
+	gradle publishToMavenLocal -Pneoforge=true
+
+deps: SHELL := /bin/bash
+deps:
+	source "${HOME}/.sdkman/bin/sdkman-init.sh" && \
+	gradle --refresh-dependencies

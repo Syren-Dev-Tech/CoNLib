@@ -1,5 +1,6 @@
 buildscript {
     repositories {
+        mavenLocal()
         mavenCentral()
         gradlePluginPortal()
         maven { url = 'maven.neoforged.net' }
@@ -76,11 +77,6 @@ def allBuilds(artifact_id) {
                 artifact tasks.named('shadowJar').get().archiveFile.get().asFile
             }
         }
-        repositories {
-            maven {
-                url "file://${project.projectDir}/dist"
-            }
-        }
     }
 }
 
@@ -102,8 +98,8 @@ def withForge() {
 
     dependencies {
         minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-        implementation "com.github.syren_dev_tech:scylla_forge:${scylla_core_version}"
-        shadowed "com.github.syren_dev_tech:scylla_forge:${scylla_core_version}"
+        implementation "com.github.syren_dev_tech:scylla_core_forge:${scylla_core_version}"
+        shadowed "com.github.syren_dev_tech:scylla_core_forge:${scylla_core_version}"
     }
 
     jar {
@@ -174,8 +170,8 @@ def withFabric() {
         }
         modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
         modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_api_version}"
-        modImplementation "com.github.syren_dev_tech:scylla_fabric:${scylla_core_version}"
-        shadowed "com.github.syren_dev_tech:scylla_fabric:${scylla_core_version}"
+        modImplementation "com.github.syren_dev_tech:scylla_core_fabric:${scylla_core_version}"
+        shadowed "com.github.syren_dev_tech:scylla_core_fabric:${scylla_core_version}"
     }
 
     loom {
@@ -201,9 +197,9 @@ def withNeoForge() {
     // Use root build.gradle logic for configuration
 
     dependencies {
-        implementation "com.github.syren_dev_tech:scylla_neoforge:${scylla_core_version}"
+        implementation "com.github.syren_dev_tech:scylla_core_neoforge:${scylla_core_version}"
         implementation "org.parchmentmc.data:parchment-1.20.1:2023.09.03@zip"
-        shadowed "com.github.syren_dev_tech:scylla_neoforge:${scylla_core_version}"
+        shadowed "com.github.syren_dev_tech:scylla_core_neoforge:${scylla_core_version}"
     }
 
     jar {
@@ -289,6 +285,7 @@ else {
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
     maven { url 'libraries.minecraft.net' }
     maven { url 'https://maven.minecraftforge.net' }
@@ -296,8 +293,7 @@ repositories {
     maven { url 'https://maven.neoforged.net/' }
     maven { url 'https://maven.fabricmc.net/' }
     maven { url 'https://maven.parchmentmc.org/' }
-    // maven { url 'https://syren-dev-tech.github.io/scylla-core/'}
-    maven { url '../scylla-common/dist/' }
+    maven { url 'https://syren-dev-tech.github.io/scylla-core/'}
     maven {
         name = 'GeckoLib'
         url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
