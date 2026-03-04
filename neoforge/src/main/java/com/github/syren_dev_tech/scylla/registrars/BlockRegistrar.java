@@ -1,12 +1,9 @@
 package com.github.syren_dev_tech.scylla.registrars;
 
-import com.github.syren_dev_tech.scylla.common.registry.IRegistrar;
-
+import com.github.syren_dev_tech.scylla.registry.IRegistrar;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 public class BlockRegistrar<T extends Block> implements IRegistrar<T> {
@@ -14,7 +11,7 @@ public class BlockRegistrar<T extends Block> implements IRegistrar<T> {
     private final DeferredRegister<Block> blocksRegistry;
 
     public BlockRegistrar(String modId) {
-        this.blocksRegistry = DeferredRegister.create(ForgeRegistries.BLOCKS, modId);
+        this.blocksRegistry = DeferredRegister.createBlocks(modId);
     }
 
     @Override

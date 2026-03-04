@@ -1,16 +1,13 @@
 package com.github.syren_dev_tech.scylla.registrars;
 
-import com.github.syren_dev_tech.scylla.common.ScyllaCommon;
-import com.github.syren_dev_tech.scylla.common.registry.ModRegister;
-import com.github.syren_dev_tech.scylla.common.registry.ModRegistrars;
-
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import com.github.syren_dev_tech.scylla.ScyllaCommon;
+import com.github.syren_dev_tech.scylla.registry.ModRegister;
+import com.github.syren_dev_tech.scylla.registry.ModRegistrars;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 
 public class NeoForgeModRegister extends ModRegister {
 
@@ -27,14 +24,12 @@ public class NeoForgeModRegister extends ModRegister {
 
         this.creativeTabRegistry.creativeTabs.forEach((key, value) -> {
             if (event.getTabKey() == key)
-                value.forEach(event::accept);
+                value.forEach(itemSupplier -> event.accept(itemSupplier.get()));
         });
     }
 
-    public void initEvents(FMLJavaModLoadingContext context) {
-        IEventBus modEventBus = context.getModEventBus();
+    public void initEvents(IEventBus modEventBus) {
         modEventBus.addListener(this::commonSetup);
-        MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
 
         finishRegistries(modEventBus);

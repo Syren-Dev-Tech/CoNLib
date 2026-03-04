@@ -1,12 +1,11 @@
 package com.github.syren_dev_tech.scylla.registrars;
 
-import com.github.syren_dev_tech.scylla.common.registry.IRegistrar;
+import com.github.syren_dev_tech.scylla.registry.IRegistrar;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 public class CreativeTabRegistrar implements IRegistrar<CreativeModeTab> {
