@@ -10,6 +10,8 @@ permissions:
 
 env:
   JAVA_VERSION: "21"
+  GRADLE_VERSION: "8.8"
+  GRADLE_OPTS: "-Dorg.gradle.parallel=false"
   BUILD_COMMAND: "make publish"
   ARTIFACT_GLOB: "build/libs/*.jar"
 
@@ -34,6 +36,8 @@ jobs:
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: ${{ env.GRADLE_VERSION }}
 
       - name: Build JAR artifacts
         shell: bash
