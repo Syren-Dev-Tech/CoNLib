@@ -43,35 +43,25 @@ jobs:
         shell: bash
         run: $BUILD_COMMAND
 
-      - name: Resolve release artifacts
-        id: artifacts
-        shell: bash
-        run: |
-          set -euo pipefail
-          shopt -s nullglob
-          mapfile -t files < <(compgen -G "$ARTIFACT_GLOB" || true)
-
-          if [[ ${#files[@]} -eq 0 ]]; then
-            echo "No artifacts found for glob: $ARTIFACT_GLOB" >&2
-            exit 1
-          fi
-
-          printf 'files<<EOF\n' >> "$GITHUB_OUTPUT"
-          printf '%s\n' "${files[@]}" >> "$GITHUB_OUTPUT"
-          printf 'EOF\n' >> "$GITHUB_OUTPUT"
-
       - name: Create or update GitHub release for tag
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
           set -euo pipefail
+          shopt -s nullglob
           tag="${GITHUB_REF_NAME}"
+          files=( $ARTIFACT_GLOB )
+
+          if [[ ${#files[@]} -eq 0 ]]; then
+            echo "No artifacts found for glob: $ARTIFACT_GLOB" >&2
+            exit 1
+          fi
 
           if gh release view "$tag" > /dev/null 2>&1; then
-            gh release upload "$tag" ${{ steps.artifacts.outputs.files }} --clobber
+            gh release upload "$tag" "${files[@]}" --clobber
           else
-            gh release create "$tag" ${{ steps.artifacts.outputs.files }} --generate-notes --title "$tag"
+            gh release create "$tag" "${files[@]}" --generate-notes --title "$tag"
           fi
 
       - name: Build latest-release.json payload
