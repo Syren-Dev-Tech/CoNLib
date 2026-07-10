@@ -1,3 +1,5 @@
+publish: publish-neoforge
+
 publish-%: SHELL := /bin/bash
 publish-%:
 	gradle --no-daemon clean build -P$*=true && \

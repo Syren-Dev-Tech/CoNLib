@@ -10,7 +10,7 @@ permissions:
 
 env:
   JAVA_VERSION: "21"
-  BUILD_COMMAND: "gradle --no-daemon build"
+  BUILD_COMMAND: "make publish"
   ARTIFACT_GLOB: "build/libs/*.jar"
 
   # Update these for each mod repository.
