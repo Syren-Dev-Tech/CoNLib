@@ -22,9 +22,16 @@ public class NeoForgeModRegister extends ModRegister {
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         ScyllaCommon.LOGGER.info("ASSIGNING CREATIVE TABS");
 
-        this.creativeTabRegistry.creativeTabs.forEach((key, value) -> {
-            if (event.getTabKey() == key)
-                value.forEach(itemSupplier -> event.accept(itemSupplier.get()));
+        this.creativeTabRegistry.tabs.forEach((name, definition) -> {
+            if (event.getTabKey() == definition.key) {
+                definition.getItems().forEach((item) -> {
+                    try {
+                        event.accept(item.registry.get());
+                    } catch (Exception e) {
+                        ScyllaCommon.LOGGER.error("Failed to add item to creative tab {}", e);
+                    }
+                });
+            }
         });
     }
 

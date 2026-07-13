@@ -1,12 +1,22 @@
-publish: publish-neoforge
+publish: publish-local
 
-publish-%: SHELL := /bin/bash
-publish-%:
+publish-local: publish-local-neoforge
+publish-remote: publish-remote-neoforge
+
+publish-local-%: SHELL := /bin/bash
+publish-local-%:
 	gradle --no-daemon clean build -P$*=true && \
 	mkdir -p ./dist/$* && \
-	cp build/libs/*.jar ./dist/$*/
+	cp build/libs/*.jar ./dist/$*/ && \
+	gradle --no-daemon publishToMavenLocal
+
+publish-remote-%: SHELL := /bin/bash
+publish-remote-%:
+	gradle --no-daemon clean build -P$*=true && \
+	mkdir -p ./dist/$* && \
+	cp build/libs/*.jar ./dist/$*/ && \
 	gradle --no-daemon publish -P$*=true && \
-	gradle --no-daemon publishToMavenLocal -P$*=true
+	gradle --no-daemon publishToMavenLocal
 
 TAG_REMOTE ?= origin
 
